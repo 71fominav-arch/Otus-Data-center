@@ -1,0 +1,56 @@
+! device: Leaf-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname Leaf-2
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Ethernet1
+   no switchport
+   ip address 10.16.2.1/30
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   no switchport
+   ip address 10.16.17.13/31
+!
+interface Ethernet6
+   no switchport
+   ip address 10.16.18.13/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.2.250/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.2/24
+!
+ip routing
+ip routing vrf mng_net
+!
+end

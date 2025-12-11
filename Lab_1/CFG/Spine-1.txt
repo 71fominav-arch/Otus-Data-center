@@ -1,0 +1,57 @@
+! device: Spine-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname Spine-1
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   !! Managment net
+   description Managment_net
+!
+interface Ethernet1
+   no switchport
+   ip address 10.16.17.10/31
+!
+interface Ethernet2
+   no switchport
+   ip address 10.16.17.12/31
+!
+interface Ethernet3
+   no switchport
+   ip address 10.16.17.14/31
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.17.250/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.17/24
+!
+ip routing
+ip routing vrf mng_net
+!
+end
