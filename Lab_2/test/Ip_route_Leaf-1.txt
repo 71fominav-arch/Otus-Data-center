@@ -55,3 +55,88 @@ Link ID         ADV Router      Age         Seq#         Checksum Link count
 10.16.3.250     10.16.3.250     880         0x8000004a   0x38a5   7
 10.16.17.250    10.16.17.250    1227        0x80000055   0xf791   7
 10.16.1.250     10.16.1.250     866         0x8000004c   0x90b9   6
+
+
+Leaf-1#show ip ospf lsa-log 
+OSPF instance 100 with ID 10.16.1.250, VRF default, LSA Throttling Log:
+[15:54:17] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:54:04] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:48:17] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:48:11] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 430 msecs
+[15:48:11] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:48:03] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:31:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:01:17] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:01:11] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 408 msecs
+[15:01:11] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:01:02] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:00:16] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 404 msecs
+[15:00:15] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 831 msecs
+[15:00:15] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:00:11] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 496 msecs
+[15:00:02] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:48:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:48:17] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:47:37] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:45:11] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:45:03] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:42:13] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+ by 469 msecs
+[14:42:09] type 1: 10.16.18.250/32 [10.16.18.250], event 4, discarded, was early by 892 msecs
+[14:42:09] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:42:01] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:40:14] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:39:14] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[14:12:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[13:41:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[13:10:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[12:40:18] type 1: 10.16.18.250/32 [10.16.18.250], event 4, discarded, was early by 576 msecs
+[12:40:17] type 1: 10.16.18.250/32 [10.16.18.250], event 4, discarded, was early by 846 msecs
+[12:40:17] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[12:40:07] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[12:24:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[11:53:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[11:22:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[10:51:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[10:20:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[09:49:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[09:18:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[08:47:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[08:16:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[07:45:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+ hold value 1000 msecs
+[06:43:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[06:12:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[05:41:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[05:10:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[04:39:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[04:08:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[03:37:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[03:06:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[02:35:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[02:04:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[01:33:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[01:02:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[00:31:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[00:00:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[23:29:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[22:58:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[22:27:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[21:56:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[21:25:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[20:54:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[20:23:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[19:52:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+ hold value 1000 msecs
+[18:50:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[18:19:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[17:48:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[17:17:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[16:46:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[16:15:51] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:45:08] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:43:56] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:38:01] type 1: 10.16.17.250/32 [10.16.17.250], event 4, discarded, was early by 887 msecs
+[15:38:01] type 1: 10.16.1.250/32 [10.16.1.250], event 2, backoff restarted, new hold value 1000 msecs
+[15:37:59] type 1: 10.16.18.250/32 [10.16.18.250], event 4, discarded, was early by 884 msecs
+[15:37:59] type 1: 10.16.1.250/32 [10.16.1.250], event 0, backoff started, new hold value 1000 msecs
