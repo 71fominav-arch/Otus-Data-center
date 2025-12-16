@@ -21,7 +21,7 @@
   - bfd на интеррфейсе в сторону соседа 100 ms x 3;
   - ip ospf authentication-key: POD1;
   - на интерфейсах в сторону соседей задаем ip ospf cost 40;
-2. Схема сети [Схема_OSPF.pdf](./Схема_OSPF.pdf).
+2. Схема сети [Схема_OSPF.pdf](./Схема_OSPF.pdf).  [ip_address](./Ip_address.md). 
 3. Конфигурация устройств:
 - [Leaf-1](./CFG/Leaf-1.txt);
 - [Leaf-2](./CFG/Leaf-2.txt);
