@@ -181,3 +181,286 @@ Maximum number of LSA allowed 12000
    Number of opaque area LSA 0. Checksum Sum 0
    Number of indication LSA 0
    Number of DC-clear LSA 0
+
+Leaf-1#show ip ospf database router 
+
+            OSPF Router with ID(10.16.1.250) (Instance ID 100) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+  LS Age: 322
+  Options: (E DC)
+  LS Type: Router Links
+  Link State ID: 10.16.18.250
+  Advertising Router: 10.16.18.250
+  LS Seq Number: 0x80000067
+  Checksum: 0xa64
+  Length: 108
+  Number of Links: 7
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.1.250
+     (Link Data)  10.16.18.10
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.10
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.2.250
+     (Link Data)  10.16.18.12
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.12
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.3.250
+     (Link Data)  10.16.18.14
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.14
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.250
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+  LS Age: 333
+  Options: (E DC)
+  LS Type: Router Links
+  Link State ID: 10.16.2.250
+  Advertising Router: 10.16.2.250
+  LS Seq Number: 0x80000058
+  Checksum: 0xd55c
+  Length: 96
+  Number of Links: 6
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.17.250
+     (Link Data)  10.16.17.13
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.12
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.18.250
+     (Link Data)  10.16.18.13
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.12
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.2.0
+     (Link Data) Network Mask: 255.255.255.252
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.2.250
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+  LS Age: 334
+  Options: (E DC)
+  LS Type: Router Links
+  Link State ID: 10.16.3.250
+  Advertising Router: 10.16.3.250
+  LS Seq Number: 0x80000058
+  Checksum: 0x1cb3
+  Length: 108
+  Number of Links: 7
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.17.250
+     (Link Data)  10.16.17.15
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.14
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.18.250
+     (Link Data)  10.16.18.15
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.14
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.3.0
+     (Link Data) Network Mask: 255.255.255.252
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.3.4
+     (Link Data) Network Mask: 255.255.255.252
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.3.250
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+  LS Age: 562
+  Options: (E DC)
+  LS Type: Router Links
+  Link State ID: 10.16.17.250
+  Advertising Router: 10.16.17.250
+  LS Seq Number: 0x80000067
+  Checksum: 0xd3a3
+  Length: 108
+  Number of Links: 7
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.1.250
+     (Link Data)  10.16.17.10
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.10
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.2.250
+     (Link Data)  10.16.17.12
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.12
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.3.250
+     (Link Data)  10.16.17.14
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.14
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.250
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
+
+  LS Age: 321
+  Options: (E DC)
+  LS Type: Router Links
+  Link State ID: 10.16.1.250
+  Advertising Router: 10.16.1.250
+  LS Seq Number: 0x80000056
+  Checksum: 0x7cc3
+  Length: 96
+  Number of Links: 6
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.17.250
+     (Link Data)  10.16.17.11
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.17.10
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Point-to-point Network
+     (Link ID) Neighboring Router ID: 10.16.18.250
+     (Link Data)  10.16.18.11
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.18.10
+     (Link Data) Network Mask: 255.255.255.254
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.1.0
+     (Link Data) Network Mask: 255.255.255.252
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 40
+
+
+    Link connected to: a Stub Network
+     (Link ID) Network/subnet number: 10.16.1.250
+     (Link Data) Network Mask: 255.255.255.255
+      Number of TOS metrics: 0
+       TOS 0 Metrics: 10
