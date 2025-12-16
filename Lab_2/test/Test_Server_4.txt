@@ -1,0 +1,23 @@
+VPCS> ping 10.16.1.2
+
+84 bytes from 10.16.1.2 icmp_seq=1 ttl=61 time=34.196 ms
+84 bytes from 10.16.1.2 icmp_seq=2 ttl=61 time=36.468 ms
+84 bytes from 10.16.1.2 icmp_seq=3 ttl=61 time=36.110 ms
+84 bytes from 10.16.1.2 icmp_seq=4 ttl=61 time=34.191 ms
+84 bytes from 10.16.1.2 icmp_seq=5 ttl=61 time=47.696 ms
+
+VPCS> ping 10.16.2.2
+
+84 bytes from 10.16.2.2 icmp_seq=1 ttl=61 time=42.260 ms
+84 bytes from 10.16.2.2 icmp_seq=2 ttl=61 time=30.717 ms
+84 bytes from 10.16.2.2 icmp_seq=3 ttl=61 time=35.416 ms
+84 bytes from 10.16.2.2 icmp_seq=4 ttl=61 time=31.520 ms
+84 bytes from 10.16.2.2 icmp_seq=5 ttl=61 time=42.713 ms
+
+VPCS> ping 10.16.3.2
+
+84 bytes from 10.16.3.2 icmp_seq=1 ttl=63 time=8.954 ms
+84 bytes from 10.16.3.2 icmp_seq=2 ttl=63 time=9.347 ms
+84 bytes from 10.16.3.2 icmp_seq=3 ttl=63 time=9.773 ms
+84 bytes from 10.16.3.2 icmp_seq=4 ttl=63 time=8.832 ms
+84 bytes from 10.16.3.2 icmp_seq=5 ttl=63 time=10.817 ms

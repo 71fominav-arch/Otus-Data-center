@@ -18,6 +18,8 @@ vrf instance mng_net
 interface Ethernet1
    no switchport
    ip address 10.16.1.1/30
+   ip ospf cost 40
+   ip ospf area 0.0.0.0
 !
 interface Ethernet2
 !
@@ -28,13 +30,19 @@ interface Ethernet4
 interface Ethernet5
    no switchport
    ip address 10.16.17.11/31
+   bfd interval 100 min-rx 100 multiplier 3
+   ip ospf cost 40
    ip ospf network point-to-point
+   ip ospf authentication-key 7 63v/wplixB0=
    ip ospf area 0.0.0.0
 !
 interface Ethernet6
    no switchport
    ip address 10.16.18.11/31
+   bfd interval 100 min-rx 100 multiplier 3
+   ip ospf cost 40
    ip ospf network point-to-point
+   ip ospf authentication-key 7 YgRgxZ6lshk=
    ip ospf area 0.0.0.0
 !
 interface Ethernet7
@@ -49,6 +57,7 @@ interface Ethernet11
 !
 interface Loopback0
    ip address 10.16.1.250/32
+   ip ospf area 0.0.0.0
 !
 interface Management1
    vrf mng_net
@@ -63,8 +72,6 @@ router ospf 100
    passive-interface default
    no passive-interface Ethernet5
    no passive-interface Ethernet6
-   network 10.16.1.0/30 area 0.0.0.0
-   network 10.16.1.250/32 area 0.0.0.0
    max-lsa 12000
 !
 end

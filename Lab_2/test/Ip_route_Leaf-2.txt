@@ -15,21 +15,28 @@ Codes: C - connected, S - static, K - kernel,
 
 Gateway of last resort is not set
 
- O        10.16.1.0/30 [110/30] via 10.16.17.12, Ethernet5
-                                via 10.16.18.12, Ethernet6
- O        10.16.1.250/32 [110/30] via 10.16.17.12, Ethernet5
+ O        10.16.1.0/30 [110/120] via 10.16.17.12, Ethernet5
+                                 via 10.16.18.12, Ethernet6
+ O        10.16.1.250/32 [110/90] via 10.16.17.12, Ethernet5
                                   via 10.16.18.12, Ethernet6
  C        10.16.2.0/30 is directly connected, Ethernet1
  C        10.16.2.250/32 is directly connected, Loopback0
- O        10.16.3.0/30 [110/30] via 10.16.17.12, Ethernet5
-                                via 10.16.18.12, Ethernet6
- O        10.16.3.4/30 [110/30] via 10.16.17.12, Ethernet5
-                                via 10.16.18.12, Ethernet6
- O        10.16.3.250/32 [110/30] via 10.16.17.12, Ethernet5
+ O        10.16.3.0/30 [110/120] via 10.16.17.12, Ethernet5
+                                 via 10.16.18.12, Ethernet6
+ O        10.16.3.4/30 [110/120] via 10.16.17.12, Ethernet5
+                                 via 10.16.18.12, Ethernet6
+ O        10.16.3.250/32 [110/90] via 10.16.17.12, Ethernet5
                                   via 10.16.18.12, Ethernet6
- O        10.16.17.10/31 [110/20] via 10.16.17.12, Ethernet5
+ O        10.16.17.10/31 [110/80] via 10.16.17.12, Ethernet5
  C        10.16.17.12/31 is directly connected, Ethernet5
- O        10.16.17.14/31 [110/20] via 10.16.17.12, Ethernet5
- O        10.16.18.10/31 [110/20] via 10.16.18.12, Ethernet6
+ O        10.16.17.14/31 [110/80] via 10.16.17.12, Ethernet5
+ O        10.16.17.250/32 [110/50] via 10.16.17.12, Ethernet5
+ O        10.16.18.10/31 [110/80] via 10.16.18.12, Ethernet6
  C        10.16.18.12/31 is directly connected, Ethernet6
- O        10.16.18.14/31 [110/20] via 10.16.18.12, Ethernet6
+ O        10.16.18.14/31 [110/80] via 10.16.18.12, Ethernet6
+ O        10.16.18.250/32 [110/50] via 10.16.18.12, Ethernet6
+
+Leaf-2#show ip ospf neighbor 
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.16.17.250    100      default  0   FULL                   00:00:30    10.16.17.12     Ethernet5
+10.16.18.250    100      default  0   FULL                   00:00:34    10.16.18.12     Ethernet6

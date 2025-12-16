@@ -19,19 +19,28 @@ vrf instance mng_net
 interface Ethernet1
    no switchport
    ip address 10.16.17.10/31
+   bfd interval 100 min-rx 100 multiplier 3
+   ip ospf cost 40
    ip ospf network point-to-point
+   ip ospf authentication-key 7 hdkCBSzb0w0=
    ip ospf area 0.0.0.0
 !
 interface Ethernet2
    no switchport
    ip address 10.16.17.12/31
+   bfd interval 100 min-rx 100 multiplier 3
+   ip ospf cost 40
    ip ospf network point-to-point
+   ip ospf authentication-key 7 NY4ZL4enZrA=
    ip ospf area 0.0.0.0
 !
 interface Ethernet3
    no switchport
    ip address 10.16.17.14/31
+   bfd interval 100 min-rx 100 multiplier 3
+   ip ospf cost 40
    ip ospf network point-to-point
+   ip ospf authentication-key 7 NY4ZL4enZrA=
    ip ospf area 0.0.0.0
 !
 interface Ethernet4
@@ -52,6 +61,7 @@ interface Ethernet11
 !
 interface Loopback0
    ip address 10.16.17.250/32
+   ip ospf area 0.0.0.0
 !
 interface Management1
    vrf mng_net
