@@ -34,4 +34,5 @@
   - [Leaf-3](./test/Ip_route_Leaf-3.txt);
 5.  Тест доступности серверов:
   - [Sever-1](./test/Test_Server_1.txt).
+  - [Sever-4](./test/Test_Server_4.txt).
     
