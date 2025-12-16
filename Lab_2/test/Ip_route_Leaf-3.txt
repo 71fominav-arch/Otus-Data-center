@@ -39,3 +39,20 @@ Leaf-3#show ip ospf neighbor
 Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
 10.16.17.250    100      default  0   FULL                   00:00:30    10.16.17.14     Ethernet5
 10.16.18.250    100      default  0   FULL                   00:00:31    10.16.18.14     Ethernet6
+
+Leaf-3#show ip ospf database 
+
+            OSPF Router with ID(10.16.3.250) (Instance ID 100) (VRF default)
+
+
+                 Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age         Seq#         Checksum Link count
+10.16.18.250    10.16.18.250    1012        0x80000057   0x2a54   7
+10.16.2.250     10.16.2.250     1023        0x8000004e   0xe952   6
+10.16.1.250     10.16.1.250     1013        0x8000004c   0x90b9   6
+10.16.17.250    10.16.17.250    1372        0x80000055   0xf791   7
+10.16.3.250     10.16.3.250     1023        0x8000004a   0x38a5   7
+
+
+
