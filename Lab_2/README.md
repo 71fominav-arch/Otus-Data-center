@@ -21,5 +21,10 @@
   - bfd на интеррфейсе в сторону соседа 100 ms x 3;
   - ip ospf authentication-key: POD1;
 2. Схема сети [Схема_OSPF.pdf](./Схема_OSPF.pdf).
-3. Конфигурация устройств [Leaf-1](./CFG/Leaf-1.txt)
+3. Конфигурация устройств:
+- [Leaf-1](./CFG/Leaf-1.txt);
+- [Leaf-2](./CFG/Leaf-2.txt);
+- [Leaf-3](./CFG/Leaf-3.txt);
+- [Spine-1](./CFG/Spine-1.txt);
+- [Spine-2](./CFG/Spine-2.txt);
     
