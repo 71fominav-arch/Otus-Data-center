@@ -13,6 +13,7 @@
     - bfd default;
     - passive-interface default;
     - router-id;
+    - на интерфейсах в сторону соседей задаем auto-cost reference-bandwidth <40000> 
    __________________________________________________________________________________________
    | name     | Leaf-1      | Leaf-2      | Leaf-3      | Spine-1      | Spine-2             |
    |----------|-------------|-------------|-------------|--------------|---------------------|
@@ -27,4 +28,10 @@
 - [Leaf-3](./CFG/Leaf-3.txt);
 - [Spine-1](./CFG/Spine-1.txt);
 - [Spine-2](./CFG/Spine-2.txt);
+4. Таблицы маршрутизации на Leaf:
+  - [Leaf-1](./test/Ip_route_Leaf-1.txt);
+  - [Leaf-2](./test/Ip_route_Leaf-2.txt);
+  - [Leaf-3](./test/Ip_route_Leaf-3.txt);
+5.  Тест доступности серверов:
+    - [Sever-1](./test/Test_Server_1.txt).
     
