@@ -1,0 +1,327 @@
+Spine-1#show ip route 
+
+VRF: default
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ I L1     10.16.1.0/30 [115/20] via 10.16.17.11, Ethernet1
+ I L1     10.16.1.250/32 [115/20] via 10.16.17.11, Ethernet1
+ I L1     10.16.2.0/30 [115/20] via 10.16.17.13, Ethernet2
+ I L1     10.16.2.250/32 [115/20] via 10.16.17.13, Ethernet2
+ I L1     10.16.3.0/30 [115/20] via 10.16.17.15, Ethernet3
+ I L1     10.16.3.4/30 [115/20] via 10.16.17.15, Ethernet3
+ I L1     10.16.3.250/32 [115/20] via 10.16.17.15, Ethernet3
+ C        10.16.17.10/31 is directly connected, Ethernet1
+ C        10.16.17.12/31 is directly connected, Ethernet2
+ C        10.16.17.14/31 is directly connected, Ethernet3
+ C        10.16.17.250/32 is directly connected, Loopback0
+ I L1     10.16.18.10/31 [115/20] via 10.16.17.11, Ethernet1
+ I L1     10.16.18.12/31 [115/20] via 10.16.17.13, Ethernet2
+ I L1     10.16.18.14/31 [115/20] via 10.16.17.15, Ethernet3
+ I L1     10.16.18.250/32 [115/30] via 10.16.17.11, Ethernet1
+                                   via 10.16.17.13, Ethernet2
+                                   via 10.16.17.15, Ethernet3
+ C        10.17.1.10/31 is directly connected, Ethernet5
+ I L2     10.17.1.12/31 [115/20] via 10.17.1.10, Ethernet5
+ I L2     10.17.1.250/32 [115/20] via 10.17.1.10, Ethernet5
+ C        10.17.2.10/31 is directly connected, Ethernet6
+ I L2     10.17.2.12/31 [115/20] via 10.17.2.10, Ethernet6
+ I L2     10.17.2.250/32 [115/20] via 10.17.2.10, Ethernet6
+
+Spine-1#show isis neighbors detail 
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+underlay  default  Leaf-1           L1   Ethernet1          P2P               UP    22          15                  
+  Area addresses: 49.0003
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 01:13:08 ago at 2025-12-23 15:38:29
+  IPv4 Interface Address: 10.16.17.11
+  IPv6 Interface Address: none
+  Interface name: Ethernet1
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+underlay  default  Leaf-2           L1   Ethernet2          P2P               UP    29          15                  
+  Area addresses: 49.0003
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 01:12:08 ago at 2025-12-23 15:39:29
+  IPv4 Interface Address: 10.16.17.13
+  IPv6 Interface Address: none
+  Interface name: Ethernet2
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+underlay  default  Leaf-3           L1   Ethernet3          P2P               UP    27          15                  
+  Area addresses: 49.0003
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 01:11:23 ago at 2025-12-23 15:40:14
+  IPv4 Interface Address: 10.16.17.15
+  IPv6 Interface Address: none
+  Interface name: Ethernet3
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+underlay  default  S-Spine-1        L2   Ethernet5          P2P               UP    22          0D                  
+  Area addresses: 49.0001
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 23:56:04 ago at 2025-12-22 16:55:33
+  IPv4 Interface Address: 10.17.1.10
+  IPv6 Interface Address: none
+  Interface name: Ethernet5
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+underlay  default  S-Spine-2        L2   Ethernet6          P2P               UP    28          0D                  
+  Area addresses: 49.0002
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 00:51:35 ago at 2025-12-23 16:00:02
+  IPv4 Interface Address: 10.17.2.10
+  IPv6 Interface Address: none
+  Interface name: Ethernet6
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+Spine-1#
+
+Spine-1#show isis neighbors level-1
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+underlay  default  Leaf-1           L1   Ethernet1          P2P               UP    25          15                  
+underlay  default  Leaf-2           L1   Ethernet2          P2P               UP    25          15                  
+underlay  default  Leaf-3           L1   Ethernet3          P2P               UP    28          15                  
+
+Spine-1#show isis neighbors level-2 
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+underlay  default  S-Spine-1        L2   Ethernet5          P2P               UP    25          0D                  
+underlay  default  S-Spine-2        L2   Ethernet6          P2P               UP    30          0D               
+
+Spine-1#show isis interface ethernet 5
+
+IS-IS Instance: underlay VRF: default
+
+  Interface Ethernet5:
+    Index: 21 SNPA: P2P
+    MTU: 1497 Type: point-to-point
+    Supported address families: IPv4
+    Area proxy boundary is disabled
+    Speed: 1000 mbps
+    BFD IPv4 is disabled
+    BFD IPv6 is disabled
+    Hello padding is enabled
+    Level 2:
+      Metric: 10, Number of adjacencies: 1
+      Link-ID: 15
+      Authentication mode: None
+      TI-LFA protection is disabled for IPv4
+      TI-LFA protection is disabled for IPv6
+Spine-1#
+
+Spine-1#show isis database detail
+
+IS-IS Instance: underlay VRF: default
+  IS-IS Level 1 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS Flags
+    Leaf-1.00-00                129  34592  1155    135 L1 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Leaf-1
+      Area addresses: 49.0003
+      Interface address: 10.16.1.250
+      Interface address: 10.16.1.1
+      Interface address: 10.16.18.11
+      Interface address: 10.16.17.11
+      IS Neighbor          : Spine-2.00          Metric: 10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      Reachability         : 10.16.1.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.1.0/30 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.1.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Leaf-2.00-00                127   4984  1041    135 L1 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Leaf-2
+      Area addresses: 49.0003
+      Interface address: 10.16.2.250
+      Interface address: 10.16.2.1
+      Interface address: 10.16.18.13
+      Interface address: 10.16.17.13
+      IS Neighbor          : Spine-2.00          Metric: 10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      Reachability         : 10.16.2.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.2.0/30 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.2.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Leaf-3.00-00                128  11973  1183    148 L1 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Leaf-3
+      Area addresses: 49.0003
+      Interface address: 10.16.3.250
+      Interface address: 10.16.3.5
+      Interface address: 10.16.3.1
+      Interface address: 10.16.18.15
+      Interface address: 10.16.17.15
+      IS Neighbor          : Spine-2.00          Metric: 10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      Reachability         : 10.16.3.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.3.4/30 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.3.0/30 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.3.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Spine-1.00-00               127   8508   608    147 L2 <DefaultAtt>
+      LSP generation remaining wait time: 0 ms
+      Time remaining until refresh: 308 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-1
+      Area addresses: 49.0003
+      Interface address: 10.16.17.250
+      Interface address: 10.16.17.14
+      Interface address: 10.16.17.12
+      Interface address: 10.16.17.10
+      IS Neighbor          : Leaf-3.00           Metric: 10
+      IS Neighbor          : Leaf-2.00           Metric: 10
+      IS Neighbor          : Leaf-1.00           Metric: 10
+      Reachability         : 10.16.17.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.17.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Spine-2.00-00               134  29130  1182    147 L2 <DefaultAtt>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-2
+      Area addresses: 49.0003
+      Interface address: 10.16.18.250
+      Interface address: 10.16.18.12
+      Interface address: 10.16.18.14
+      Interface address: 10.16.18.10
+      IS Neighbor          : Leaf-2.00           Metric: 10
+      IS Neighbor          : Leaf-3.00           Metric: 10
+      IS Neighbor          : Leaf-1.00           Metric: 10
+      Reachability         : 10.16.18.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.18.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS Flags
+    Spine-1.00-00               143  51544   882    247 L2 <>
+      LSP generation remaining wait time: 0 ms
+      Time remaining until refresh: 582 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-1
+      Area addresses: 49.0003
+      Interface address: 10.17.2.11
+      Interface address: 10.17.1.11
+      IS Neighbor          : S-Spine-2.00        Metric: 10
+      IS Neighbor          : S-Spine-1.00        Metric: 10
+      Reachability         : 10.16.18.250/32 Metric: 30 Type: 1 Up
+      Reachability         : 10.16.17.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.4/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.17.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Spine-2.00-00               146   4085  1146    247 L2 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-2
+      Area addresses: 49.0003
+      Interface address: 10.17.2.13
+      Interface address: 10.17.1.13
+      IS Neighbor          : S-Spine-2.00        Metric: 10
+      IS Neighbor          : S-Spine-1.00        Metric: 10
+      Reachability         : 10.16.18.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.250/32 Metric: 30 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.4/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.12/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.18.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    S-Spine-1.00-00            1094  15913   714    125 L2 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: S-Spine-1
+      Area addresses: 49.0001
+      Interface address: 10.17.1.250
+      Interface address: 10.17.1.12
+      Interface address: 10.17.1.10
+      IS Neighbor          : Spine-2.00          Metric: 10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      Reachability         : 10.17.1.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.17.1.12 Flags: []
+        Area leader priority: 250 algorithm: 0
+    S-Spine-2.00-00              10  62619   882    125 L2 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: S-Spine-2
+      Area addresses: 49.0002
+      Interface address: 10.17.2.250
+      Interface address: 10.17.2.12
+      Interface address: 10.17.2.10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      IS Neighbor          : Spine-2.00          Metric: 10
+      Reachability         : 10.17.2.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.17.2.10 Flags: []
+        Area leader priority: 250 algorithm: 0
+Spine-1#
+
+

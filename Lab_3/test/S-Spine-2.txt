@@ -1,0 +1,142 @@
+S-Spine-2#show ip route 
+
+VRF: default
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ I L2     10.16.1.0/30 [115/30] via 10.17.2.11, Ethernet1
+                                via 10.17.2.13, Ethernet2
+ I L2     10.16.1.250/32 [115/30] via 10.17.2.11, Ethernet1
+                                  via 10.17.2.13, Ethernet2
+ I L2     10.16.2.0/30 [115/30] via 10.17.2.11, Ethernet1
+                                via 10.17.2.13, Ethernet2
+ I L2     10.16.2.250/32 [115/30] via 10.17.2.11, Ethernet1
+                                  via 10.17.2.13, Ethernet2
+ I L2     10.16.3.0/30 [115/30] via 10.17.2.11, Ethernet1
+                                via 10.17.2.13, Ethernet2
+ I L2     10.16.3.4/30 [115/30] via 10.17.2.11, Ethernet1
+                                via 10.17.2.13, Ethernet2
+ I L2     10.16.3.250/32 [115/30] via 10.17.2.11, Ethernet1
+                                  via 10.17.2.13, Ethernet2
+ I L2     10.16.17.10/31 [115/20] via 10.17.2.11, Ethernet1
+ I L2     10.16.17.12/31 [115/20] via 10.17.2.11, Ethernet1
+ I L2     10.16.17.14/31 [115/20] via 10.17.2.11, Ethernet1
+ I L2     10.16.17.250/32 [115/20] via 10.17.2.11, Ethernet1
+ I L2     10.16.18.10/31 [115/20] via 10.17.2.13, Ethernet2
+ I L2     10.16.18.12/31 [115/20] via 10.17.2.13, Ethernet2
+ I L2     10.16.18.14/31 [115/20] via 10.17.2.13, Ethernet2
+ I L2     10.16.18.250/32 [115/20] via 10.17.2.13, Ethernet2
+ I L2     10.17.1.10/31 [115/20] via 10.17.2.11, Ethernet1
+ I L2     10.17.1.12/31 [115/20] via 10.17.2.13, Ethernet2
+ I L2     10.17.1.250/32 [115/30] via 10.17.2.11, Ethernet1
+                                  via 10.17.2.13, Ethernet2
+ C        10.17.2.10/31 is directly connected, Ethernet1
+ C        10.17.2.12/31 is directly connected, Ethernet2
+ C        10.17.2.250/32 is directly connected, Loopback0
+
+S-Spine-2#
+
+S-Spine-2#show isis database detail 
+
+IS-IS Instance: underlay VRF: default
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS Flags
+    Spine-1.00-00               143  51544  1124    247 L2 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-1
+      Area addresses: 49.0003
+      Interface address: 10.17.2.11
+      Interface address: 10.17.1.11
+      IS Neighbor          : S-Spine-2.00        Metric: 10
+      IS Neighbor          : S-Spine-1.00        Metric: 10
+      Reachability         : 10.16.18.250/32 Metric: 30 Type: 1 Up
+      Reachability         : 10.16.17.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.4/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.17.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    Spine-2.00-00               145   4596  1122    247 L2 <>
+      Remaining lifetime received: 1199 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: Spine-2
+      Area addresses: 49.0003
+      Interface address: 10.17.2.13
+      Interface address: 10.17.1.13
+      IS Neighbor          : S-Spine-2.00        Metric: 10
+      IS Neighbor          : S-Spine-1.00        Metric: 10
+      Reachability         : 10.16.18.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.17.250/32 Metric: 30 Type: 1 Up
+      Reachability         : 10.16.17.14/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.12/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.17.10/31 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.4/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.3.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.2.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.250/32 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.1.0/30 Metric: 20 Type: 1 Up
+      Reachability         : 10.16.18.14/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.16.18.10/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.12/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.16.18.250 Flags: []
+        Area leader priority: 250 algorithm: 0
+    S-Spine-1.00-00            1094  15913  1122    125 L2 <>
+      Remaining lifetime received: 1035 s Modified to: 1200 s
+      NLPID: 0xCC(IPv4)
+      Hostname: S-Spine-1
+      Area addresses: 49.0001
+      Interface address: 10.17.1.250
+      Interface address: 10.17.1.12
+      Interface address: 10.17.1.10
+      IS Neighbor          : Spine-2.00          Metric: 10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      Reachability         : 10.17.1.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.1.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.17.1.12 Flags: []
+        Area leader priority: 250 algorithm: 0
+    S-Spine-2.00-00              10  62619  1124    125 L2 <>
+      LSP generation remaining wait time: 0 ms
+      Time remaining until refresh: 824 s
+      NLPID: 0xCC(IPv4)
+      Hostname: S-Spine-2
+      Area addresses: 49.0002
+      Interface address: 10.17.2.250
+      Interface address: 10.17.2.12
+      Interface address: 10.17.2.10
+      IS Neighbor          : Spine-1.00          Metric: 10
+      IS Neighbor          : Spine-2.00          Metric: 10
+      Reachability         : 10.17.2.250/32 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.12/31 Metric: 10 Type: 1 Up
+      Reachability         : 10.17.2.10/31 Metric: 10 Type: 1 Up
+      Router Capabilities: Router Id: 10.17.2.10 Flags: []
+        Area leader priority: 250 algorithm: 0
+S-Spine-2#

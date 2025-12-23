@@ -1,0 +1,109 @@
+S-Spine-1#show ip route 
+
+VRF: default
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ I L2     10.16.1.0/30 [115/30] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ I L2     10.16.1.250/32 [115/30] via 10.17.1.11, Ethernet1
+                                  via 10.17.1.13, Ethernet2
+ I L2     10.16.2.0/30 [115/30] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ I L2     10.16.2.250/32 [115/30] via 10.17.1.11, Ethernet1
+                                  via 10.17.1.13, Ethernet2
+ I L2     10.16.3.0/30 [115/30] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ I L2     10.16.3.4/30 [115/30] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ I L2     10.16.3.250/32 [115/30] via 10.17.1.11, Ethernet1
+                                  via 10.17.1.13, Ethernet2
+ I L2     10.16.17.10/31 [115/20] via 10.17.1.11, Ethernet1
+ I L2     10.16.17.12/31 [115/20] via 10.17.1.11, Ethernet1
+ I L2     10.16.17.14/31 [115/20] via 10.17.1.11, Ethernet1
+ I L2     10.16.17.250/32 [115/20] via 10.17.1.11, Ethernet1
+ I L2     10.16.18.10/31 [115/20] via 10.17.1.13, Ethernet2
+ I L2     10.16.18.12/31 [115/20] via 10.17.1.13, Ethernet2
+ I L2     10.16.18.14/31 [115/20] via 10.17.1.13, Ethernet2
+ I L2     10.16.18.250/32 [115/20] via 10.17.1.13, Ethernet2
+ C        10.17.1.10/31 is directly connected, Ethernet1
+ C        10.17.1.12/31 is directly connected, Ethernet2
+ C        10.17.1.250/32 is directly connected, Loopback0
+ I L2     10.17.2.10/31 [115/20] via 10.17.1.11, Ethernet1
+ I L2     10.17.2.12/31 [115/20] via 10.17.1.13, Ethernet2
+ I L2     10.17.2.250/32 [115/30] via 10.17.1.11, Ethernet1
+                                  via 10.17.1.13, Ethernet2
+
+S-Spine-1#
+
+S-Spine-1#show isis neighbors detail 
+ 
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id          
+underlay  default  Spine-1          L2   Ethernet1          P2P               UP    22          15                  
+  Area addresses: 49.0003
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 1d00h ago at 2025-12-22 16:55:33
+  IPv4 Interface Address: 10.17.1.11
+  IPv6 Interface Address: none
+  Interface name: Ethernet1
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+underlay  default  Spine-2          L2   Ethernet2          P2P               UP    23          15                  
+  Area addresses: 49.0003
+  SNPA: P2P
+  Router ID: 0.0.0.0
+  Advertised Hold Time: 30
+  State Changed: 01:06:47 ago at 2025-12-23 15:57:45
+  IPv4 Interface Address: 10.17.1.13
+  IPv6 Interface Address: none
+  Interface name: Ethernet2
+  Graceful Restart: Supported 
+  Supported Address Families: IPv4
+  Neighbor Supported Address Families: IPv4
+S-Spine-1#
+
+S-Spine-1#show isis summary
+ 
+IS-IS Instance: underlay VRF: default
+  Instance ID: 0
+  System ID: 0100.1700.1250, administratively enabled
+  Router ID: IPv4: 10.17.1.12
+  Hostname: S-Spine-1
+  Multi Topology disabled, attached
+  IPv4 Preference: Level 1: 115, Level 2: 115
+  IPv6 Preference: Level 1: 115, Level 2: 115
+  IS-Type: Level 2, Number active interfaces: 3
+  Routes IPv4 only
+  LSP size maximum: Level 1: 1492, Level 2: 1492
+                            Max wait(s) Initial wait(ms) Hold interval(ms)
+  LSP Generation Interval:     5              50               50
+  SPF Interval:                2            1000             1000
+  Current SPF hold interval(ms): Level 1: 0, Level 2: 2000
+  Last Level 2 SPF run 1:27 minutes ago
+  CSNP generation interval: 10 seconds
+  Dynamic Flooding: Disabled
+  Authentication mode: Level 1: None, Level 2: None
+  Graceful Restart: Disabled, Graceful Restart Helper: Enabled
+  Area addresses: 49.0001
+  level 2: number DIS interfaces: 0, LSDB size: 4
+    Area Leader: None
+    Overload Bit is not set. 
+  Redistributed Level 1 routes: 0 limit: Not Configured
+  Redistributed Level 2 routes: 0 limit: Not Configured
+
+
+
