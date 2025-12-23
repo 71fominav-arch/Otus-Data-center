@@ -57,6 +57,7 @@ ip routing vrf mng_net
 !
 router isis underlay
    net 49.0001.0100.1700.1250.00
+   is-type level-2
    log-adjacency-changes
    !
    address-family ipv4 unicast
