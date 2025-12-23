@@ -1,0 +1,64 @@
+! device: S-Spine-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname S-Spine-1
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Ethernet1
+   no switchport
+   ip address 10.17.1.10/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.17.1.12/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.17.1.250/32
+   isis enable underlay
+   isis circuit-type level-2
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.101/24
+!
+ip routing
+ip routing vrf mng_net
+!
+router isis underlay
+   net 49.0001.0100.1700.1250.00
+   log-adjacency-changes
+   !
+   address-family ipv4 unicast
+!
+end

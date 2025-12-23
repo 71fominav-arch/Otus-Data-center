@@ -1,0 +1,88 @@
+! device: Spine-2 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname Spine-2
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Ethernet1
+   no switchport
+   ip address 10.16.18.10/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.16.18.12/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet3
+   no switchport
+   ip address 10.16.18.14/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet4
+!
+interface Ethernet5
+   no switchport
+   ip address 10.17.1.13/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet6
+   no switchport
+   ip address 10.17.2.13/31
+   bfd interval 100 min-rx 100 multiplier 3
+   isis enable underlay
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.18.250/32
+   isis enable underlay
+   isis circuit-type level-1
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.18/24
+!
+ip routing
+ip routing vrf mng_net
+!
+router isis underlay
+   net 49.0003.0100.1601.8250.00
+   log-adjacency-changes
+   !
+   address-family ipv4 unicast
+!
+end
