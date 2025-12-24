@@ -34,13 +34,13 @@ ________________________________________________________________________________
 
    
   10. bfd на интеррфейсе в сторону соседа 100 ms x 3;
-  11. Конфигурации устройств:
-      11.1 [Leaf-1](./CFG/Leaf-1.txt);  
-      11.2 [Leaf-2](./CFG/Leaf-2.txt);
-      11.3 [Leaf-3](./CFG/Leaf-3.txt);
-      11.4 [Spine-1](./CFG/Spine-1.txt);
-      11.5 [Spine-2](./CFG/Spine-2.txt);
-      11.6 [S-Spine-1](./CFG/S-Spine-1.txt);
-      11.7 [S-Spine-2](./CFG/S-Spine-2.txt);
+  11. Конфигурации устройств:   
+      11.1 [Leaf-1](./CFG/Leaf-1.txt);   
+      11.2 [Leaf-2](./CFG/Leaf-2.txt);   
+      11.3 [Leaf-3](./CFG/Leaf-3.txt);   
+      11.4 [Spine-1](./CFG/Spine-1.txt);  
+      11.5 [Spine-2](./CFG/Spine-2.txt);  
+      11.6 [S-Spine-1](./CFG/S-Spine-1.txt);  
+      11.7 [S-Spine-2](./CFG/S-Spine-2.txt);  
       
 
