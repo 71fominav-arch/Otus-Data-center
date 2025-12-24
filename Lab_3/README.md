@@ -41,8 +41,8 @@ ________________________________________________________________________________
       11.4 [Spine-1](./CFG/Spine-1.txt);  
       11.5 [Spine-2](./CFG/Spine-2.txt);  
       11.6 [S-Spine-1](./CFG/S-Spine-1.txt);  
-      11.7 [S-Spine-2](./CFG/S-Spine-2.txt);  
-  12. Диагностика:
+      11.7 [S-Spine-2](./CFG/S-Spine-2.txt);    
+  12. Диагностика:    
       12.1 Команды в [leaf-1](./test/leaf-1.txt);   
       12.1 Команды в [Spine-1](./test/Spine-1.txt);   
       12.1 Команды в [S-Spine-1](./test/S-Spine-1.txt);   
