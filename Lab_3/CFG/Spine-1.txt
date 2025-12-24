@@ -21,6 +21,7 @@ interface Ethernet1
    ip address 10.16.17.10/31
    bfd interval 100 min-rx 100 multiplier 3
    isis enable underlay
+   isis bfd
    isis circuit-type level-1
    isis network point-to-point
 !
@@ -29,6 +30,7 @@ interface Ethernet2
    ip address 10.16.17.12/31
    bfd interval 100 min-rx 100 multiplier 3
    isis enable underlay
+   isis bfd
    isis circuit-type level-1
    isis network point-to-point
 !
@@ -37,6 +39,7 @@ interface Ethernet3
    ip address 10.16.17.14/31
    bfd interval 100 min-rx 100 multiplier 3
    isis enable underlay
+   isis bfd
    isis circuit-type level-1
    isis network point-to-point
 !
@@ -47,6 +50,7 @@ interface Ethernet5
    ip address 10.17.1.11/31
    bfd interval 100 min-rx 100 multiplier 3
    isis enable underlay
+   isis bfd
    isis circuit-type level-2
    isis network point-to-point
 !
@@ -55,6 +59,7 @@ interface Ethernet6
    ip address 10.17.2.11/31
    bfd interval 100 min-rx 100 multiplier 3
    isis enable underlay
+   isis bfd
    isis circuit-type level-2
    isis network point-to-point
 !
@@ -86,4 +91,5 @@ router isis underlay
    !
    address-family ipv4 unicast
 !
+
 end
