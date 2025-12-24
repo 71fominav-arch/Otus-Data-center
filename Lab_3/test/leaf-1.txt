@@ -89,7 +89,7 @@ IS-IS Instance: underlay VRF: default
     Spine-1          10       0         Spine-1          Ethernet5                P2P              
     Spine-2          10       0         Spine-2          Ethernet6                P2P   
 
-Leaf-1#show isis interface ethernet 6 
+Leaf-1#show isis interface ethernet 6
 
 IS-IS Instance: underlay VRF: default
 
@@ -99,35 +99,29 @@ IS-IS Instance: underlay VRF: default
     Supported address families: IPv4
     Area proxy boundary is disabled
     Speed: 1000 mbps
-    BFD IPv4 is disabled
+    BFD IPv4 is enabled
     BFD IPv6 is disabled
     Hello padding is enabled
     Level 1:
-      Metric: 10, Number of adjacencies: 1
+      Metric: 10, Number of adjacencies: 0
       Link-ID: 16
       Authentication mode: None
       TI-LFA protection is disabled for IPv4
       TI-LFA protection is disabled for IPv6
-Leaf-1#show isis interface ethernet 5
 
-IS-IS Instance: underlay VRF: default
+Leaf-1#show bfd peers
+VRF name: default
+-----------------
+DstAddr         MyDisc   YourDisc  Interface/Transport    Type          LastUp
+----------- ---------- ----------- -------------------- ------- ---------------
+10.16.17.10 2247858932 3034859575        Ethernet5(21)  normal  12/24/25 04:44
+10.16.18.10 3484999829  844115410        Ethernet6(22)  normal  12/24/25 04:44
 
-  Interface Ethernet5:
-    Index: 21 SNPA: P2P
-    MTU: 1497 Type: point-to-point
-    Supported address families: IPv4
-    Area proxy boundary is disabled
-    Speed: 1000 mbps
-    BFD IPv4 is disabled
-    BFD IPv6 is disabled
-    Hello padding is enabled
-    Level 1:
-      Metric: 10, Number of adjacencies: 1
-      Link-ID: 15
-      Authentication mode: None
-      TI-LFA protection is disabled for IPv4
-      TI-LFA protection is disabled for IPv6
-Leaf-1#
+   LastDown            LastDiag    State
+-------------- ------------------- -----
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+
 
 Leaf-1# show isis database detail
 
@@ -225,6 +219,7 @@ IS-IS Instance: underlay VRF: default
       Router Capabilities: Router Id: 10.16.18.250 Flags: []
         Area leader priority: 250 algorithm: 0
 Leaf-1#
+
 
 
 
