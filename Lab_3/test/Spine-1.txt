@@ -117,26 +117,25 @@ Instance  VRF      System Id        Type Interface          SNPA              St
 underlay  default  S-Spine-1        L2   Ethernet5          P2P               UP    25          0D                  
 underlay  default  S-Spine-2        L2   Ethernet6          P2P               UP    30          0D               
 
-Spine-1#show isis interface ethernet 5
+Spine-1#show isis interface ethernet 1
 
 IS-IS Instance: underlay VRF: default
 
-  Interface Ethernet5:
-    Index: 21 SNPA: P2P
+  Interface Ethernet1:
+    Index: 17 SNPA: P2P
     MTU: 1497 Type: point-to-point
     Supported address families: IPv4
     Area proxy boundary is disabled
     Speed: 1000 mbps
-    BFD IPv4 is disabled
+    BFD IPv4 is enabled
     BFD IPv6 is disabled
     Hello padding is enabled
-    Level 2:
+    Level 1:
       Metric: 10, Number of adjacencies: 1
-      Link-ID: 15
+      Link-ID: 11
       Authentication mode: None
       TI-LFA protection is disabled for IPv4
       TI-LFA protection is disabled for IPv6
-Spine-1#
 
 Spine-1#show isis database detail
 
@@ -323,5 +322,24 @@ IS-IS Instance: underlay VRF: default
       Router Capabilities: Router Id: 10.17.2.10 Flags: []
         Area leader priority: 250 algorithm: 0
 Spine-1#
+Spine-1#show bfd peers
+VRF name: default
+-----------------
+DstAddr         MyDisc   YourDisc  Interface/Transport    Type          LastUp
+----------- ---------- ----------- -------------------- ------- ---------------
+10.16.17.11 1447405548  194399523        Ethernet1(17)  normal  12/24/25 04:41
+10.16.17.13 2177251463 1694311509        Ethernet2(18)  normal  12/24/25 04:41
+10.16.17.15  867863638 3444530681        Ethernet3(19)  normal  12/24/25 04:41
+10.17.1.10  2299426027 2740840646        Ethernet5(21)  normal  12/24/25 04:40
+10.17.2.10   691753050   24041480        Ethernet6(22)  normal  12/24/25 04:41
+
+   LastDown            LastDiag    State
+-------------- ------------------- -----
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+
 
 
