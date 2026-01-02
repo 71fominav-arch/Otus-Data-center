@@ -1,0 +1,97 @@
+! device: Spine-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname Spine-1
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   !! Managment net
+   description Managment_net
+!
+interface Ethernet1
+   description to-Leaf1-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.10/31
+   no isis bfd
+!
+interface Ethernet2
+   description to-Leaf2-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.12/31
+   no isis bfd
+!
+interface Ethernet3
+   description to-Leaf3-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.14/31
+   no isis bfd
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-S-Spine1-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.17.1.11/31
+   no isis bfd
+!
+interface Ethernet6
+   description to-S-Spine2-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.17.2.11/31
+   no isis bfd
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.17.250/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.17/24
+!
+ip routing
+ip routing vrf mng_net
+!
+router bgp 65001
+   router-id 10.16.17.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.16.17.0/24 peer-group UNDERLAY remote-as 65001
+   neighbor S-Spine peer group
+   neighbor S-Spine remote-as 65001
+   neighbor S-Spine next-hop-self
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65001
+   neighbor UNDERLAY next-hop-self
+   neighbor UNDERLAY route-reflector-client
+   neighbor 10.17.1.10 peer group S-Spine
+   neighbor 10.17.2.10 peer group S-Spine
+   !
+   address-family ipv4
+      neighbor S-Spine activate
+      neighbor UNDERLAY activate
+      network 10.16.17.250/32
+!
+end
