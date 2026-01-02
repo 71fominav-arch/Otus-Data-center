@@ -1,0 +1,290 @@
+Leaf-1#show ip route
+
+VRF: default
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ C        10.16.1.0/30 is directly connected, Ethernet1
+ C        10.16.1.250/32 is directly connected, Loopback0
+ B I      10.16.2.0/30 [200/0] via 10.16.17.10, Ethernet5
+                               via 10.16.18.10, Ethernet6
+ B I      10.16.2.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                 via 10.16.18.10, Ethernet6
+ B I      10.16.3.0/30 [200/0] via 10.16.17.10, Ethernet5
+                               via 10.16.18.10, Ethernet6
+ B I      10.16.3.4/30 [200/0] via 10.16.17.10, Ethernet5
+                               via 10.16.18.10, Ethernet6
+ B I      10.16.3.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                 via 10.16.18.10, Ethernet6
+ C        10.16.17.10/31 is directly connected, Ethernet5
+ B I      10.16.17.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                  via 10.16.18.10, Ethernet6
+ C        10.16.18.10/31 is directly connected, Ethernet6
+ B I      10.16.18.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                  via 10.16.18.10, Ethernet6
+ B I      10.17.1.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                 via 10.16.18.10, Ethernet6
+ B I      10.17.2.250/32 [200/0] via 10.16.17.10, Ethernet5
+                                 via 10.16.18.10, Ethernet6
+
+Leaf-1#show ip bgp neighbors
+BGP neighbor is 10.16.17.10, remote AS 65001, internal link
+  BGP version 4, remote router ID 10.16.17.250, VRF default
+  Inherits configuration from and member of peer-group UNDERLAY
+  Negotiated BGP version 4
+  Member of update group 2
+  Last read never, last write never
+  Hold time is 9, keepalive interval is 3 seconds
+  Configured hold time is 9, keepalive interval is 3 seconds
+  Connect timer is inactive
+  Idle-restart timer is inactive
+  BGP state is Established, up for    2d21h
+  Number of transitions to established: 481
+  Last state was OpenConfirm
+  Last event was RecvKeepAlive
+  Last sent notification:Cease/other configuration change, Last time    2d21h, First time    4d20h, Repeats 461
+  Last rcvd notification:Cease/other configuration change, Last time    2d23h, First time    4d17h, Repeats 16
+  Neighbor Capabilities:
+    Multiprotocol IPv4 Unicast: advertised and received and negotiated
+    Four Octet ASN: advertised and received and negotiated
+    Route Refresh: advertised and received and negotiated
+    Send End-of-RIB messages: advertised and received and negotiated
+    Additional-paths recv capability:
+      IPv4 Unicast: advertised
+    Additional-paths send capability:
+      IPv4 Unicast: received
+  Restart timer is inactive
+  End of rib timer is inactive
+  Message Statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent      Rcvd
+    Opens:                481       481
+    Notifications:        462        18
+    Updates:              967      3777
+    Keepalives:        141276    141154
+    Route-Refresh:          3         2
+    Total messages:    143189    145432
+  Prefix Statistics:
+                         Sent      Rcvd     Best Paths     Best ECMP Paths
+    IPv4 Unicast:           2         9              2                   9
+    IPv6 Unicast:           0         0              0                   0
+    IPv4 SR-TE:             0         0              0                   0
+    IPv6 SR-TE:             0         0              0                   0
+  Inbound updates dropped by reason:
+    AS path loop detection: 0
+    Enforced First AS: 0
+    Originator ID matches local router ID: 3
+    Nexthop matches local IP address: 0
+    Unexpected IPv6 nexthop for IPv4 routes: 0
+  Inbound updates with attribute errors:
+    Resulting in removal of all paths in update (treat-as-withdraw): 0
+    Resulting in AFI/SAFI disable: 0
+    Resulting in attribute ignore: 0
+  Inbound paths dropped by reason:
+    IPv4 labeled-unicast NLRIs dropped due to excessive labels: 0
+    IPv6 labeled-unicast NLRIs dropped due to excessive labels: 0
+  Outbound paths dropped by reason:
+    IPv4 local address not available: 0
+    IPv6 local address not available: 0
+    Inbound policy
+    Outbound policy
+Local AS is 65001, local router ID 10.16.1.250
+TTL is 255
+Local TCP address is 10.16.17.11, local port is 45383
+Remote TCP address is 10.16.17.10, remote port is 179
+Auto-Local-Addr is disabled
+TCP Socket Information:
+  TCP state is ESTABLISHED
+  Recv-Q: 0/32768
+  Send-Q: 0/32768
+  Outgoing Maximum Segment Size (MSS): 9162
+  Total Number of TCP retransmissions: 8
+  Options:
+    Timestamps enabled: yes
+    Selective Acknowledgments enabled: yes
+    Window Scale enabled: yes
+    Explicit Congestion Notification (ECN) enabled: no
+  Socket Statistics:
+    Window Scale (wscale): 7,7
+    Retransmission Timeout (rto): 220.0ms
+    Round-trip Time (rtt/rtvar): 16.7ms/9.5ms
+    Delayed Ack Timeout (ato): 40.0ms
+    Congestion Window (cwnd): 10
+    TCP Throughput: 43.77 Mbps
+    Recv Round-trip Time (rcv_rtt): 62280.3ms
+    Advertised Recv Window (rcv_space): 64313
+
+
+BGP neighbor is 10.16.18.10, remote AS 65001, internal link
+  BGP version 4, remote router ID 10.16.18.250, VRF default
+  Inherits configuration from and member of peer-group UNDERLAY
+  Negotiated BGP version 4
+  Member of update group 2
+  Last read 00:00:01, last write 00:00:01
+  Hold time is 9, keepalive interval is 3 seconds
+  Configured hold time is 9, keepalive interval is 3 seconds
+  Connect timer is inactive
+  Idle-restart timer is inactive
+  BGP state is Established, up for    2d21h
+  Number of transitions to established: 445
+  Last state was OpenConfirm
+  Last event was RecvKeepAlive
+  Last sent notification:Cease/other configuration change, Last time    2d21h, First time    4d20h, Repeats 420
+  Last rcvd notification:Cease/other configuration change, Last time    2d23h, First time    4d19h, Repeats 22
+  Neighbor Capabilities:
+    Multiprotocol IPv4 Unicast: advertised and received and negotiated
+    Four Octet ASN: advertised and received and negotiated
+    Route Refresh: advertised and received and negotiated
+    Send End-of-RIB messages: advertised and received and negotiated
+    Additional-paths recv capability:
+      IPv4 Unicast: advertised
+    Additional-paths send capability:
+      IPv4 Unicast: received
+  Restart timer is inactive
+  End of rib timer is inactive
+  Message Statistics:
+    InQ depth is 0
+    OutQ depth is 0
+                         Sent      Rcvd
+    Opens:                445       445
+    Notifications:        421        23
+    Updates:              894      4019
+    Keepalives:        140878    140754
+    Route-Refresh:          3         1
+    Total messages:    142641    145242
+  Prefix Statistics:
+                         Sent      Rcvd     Best Paths     Best ECMP Paths
+    IPv4 Unicast:           2         9              7                   9
+    IPv6 Unicast:           0         0              0                   0
+    IPv4 SR-TE:             0         0              0                   0
+    IPv6 SR-TE:             0         0              0                   0
+  Inbound updates dropped by reason:
+    AS path loop detection: 0
+    Enforced First AS: 0
+    Originator ID matches local router ID: 0
+    Nexthop matches local IP address: 0
+    Unexpected IPv6 nexthop for IPv4 routes: 0
+  Inbound updates with attribute errors:
+    Resulting in removal of all paths in update (treat-as-withdraw): 0
+    Resulting in AFI/SAFI disable: 0
+    Resulting in attribute ignore: 0
+  Inbound paths dropped by reason:
+    IPv4 labeled-unicast NLRIs dropped due to excessive labels: 0
+    IPv6 labeled-unicast NLRIs dropped due to excessive labels: 0
+  Outbound paths dropped by reason:
+    IPv4 local address not available: 0
+    IPv6 local address not available: 0
+    Inbound policy
+    Outbound policy
+Local AS is 65001, local router ID 10.16.1.250
+TTL is 255
+Local TCP address is 10.16.18.11, local port is 42203
+Remote TCP address is 10.16.18.10, remote port is 179
+Auto-Local-Addr is disabled
+TCP Socket Information:
+  TCP state is ESTABLISHED
+  Recv-Q: 0/32768
+  Send-Q: 0/32768
+  Outgoing Maximum Segment Size (MSS): 9162
+  Total Number of TCP retransmissions: 32
+  Options:
+    Timestamps enabled: yes
+    Selective Acknowledgments enabled: yes
+    Window Scale enabled: yes
+    Explicit Congestion Notification (ECN) enabled: no
+  Socket Statistics:
+    Window Scale (wscale): 7,7
+    Retransmission Timeout (rto): 216.0ms
+    Round-trip Time (rtt/rtvar): 12.0ms/2.5ms
+    Delayed Ack Timeout (ato): 40.0ms
+    Congestion Window (cwnd): 10
+    TCP Throughput: 60.94 Mbps
+    Recv Round-trip Time (rcv_rtt): 149299.5ms
+    Advertised Recv Window (rcv_space): 64323
+
+
+Leaf-1#
+
+Leaf-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+Neighbor Status Codes: m - Under maintenance
+  Neighbor         V  AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.17.10      4  65001         145463    143220    0    0    2d21h Estab   9      9
+  10.16.18.10      4  65001         145273    142672    0    0    2d21h Estab   9      9
+
+Leaf-1#ping ip 10.16.2.2 source 10.16.1.250
+PING 10.16.2.2 (10.16.2.2) from 10.16.1.250 : 72(100) bytes of data.
+80 bytes from 10.16.2.2: icmp_seq=1 ttl=62 time=67.7 ms
+80 bytes from 10.16.2.2: icmp_seq=2 ttl=62 time=60.9 ms
+80 bytes from 10.16.2.2: icmp_seq=3 ttl=62 time=88.0 ms
+80 bytes from 10.16.2.2: icmp_seq=4 ttl=62 time=85.8 ms
+80 bytes from 10.16.2.2: icmp_seq=5 ttl=62 time=76.5 ms
+
+--- 10.16.2.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 51ms
+rtt min/avg/max/mdev = 60.934/75.819/88.073/10.374 ms, pipe 5, ipg/ewma 12.971/72.183 ms
+Leaf-1#ping ip 10.16.3.2 source 10.16.1.250
+PING 10.16.3.2 (10.16.3.2) from 10.16.1.250 : 72(100) bytes of data.
+80 bytes from 10.16.3.2: icmp_seq=1 ttl=62 time=53.5 ms
+80 bytes from 10.16.3.2: icmp_seq=2 ttl=62 time=50.1 ms
+80 bytes from 10.16.3.2: icmp_seq=3 ttl=62 time=47.2 ms
+80 bytes from 10.16.3.2: icmp_seq=4 ttl=62 time=77.4 ms
+80 bytes from 10.16.3.2: icmp_seq=5 ttl=62 time=70.6 ms
+
+--- 10.16.3.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 52ms
+rtt min/avg/max/mdev = 47.295/59.806/77.412/11.966 ms, pipe 5, ipg/ewma 13.224/57.408 ms
+Leaf-1#ping ip 10.16.3.6 source 10.16.1.250
+PING 10.16.3.6 (10.16.3.6) from 10.16.1.250 : 72(100) bytes of data.
+80 bytes from 10.16.3.6: icmp_seq=1 ttl=62 time=48.0 ms
+80 bytes from 10.16.3.6: icmp_seq=2 ttl=62 time=96.6 ms
+80 bytes from 10.16.3.6: icmp_seq=3 ttl=62 time=88.5 ms
+80 bytes from 10.16.3.6: icmp_seq=4 ttl=62 time=105 ms
+80 bytes from 10.16.3.6: icmp_seq=5 ttl=62 time=61.9 ms
+
+--- 10.16.3.6 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 99ms
+rtt min/avg/max/mdev = 48.045/80.232/105.939/21.772 ms, pipe 4, ipg/ewma 24.825/64.065 ms
+Leaf-1#ping ip 10.17.1.250 source 10.16.1.250
+PING 10.17.1.250 (10.17.1.250) from 10.16.1.250 : 72(100) bytes of data.
+80 bytes from 10.17.1.250: icmp_seq=1 ttl=63 time=26.5 ms
+80 bytes from 10.17.1.250: icmp_seq=2 ttl=63 time=22.1 ms
+80 bytes from 10.17.1.250: icmp_seq=3 ttl=63 time=25.3 ms
+80 bytes from 10.17.1.250: icmp_seq=4 ttl=63 time=16.3 ms
+80 bytes from 10.17.1.250: icmp_seq=5 ttl=63 time=25.7 ms
+
+--- 10.17.1.250 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 79ms
+rtt min/avg/max/mdev = 16.348/23.243/26.565/3.772 ms, pipe 3, ipg/ewma 19.941/24.867 ms
+Leaf-1#ping ip 10.17.2.250 source 10.16.1.250
+PING 10.17.2.250 (10.17.2.250) from 10.16.1.250 : 72(100) bytes of data.
+80 bytes from 10.17.2.250: icmp_seq=1 ttl=63 time=33.8 ms
+80 bytes from 10.17.2.250: icmp_seq=2 ttl=63 time=38.7 ms
+80 bytes from 10.17.2.250: icmp_seq=3 ttl=63 time=62.7 ms
+80 bytes from 10.17.2.250: icmp_seq=4 ttl=63 time=34.1 ms
+80 bytes from 10.17.2.250: icmp_seq=5 ttl=63 time=24.2 ms
+
+--- 10.17.2.250 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 109ms
+rtt min/avg/max/mdev = 24.291/38.754/62.781/12.900 ms, pipe 3, ipg/ewma 27.338/35.842 ms
+
+
+
+
+
+
+
+
