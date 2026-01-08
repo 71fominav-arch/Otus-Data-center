@@ -1,0 +1,74 @@
+! device: P2-Leaf-2 (vEOS-lab, EOS-4.29.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname P2-Leaf-2
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-Server-6-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.34.1/30
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Pod2-Spine-1-Eth2
+   mtu 9214
+   no switchport
+   ip address 10.16.49.13/31
+!
+interface Ethernet6
+   description to-Pod2-Spine-2-Eth2
+   mtu 9214
+   no switchport
+   ip address 10.16.50.13/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.34.250/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65102
+   router-id 10.16.34.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65601
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY bfd
+   neighbor 10.16.49.12 peer group UNDERLAY
+   neighbor 10.16.50.12 peer group UNDERLAY
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.34.0/30
+      network 10.16.34.250/32
+!
+end

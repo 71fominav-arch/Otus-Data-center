@@ -1,0 +1,89 @@
+! device: P2-Spine-2 (vEOS-lab, EOS-4.29.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname P2-Spine-2
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-Pod2-Leaf1-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.16.50.10/31
+!
+interface Ethernet2
+   description to-Pod2-Leaf2-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.16.50.12/31
+!
+interface Ethernet3
+   description to-Pod2-Leaf3-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.16.50.14/31
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-S-Spine1-Eth2
+   mtu 9214
+   no switchport
+   ip address 10.17.1.17/31
+!
+interface Ethernet6
+   description to-S-Spine2-Eth2
+   mtu 9214
+   no switchport
+   ip address 10.17.2.17/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.50.250/32
+!
+interface Management1
+!
+ip routing
+!
+peer-filter leaf_asn
+   10 match as-range 65101-65200 result accept
+!
+router bgp 65601
+   router-id 10.16.50.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.16.50.0/24 peer-group UNDERLAY peer-filter leaf_asn
+   neighbor SPINE peer group
+   neighbor SPINE remote-as 65701
+   neighbor SPINE out-delay 0
+   neighbor SPINE bfd
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY bfd
+   neighbor 10.17.1.16 peer group SPINE
+   neighbor 10.17.2.16 peer group SPINE
+   !
+   address-family ipv4
+      neighbor SPINE activate
+      neighbor UNDERLAY activate
+      network 10.16.50.250/32
+!
+end

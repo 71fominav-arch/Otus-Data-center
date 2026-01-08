@@ -1,0 +1,64 @@
+hostname P1-Leaf-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-Server-1-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.1.1/30
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Pod1-Spine-1-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.16.17.11/31
+!
+interface Ethernet6
+   description to-Pod1-Spine-2-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.16.18.11/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.1.250/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65001
+   router-id 10.16.1.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65501
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY bfd
+   neighbor 10.16.17.10 peer group UNDERLAY
+   neighbor 10.16.18.10 peer group UNDERLAY
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.1.0/30
+      network 10.16.1.250/32
+!
+end

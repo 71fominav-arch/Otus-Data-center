@@ -1,0 +1,79 @@
+! device: S-Spine-2 (vEOS-lab, EOS-4.29.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname S-Spine-2
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-Pod1-Spine1-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.17.2.10/31
+!
+interface Ethernet2
+   description to-Pod1-Spine2-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.17.2.12/31
+!
+interface Ethernet3
+   description to-Pod2-Spine1-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.17.2.14/31
+!
+interface Ethernet4
+   description to-Pod1-Spine2-Eth6
+   mtu 9214
+   no switchport
+   ip address 10.17.2.16/31
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.17.2.250/32
+!
+interface Management1
+!
+ip routing
+!
+peer-filter spine_asn
+   10 match as-range 65501 result accept
+   20 match as-range 65601 result accept
+!
+router bgp 65701
+   router-id 10.17.2.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.17.2.0/24 peer-group SPINE peer-filter spine_asn
+   neighbor SPINE peer group
+   neighbor SPINE out-delay 0
+   neighbor SPINE bfd
+   !
+   address-family ipv4
+      neighbor SPINE activate
+      network 10.17.2.250/32
+!
+end
