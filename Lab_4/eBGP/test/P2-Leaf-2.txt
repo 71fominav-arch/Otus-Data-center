@@ -1,0 +1,120 @@
+P2-Leaf-2#show ip route
+
+VRF: default
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.16.1.0/30 [20/0] via 10.16.49.12, Ethernet5
+                              via 10.16.50.12, Ethernet6
+ B E      10.16.1.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                via 10.16.50.12, Ethernet6
+ B E      10.16.2.0/30 [20/0] via 10.16.49.12, Ethernet5
+                              via 10.16.50.12, Ethernet6
+ B E      10.16.2.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                via 10.16.50.12, Ethernet6
+ B E      10.16.3.0/30 [20/0] via 10.16.49.12, Ethernet5
+                              via 10.16.50.12, Ethernet6
+ B E      10.16.3.4/30 [20/0] via 10.16.49.12, Ethernet5
+                              via 10.16.50.12, Ethernet6
+ B E      10.16.3.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                via 10.16.50.12, Ethernet6
+ B E      10.16.17.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                 via 10.16.50.12, Ethernet6
+ B E      10.16.18.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                 via 10.16.50.12, Ethernet6
+ B E      10.16.33.0/30 [20/0] via 10.16.49.12, Ethernet5
+                               via 10.16.50.12, Ethernet6
+ B E      10.16.33.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                 via 10.16.50.12, Ethernet6
+ C        10.16.34.0/30 is directly connected, Ethernet1
+ C        10.16.34.250/32 is directly connected, Loopback0
+ B E      10.16.35.0/30 [20/0] via 10.16.49.12, Ethernet5
+                               via 10.16.50.12, Ethernet6
+ B E      10.16.35.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                 via 10.16.50.12, Ethernet6
+ C        10.16.49.12/31 is directly connected, Ethernet5
+ B E      10.16.49.250/32 [20/0] via 10.16.49.12, Ethernet5
+ C        10.16.50.12/31 is directly connected, Ethernet6
+ B E      10.16.50.250/32 [20/0] via 10.16.50.12, Ethernet6
+ B E      10.17.1.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                via 10.16.50.12, Ethernet6
+ B E      10.17.2.250/32 [20/0] via 10.16.49.12, Ethernet5
+                                via 10.16.50.12, Ethernet6
+
+P2-Leaf-2#show ip bgp
+BGP routing table information for VRF default
+Router identifier 10.16.34.250, local AS number 65102
+Route status codes: s - suppressed, * - valid, > - active, # - not installed, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+         Network                Next Hop            Metric  LocPref Weight  Path
+ * >Ec   10.16.1.0/30           10.16.49.12           0       100     0       65601 65701 65501 65001 i
+ *  ec   10.16.1.0/30           10.16.50.12           0       100     0       65601 65701 65501 65001 i
+ * >Ec   10.16.1.250/32         10.16.49.12           0       100     0       65601 65701 65501 65001 i
+ *  ec   10.16.1.250/32         10.16.50.12           0       100     0       65601 65701 65501 65001 i
+ * >Ec   10.16.2.0/30           10.16.49.12           0       100     0       65601 65701 65501 65002 i
+ *  ec   10.16.2.0/30           10.16.50.12           0       100     0       65601 65701 65501 65002 i
+ * >Ec   10.16.2.250/32         10.16.49.12           0       100     0       65601 65701 65501 65002 i
+ *  ec   10.16.2.250/32         10.16.50.12           0       100     0       65601 65701 65501 65002 i
+ * >Ec   10.16.3.0/30           10.16.49.12           0       100     0       65601 65701 65501 65003 i
+ *  ec   10.16.3.0/30           10.16.50.12           0       100     0       65601 65701 65501 65003 i
+ * >Ec   10.16.3.4/30           10.16.49.12           0       100     0       65601 65701 65501 65003 i
+ *  ec   10.16.3.4/30           10.16.50.12           0       100     0       65601 65701 65501 65003 i
+ * >Ec   10.16.3.250/32         10.16.49.12           0       100     0       65601 65701 65501 65003 i
+ *  ec   10.16.3.250/32         10.16.50.12           0       100     0       65601 65701 65501 65003 i
+ * >Ec   10.16.17.250/32        10.16.49.12           0       100     0       65601 65701 65501 i
+ *  ec   10.16.17.250/32        10.16.50.12           0       100     0       65601 65701 65501 i
+ * >Ec   10.16.18.250/32        10.16.49.12           0       100     0       65601 65701 65501 i
+601 65701 65501 i
+ * >Ec   10.16.33.0/30          10.16.49.12           0       100     0       65601 65101 i
+ *  ec   10.16.33.0/30          10.16.50.12           0       100     0       65601 65101 i
+ * >Ec   10.16.33.250/32        10.16.49.12           0       100     0       65601 65101 i
+ *  ec   10.16.33.250/32        10.16.50.12           0       100     0       65601 65101 i
+ * >     10.16.34.0/30          -                     1       0       -       i
+ * >     10.16.34.250/32        -                     0       0       -       i
+ * >Ec   10.16.35.0/30          10.16.49.12           0       100     0       65601 65103 i
+ *  ec   10.16.35.0/30          10.16.50.12           0       100     0       65601 65103 i
+ * >Ec   10.16.35.250/32        10.16.49.12           0       100     0       65601 65103 i
+ *  ec   10.16.35.250/32        10.16.50.12           0       100     0       65601 65103 i
+ * >     10.16.49.250/32        10.16.49.12           0       100     0       65601 i
+ * >     10.16.50.250/32        10.16.50.12           0       100     0       65601 i
+ * >Ec   10.17.1.250/32         10.16.50.12           0       100     0       65601 65701 i
+ *  ec   10.17.1.250/32         10.16.49.12           0       100     0       65601 65701 i
+ * >Ec   10.17.2.250/32         10.16.49.12           0       100     0       65601 65701 i
+ *  ec   10.17.2.250/32         10.16.50.12           0       100     0       65601 65701 i
+P2-Leaf-2#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.34.250, local AS number 65102
+Neighbor Status Codes: m - Under maintenance
+  Neighbor         V  AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.49.12      4  65601           2815      2804    0    0 00:43:30 Estab   16     16
+  10.16.50.12      4  65601           2741      2738    0    0 00:43:28 Estab   16     16
+P2-Leaf-2#show bfd peers
+VRF name: default
+-----------------
+DstAddr         MyDisc   YourDisc  Interface/Transport    Type          LastUp
+----------- ---------- ----------- -------------------- ------- ---------------
+10.16.49.12 1268893441 1485761572        Ethernet5(20)  normal  01/02/26 03:50
+10.16.50.12 3059521614 3893819744        Ethernet6(21)  normal  01/02/26 03:50
+
+         LastDown            LastDiag    State
+-------------------- ------------------- -----
+   01/02/26 03:49       No Diagnostic       Up
+   01/02/26 03:49       No Diagnostic       Up
+
+P2-Leaf-2#
+
+

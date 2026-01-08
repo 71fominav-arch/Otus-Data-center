@@ -1,0 +1,120 @@
+S-Spine-1#show ip route
+
+VRF: default
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ B E      10.16.1.0/30 [20/0] via 10.17.1.11, Ethernet1
+                              via 10.17.1.13, Ethernet2
+ B E      10.16.1.250/32 [20/0] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ B E      10.16.2.0/30 [20/0] via 10.17.1.11, Ethernet1
+                              via 10.17.1.13, Ethernet2
+ B E      10.16.2.250/32 [20/0] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ B E      10.16.3.0/30 [20/0] via 10.17.1.11, Ethernet1
+                              via 10.17.1.13, Ethernet2
+ B E      10.16.3.4/30 [20/0] via 10.17.1.11, Ethernet1
+                              via 10.17.1.13, Ethernet2
+ B E      10.16.3.250/32 [20/0] via 10.17.1.11, Ethernet1
+                                via 10.17.1.13, Ethernet2
+ B E      10.16.17.250/32 [20/0] via 10.17.1.11, Ethernet1
+ B E      10.16.18.250/32 [20/0] via 10.17.1.13, Ethernet2
+ B E      10.16.33.0/30 [20/0] via 10.17.1.15, Ethernet3
+                               via 10.17.1.17, Ethernet4
+ B E      10.16.33.250/32 [20/0] via 10.17.1.15, Ethernet3
+                                 via 10.17.1.17, Ethernet4
+ B E      10.16.34.0/30 [20/0] via 10.17.1.15, Ethernet3
+                               via 10.17.1.17, Ethernet4
+ B E      10.16.34.250/32 [20/0] via 10.17.1.15, Ethernet3
+                                 via 10.17.1.17, Ethernet4
+ B E      10.16.35.0/30 [20/0] via 10.17.1.15, Ethernet3
+                               via 10.17.1.17, Ethernet4
+ B E      10.16.35.250/32 [20/0] via 10.17.1.15, Ethernet3
+                                 via 10.17.1.17, Ethernet4
+ B E      10.16.49.250/32 [20/0] via 10.17.1.15, Ethernet3
+ B E      10.16.50.250/32 [20/0] via 10.17.1.17, Ethernet4
+ C        10.17.1.10/31 is directly connected, Ethernet1
+ C        10.17.1.12/31 is directly connected, Ethernet2
+ C        10.17.1.14/31 is directly connected, Ethernet3
+ C        10.17.1.16/31 is directly connected, Ethernet4
+ C        10.17.1.250/32 is directly connected, Loopback0
+
+S-Spine-1#show ip bgp
+BGP routing table information for VRF default
+Router identifier 10.17.1.250, local AS number 65701
+Route status codes: s - suppressed, * - valid, > - active, # - not installed, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+         Network                Next Hop            Metric  LocPref Weight  Path
+ * >Ec   10.16.1.0/30           10.17.1.11            0       100     0       65501 65001 i
+ *  ec   10.16.1.0/30           10.17.1.13            0       100     0       65501 65001 i
+ * >Ec   10.16.1.250/32         10.17.1.11            0       100     0       65501 65001 i
+ *  ec   10.16.1.250/32         10.17.1.13            0       100     0       65501 65001 i
+ * >Ec   10.16.2.0/30           10.17.1.11            0       100     0       65501 65002 i
+ *  ec   10.16.2.0/30           10.17.1.13            0       100     0       65501 65002 i
+ * >Ec   10.16.2.250/32         10.17.1.11            0       100     0       65501 65002 i
+ *  ec   10.16.2.250/32         10.17.1.13            0       100     0       65501 65002 i
+ * >Ec   10.16.3.0/30           10.17.1.11            0       100     0       65501 65003 i
+ *  ec   10.16.3.0/30           10.17.1.13            0       100     0       65501 65003 i
+ * >Ec   10.16.3.4/30           10.17.1.11            0       100     0       65501 65003 i
+ *  ec   10.16.3.4/30           10.17.1.13            0       100     0       65501 65003 i
+ * >Ec   10.16.3.250/32         10.17.1.11            0       100     0       65501 65003 i
+ *  ec   10.16.3.250/32         10.17.1.13            0       100     0       65501 65003 i
+ * >     10.16.17.250/32        10.17.1.11            0       100     0       65501 i
+ * >     10.16.18.250/32        10.17.1.13            0       100     0       65501 i
+ * >Ec   10.16.33.0/30          10.17.1.17            0       100     0       65601 65101 i
+601 65101 i
+ * >Ec   10.16.33.250/32        10.17.1.17            0       100     0       65601 65101 i
+ *  ec   10.16.33.250/32        10.17.1.15            0       100     0       65601 65101 i
+ * >Ec   10.16.34.0/30          10.17.1.17            0       100     0       65601 65102 i
+ *  ec   10.16.34.0/30          10.17.1.15            0       100     0       65601 65102 i
+ * >Ec   10.16.34.250/32        10.17.1.17            0       100     0       65601 65102 i
+ *  ec   10.16.34.250/32        10.17.1.15            0       100     0       65601 65102 i
+ * >Ec   10.16.35.0/30          10.17.1.17            0       100     0       65601 65103 i
+ *  ec   10.16.35.0/30          10.17.1.15            0       100     0       65601 65103 i
+ * >Ec   10.16.35.250/32        10.17.1.17            0       100     0       65601 65103 i
+ *  ec   10.16.35.250/32        10.17.1.15            0       100     0       65601 65103 i
+ * >     10.16.49.250/32        10.17.1.15            0       100     0       65601 i
+ * >     10.16.50.250/32        10.17.1.17            0       100     0       65601 i
+ * >     10.17.1.250/32         -                     0       0       -       i
+S-Spine-1#show ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.17.1.250, local AS number 65701
+Neighbor Status Codes: m - Under maintenance
+  Neighbor         V  AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.17.1.11       4  65501           1079      1077    0    0 00:53:20 Estab   8      8
+  10.17.1.13       4  65501           1079      1080    0    0 00:53:18 Estab   8      8
+  10.17.1.15       4  65601           1078      1079    0    0 00:53:15 Estab   7      7
+  10.17.1.17       4  65601           1074      1077    0    0 00:53:18 Estab   7      7
+S-Spine-1#show bfd peers
+VRF name: default
+-----------------
+DstAddr        MyDisc    YourDisc  Interface/Transport    Type          LastUp
+---------- ----------- ----------- -------------------- ------- ---------------
+10.17.1.11  537696089  3270826747        Ethernet1(16)  normal  01/02/26 03:50
+10.17.1.13  159162977  3011414284        Ethernet2(17)  normal  01/02/26 03:50
+10.17.1.15 3892941104  1747592712        Ethernet3(18)  normal  01/02/26 04:43
+10.17.1.17 3504679827  3550362873        Ethernet4(19)  normal  01/02/26 03:50
+
+   LastDown            LastDiag    State
+-------------- ------------------- -----
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+
+S-Spine-1#
