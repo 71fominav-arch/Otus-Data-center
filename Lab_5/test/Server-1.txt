@@ -1,0 +1,27 @@
+Server-1> ping 192.168.90.30 -t
+
+84 bytes from 192.168.90.30 icmp_seq=1 ttl=64 time=12.359 ms
+84 bytes from 192.168.90.30 icmp_seq=2 ttl=64 time=15.224 ms
+84 bytes from 192.168.90.30 icmp_seq=3 ttl=64 time=13.472 ms
+84 bytes from 192.168.90.30 icmp_seq=4 ttl=64 time=11.368 ms
+84 bytes from 192.168.90.30 icmp_seq=5 ttl=64 time=11.874 ms
+^C
+Server-1> ping 192.168.90.50 -t
+
+192.168.90.50 icmp_seq=1 timeout
+84 bytes from 192.168.90.50 icmp_seq=2 ttl=64 time=21.645 ms
+84 bytes from 192.168.90.50 icmp_seq=3 ttl=64 time=19.500 ms
+84 bytes from 192.168.90.50 icmp_seq=4 ttl=64 time=15.765 ms
+84 bytes from 192.168.90.50 icmp_seq=5 ttl=64 time=16.493 ms
+84 bytes from 192.168.90.50 icmp_seq=6 ttl=64 time=18.089 ms
+84 bytes from 192.168.90.50 icmp_seq=7 ttl=64 time=15.341 ms
+84 bytes from 192.168.90.50 icmp_seq=8 ttl=64 time=16.257 ms
+^C
+Server-1> ping 192.168.90.70 -t
+
+84 bytes from 192.168.90.70 icmp_seq=1 ttl=64 time=25.596 ms
+84 bytes from 192.168.90.70 icmp_seq=2 ttl=64 time=25.876 ms
+84 bytes from 192.168.90.70 icmp_seq=3 ttl=64 time=27.514 ms
+84 bytes from 192.168.90.70 icmp_seq=4 ttl=64 time=25.615 ms
+84 bytes from 192.168.90.70 icmp_seq=5 ttl=64 time=25.575 ms
+84 bytes from 192.168.90.70 icmp_seq=6 ttl=64 time=28.393 ms
