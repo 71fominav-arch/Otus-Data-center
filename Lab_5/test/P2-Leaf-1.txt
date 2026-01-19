@@ -1,0 +1,90 @@
+P2-Leaf-1#show ip route
+
+VRF: default
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ C        10.16.33.250/32 is directly connected, Loopback0
+ I L1     10.16.34.250/32 [115/30] via 10.16.49.10, Ethernet5
+                                   via 10.16.50.10, Ethernet6
+ I L1     10.16.35.250/32 [115/30] via 10.16.49.10, Ethernet5
+                                   via 10.16.50.10, Ethernet6
+ C        10.16.49.10/31 is directly connected, Ethernet5
+ I L1     10.16.49.12/31 [115/20] via 10.16.49.10, Ethernet5
+ I L1     10.16.49.14/31 [115/20] via 10.16.49.10, Ethernet5
+ I L1     10.16.49.250/32 [115/20] via 10.16.49.10, Ethernet5
+ C        10.16.50.10/31 is directly connected, Ethernet6
+ I L1     10.16.50.12/31 [115/20] via 10.16.50.10, Ethernet6
+ I L1     10.16.50.14/31 [115/20] via 10.16.50.10, Ethernet6
+ I L1     10.16.50.250/32 [115/20] via 10.16.50.10, Ethernet6
+
+P2-Leaf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.33.250, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Neighbor     V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.49.250 4 65601           3979      4005    0    0 00:30:26 Estab   4      4
+  10.16.50.250 4 65601           3710      3745    0    0 00:30:33 Estab   4      4
+P2-Leaf-1#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.16.33.250, local AS number 65101
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.33.250:90 mac-ip 0050.7966.680d
+                                 -                     -       -       0       i
+ * >      RD: 10.16.33.250:90 mac-ip 0050.7966.6811
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.35.250:90 mac-ip 0050.7966.6813
+                                 10.16.35.250          -       100     0       65601 65103 i
+ *  ec    RD: 10.16.35.250:90 mac-ip 0050.7966.6813
+                                 10.16.35.250          -       100     0       65601 65103 i
+ * >      RD: 10.16.33.250:90 imet 10.16.33.250
+                                 -                     -       -       0       i
+ * >      RD: 10.16.33.250:100 imet 10.16.33.250
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.34.250:100 imet 10.16.34.250
+                                 10.16.34.250          -       100     0       65601 65102 i
+ *  ec    RD: 10.16.34.250:100 imet 10.16.34.250
+                                 10.16.34.250          -       100     0       65601 65102 i
+ * >Ec    RD: 10.16.35.250:90 imet 10.16.35.250
+                                 10.16.35.250          -       100     0       65601 65103 i
+ *  ec    RD: 10.16.35.250:90 imet 10.16.35.250
+                                 10.16.35.250          -       100     0       65601 65103 i
+ * >Ec    RD: 10.16.35.250:100 imet 10.16.35.250
+                                 10.16.35.250          -       100     0       65601 65103 i
+ *  ec    RD: 10.16.35.250:100 imet 10.16.35.250
+                                 10.16.35.250          -       100     0       65601 65103 i
+P2-Leaf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP               Tunnel Type(s)
+------------------ --------------
+10.16.34.250       flood
+10.16.35.250       flood, unicast
+
+Total number of remote VTEPS:  2
+P2-Leaf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP               Tunnel Type(s)
+------------------ --------------
+10.16.34.250       flood, unicast
+10.16.35.250       flood, unicast
+
+Total number of remote VTEPS:  2
+P2-Leaf-1#

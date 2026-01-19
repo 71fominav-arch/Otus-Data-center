@@ -1,0 +1,52 @@
+P1-Leaf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+Neighbor Status Codes: m - Under maintenance
+  Neighbor     V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.17.250 4 65001           8509      8537    0    0 00:23:09 Estab   6      6
+  10.16.18.250 4 65001           8458      8452    0    0 00:23:10 Estab   6      6
+P1-Leaf-1#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexth op
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.1.250:90 mac-ip 0050.7966.680d
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.17.250
+ * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6811
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.17.250
+ *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6811
+ Or-ID: 10.16.3.250 C-LST: 10.16.18.250
+ * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6813
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6813
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.17.250
+ * >      RD: 10.16.1.250:90 imet 10.16.1.250
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.2.250:100 imet 10.16.2.250
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16. 2.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.2.250:100 imet 10.16.2.250
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16. 2.250 C-LST: 10.16.17.250
+ * >Ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.17.250
+ * >Ec    RD: 10.16.3.250:100 imet 10.16.3.250
+ Or-ID: 10.16.3.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.3.250:100 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       i Or-ID: 10.16. 3.250 C-LST: 10.16.17.250
+P1-Leaf-1#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP              Tunnel Type(s)
+----------------- --------------
+10.16.3.250       flood, unicast
+
+Total number of remote VTEPS:  1

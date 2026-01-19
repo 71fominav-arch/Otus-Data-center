@@ -1,0 +1,122 @@
+P1-Leaf-3#show ip route
+
+VRF: default
+Codes: C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route
+
+Gateway of last resort is not set
+
+ O        10.16.1.250/32 [110/90] via 10.16.17.14, Ethernet5
+                                  via 10.16.18.14, Ethernet6
+ O        10.16.2.250/32 [110/90] via 10.16.17.14, Ethernet5
+                                  via 10.16.18.14, Ethernet6
+ C        10.16.3.250/32 is directly connected, Loopback0
+ O        10.16.17.10/31 [110/80] via 10.16.17.14, Ethernet5
+ O        10.16.17.12/31 [110/80] via 10.16.17.14, Ethernet5
+ C        10.16.17.14/31 is directly connected, Ethernet5
+ O        10.16.17.250/32 [110/50] via 10.16.17.14, Ethernet5
+ O        10.16.18.10/31 [110/80] via 10.16.18.14, Ethernet6
+ O        10.16.18.12/31 [110/80] via 10.16.18.14, Ethernet6
+ C        10.16.18.14/31 is directly connected, Ethernet6
+ O        10.16.18.250/32 [110/50] via 10.16.18.14, Ethernet6
+
+P1-Leaf-3#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.16.3.250, local AS number 65001
+Neighbor Status Codes: m - Under maintenance
+  Neighbor     V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  10.16.17.250 4 65001           1116      1128    0    0 00:27:55 Estab   4      4
+  10.16.18.250 4 65001           1123      1131    0    0 00:27:55 Estab   4      4
+P1-Leaf-3#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.16.3.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.1.250:90 mac-ip 0050.7966.680d
+                                 10.16.1.250           -       100     0       i Or-ID: 10.16.1.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.1.250:90 mac-ip 0050.7966.680d
+                                 10.16.1.250           -       100     0       i Or-ID: 10.16.1.250 C-LST: 10.16.17.250
+ * >Ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.17.250
+ * >      RD: 10.16.3.250:90 mac-ip 0050.7966.680f
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 mac-ip 0050.7966.6810
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.1.250:90 imet 10.16.1.250
+                                 10.16.1.250           -       100     0       i Or-ID: 10.16.1.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.1.250:90 imet 10.16.1.250
+                                 10.16.1.250           -       100     0       i Or-ID: 10.16.1.250 C-LST: 10.16.17.250
+ * >Ec    RD: 10.16.2.250:100 imet 10.16.2.250
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.18.250
+ *  ec    RD: 10.16.2.250:100 imet 10.16.2.250
+                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.17.250
+ * >      RD: 10.16.3.250:90 imet 10.16.3.250
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 imet 10.16.3.250
+                                 -                     -       -       0       i
+P1-Leaf-3#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  90    0050.7966.680d    DYNAMIC     Vx1        1       0:05:54 ago
+  90    0050.7966.680f    DYNAMIC     Et1        1       0:05:54 ago
+ 100    0050.7966.680e    DYNAMIC     Vx1        1       0:04:16 ago
+ 100    0050.7966.6810    DYNAMIC     Et2        1       0:04:16 ago
+Total Mac Addresses for this criterion: 4
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+P1-Leaf-3#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  90    0050.7966.680d    DYNAMIC     Vx1        1       0:06:26 ago
+  90    0050.7966.680f    DYNAMIC     Et1        1       0:06:26 ago
+  90    0050.7966.6813    DYNAMIC     Et10       1       0:00:04 ago
+ 100    0050.7966.680e    DYNAMIC     Vx1        1       0:04:48 ago
+ 100    0050.7966.6810    DYNAMIC     Et2        1       0:04:48 ago
+Total Mac Addresses for this criterion: 5
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+P1-Leaf-3#
+P1-Leaf-3#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP              Tunnel Type(s)
+----------------- --------------
+10.16.1.250       flood, unicast
+10.16.2.250       flood, unicast
+
+Total number of remote VTEPS:  2
+
+
+
+
