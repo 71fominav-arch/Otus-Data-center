@@ -1,0 +1,132 @@
+! device: Spine-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+no logging console
+!
+hostname Spine-1
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   !! Managment net
+   description Managment_net
+!
+interface Ethernet1
+   description to-Leaf1-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.10/31
+   ip ospf cost 40
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   no isis bfd
+!
+interface Ethernet2
+   description to-Leaf2-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.12/31
+   ip ospf cost 40
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   no isis bfd
+!
+interface Ethernet3
+   description to-Leaf3-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.14/31
+   ip ospf cost 40
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
+   no isis bfd
+!
+interface Ethernet4
+   description to-Leaf-4-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.16/31
+!
+interface Ethernet5
+   mtu 9214
+   no switchport
+   no isis bfd
+!
+interface Ethernet6
+   mtu 9214
+   no switchport
+   no isis bfd
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.17.250/32
+   ip ospf area 0.0.0.0
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.17/24
+!
+ip routing
+ip routing vrf mng_net
+!
+peer-filter leaf_asn
+   10 match as-range 65001-65100 result accept
+!
+router bgp 65501
+   router-id 10.16.17.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.16.17.0/24 peer-group UNDERLAY peer-filter leaf_asn
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY ebgp-multihop 2
+   neighbor 10.16.1.250 remote-as 65001
+   neighbor 10.16.1.250 next-hop-unchanged
+   neighbor 10.16.1.250 update-source Loopback0
+   neighbor 10.16.1.250 ebgp-multihop 2
+   neighbor 10.16.1.250 send-community extended
+   neighbor 10.16.2.250 remote-as 65002
+   neighbor 10.16.2.250 next-hop-unchanged
+   neighbor 10.16.2.250 update-source Loopback0
+   neighbor 10.16.2.250 ebgp-multihop 2
+   neighbor 10.16.2.250 send-community extended
+   neighbor 10.16.3.250 remote-as 65003
+   neighbor 10.16.3.250 next-hop-unchanged
+   neighbor 10.16.3.250 update-source Loopback0
+   neighbor 10.16.3.250 ebgp-multihop 2
+   neighbor 10.16.3.250 send-community extended
+   neighbor 10.16.4.250 remote-as 65004
+   neighbor 10.16.4.250 next-hop-unchanged
+   neighbor 10.16.4.250 update-source Loopback0
+   neighbor 10.16.4.250 ebgp-multihop 2
+   neighbor 10.16.4.250 send-community extended
+   !
+   address-family evpn
+      neighbor 10.16.1.250 activate
+      neighbor 10.16.2.250 activate
+      neighbor 10.16.3.250 activate
+      neighbor 10.16.4.250 activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.17.250/32
+!
+end
