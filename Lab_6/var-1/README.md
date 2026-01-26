@@ -6,6 +6,7 @@ VxLAN. L3VNI
 В данной работе хочется реализовать два варианта Asymmetric IRB и Symmetric IRB.     
 
 ![Схема коммутации](Схема_L2.jpg)     
+![Схема L3](Схема_VXLan.jpg)      
 
 В POD1 реализуется  Asymmetric IRB.    
 ### UNDERLAY строим на OSPF
