@@ -36,7 +36,7 @@ exit
 
 ### После построения L3 связности между Leaf и Spine настраиваем VXLan
 
-vlan 90   / создаем Vlan /
+vlan 90    (создаем Vlan) \      
    name Servers-1     
 exit  
 
