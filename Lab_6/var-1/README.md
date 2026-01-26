@@ -129,34 +129,34 @@ interface Ethernet6
 
 ### OVERLAY строим на eBGP 
 Пример для P1-Leaf-1     
-router bgp 65101
-   router-id 10.16.33.250
-   no bgp default ipv4-unicast
-   timers bgp 3 9
-   distance bgp 20 200 200
-   maximum-paths 2 ecmp 2
-   neighbor UNDERLAY peer group
-   neighbor UNDERLAY remote-as 65601
-   neighbor UNDERLAY next-hop-unchanged
-   neighbor UNDERLAY out-delay 0
-   neighbor UNDERLAY update-source Loopback0
-   neighbor UNDERLAY ebgp-multihop 2
-   neighbor UNDERLAY send-community extended
-   neighbor 10.16.49.250 peer group UNDERLAY
-   neighbor 10.16.50.250 peer group UNDERLAY
-   !
-
-   address-family ipv4
-      neighbor UNDERLAY activate
-   !
-   vrf VRF-Router
-      rd 65101:21
-      route-target import evpn 21:111111
-      route-target export evpn 21:111111
-      redistribute connected
-
-### После построения L3 связности между Leaf и Spine настраиваем vrf и VXLan
-vrf instance VRF-Router   
+router bgp 65101    
+   router-id 10.16.33.250    
+   no bgp default ipv4-unicast    
+   timers bgp 3 9    
+   distance bgp 20 200 200   
+   maximum-paths 2 ecmp 2    
+   neighbor UNDERLAY peer group    
+   neighbor UNDERLAY remote-as 65601    
+   neighbor UNDERLAY next-hop-unchanged    
+   neighbor UNDERLAY out-delay 0    
+   neighbor UNDERLAY update-source Loopback0    
+   neighbor UNDERLAY ebgp-multihop 2    
+   neighbor UNDERLAY send-community extended    
+   neighbor 10.16.49.250 peer group UNDERLAY    
+   neighbor 10.16.50.250 peer group UNDERLAY   
+   !   
+   
+   address-family ipv4    
+      neighbor UNDERLAY activate    
+   !    
+   vrf VRF-Router   
+      rd 65101:21   
+      route-target import evpn 21:111111   
+      route-target export evpn 21:111111    
+      redistribute connected    
+   
+### После построения L3 связности между Leaf и Spine настраиваем vrf и VXLan    
+vrf instance VRF-Router    
    rd 65101:21   
    exit   
 ip routing vrf VRF-Router    
