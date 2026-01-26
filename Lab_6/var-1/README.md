@@ -8,7 +8,7 @@ VxLAN. L3VNI
 ![Схема коммутации](Схема_L2.jpg)     
 ![Схема L3](Схема_VXLan.jpg)      
 
-В POD1 реализуется  Asymmetric IRB.    
+### В POD1 реализуется  Asymmetric IRB.    
 ### UNDERLAY строим на OSPF
 Пример для P1-Leaf-1    
 router ospf 100  
@@ -95,13 +95,101 @@ interface Vlan100   (Поднимаем маршрутизацию)
 
 [Тестовые команды с P1-Leaf-1](./test/P1-Leaf-1.txt)   
 
+### В POD1 реализуется  Symmetric IRB.    
+### UNDERLAY строим на ISIS
+Пример для P2-Leaf-1     
+router isis underlay    
+   net 49.0003.0100.1603.3250.00    
+   is-type level-1   
+   log-adjacency-changes    
+   !    
+   address-family ipv4 unicast    
+exit     
+interface Ethernet5   
+   description to-Pod2-Spine-1-Eth1  
+   mtu 9000   
+   no switchport   
+   ip address 10.16.49.11/31    
+   isis enable underlay   
+   isis bfd   
+   isis circuit-type level-1   
+   isis network point-to-point   
+exit   
+interface Ethernet6   
+   description to-Pod2-Spine-2-Eth1   
+   mtu 9000   
+   no switchport   
+   ip address 10.16.50.11/31   
+   isis enable underlay   
+   isis bfd   
+   isis circuit-type level-1   
+   isis network point-to-point   
+   exit   
+Интерфейсы Ethernet5 и Ethernet6 на P1-Spine-1 и P1-Spine-2.       
 
+### OVERLAY строим на eBGP 
+Пример для P1-Leaf-1     
+router bgp 65101
+   router-id 10.16.33.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65601
+   neighbor UNDERLAY next-hop-unchanged
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY update-source Loopback0
+   neighbor UNDERLAY ebgp-multihop 2
+   neighbor UNDERLAY send-community extended
+   neighbor 10.16.49.250 peer group UNDERLAY
+   neighbor 10.16.50.250 peer group UNDERLAY
+   !
+
+   address-family ipv4
+      neighbor UNDERLAY activate
+   !
+   vrf VRF-Router
+      rd 65101:21
+      route-target import evpn 21:111111
+      route-target export evpn 21:111111
+      redistribute connected
+
+### После построения L3 связности между Leaf и Spine настраиваем vrf и VXLan
+vrf instance VRF-Router   
+   rd 65101:21   
+   exit   
+ip routing vrf VRF-Router    
+interface Vlan90   
+   vrf VRF-Router   
+   ip address 192.168.90.4/24    
+   ip virtual-router address 192.168.90.254    
+exit    
+interface Vxlan1    
+   vxlan source-interface Loopback0   
+   vxlan udp-port 4789    
+   vxlan vlan 90 vni 10090   
+   vxlan vlan 100 vni 100100   
+   vxlan vrf VRF-Router vni 111111   
+exit   
+ip virtual-router mac-address 02:02:00:00:00:00   
+exit   
     
-
-
-
-
-
+router bgp 65101   
+   vlan 100   
+      rd auto    
+      route-target both 100:100100   
+      redistribute learned   
+   !   
+   vlan 90    
+      rd auto   
+      route-target both 90:10090    
+      redistribute learned    
+   !
+   address-family evpn    
+      neighbor UNDERLAY activate  
+   exit     
+  
 
 
 
