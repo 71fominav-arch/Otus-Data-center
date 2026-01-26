@@ -78,45 +78,24 @@ interface Vlan100   (Поднимаем маршрутизацию)
 
 Убеждаемся что есть взаимодействие между хостами. 
 
-P1-Leaf-1#show bgp evpn route-type mac-ip   
-BGP routing table information for VRF default    
-Router identifier 10.16.1.250, local AS number 65001   
-Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP    
-                    c - Contributing to ECMP, % - Pending BGP convergence    
-Origin codes: i - IGP, e - EGP, ? - incomplete    
-AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop   
-   
-          Network                Next Hop              Metric  LocPref Weight  Path    
- * >      RD: 10.16.1.250:90 mac-ip 0050.7966.680d    
-                                 -                     -       -       0       i    
- * >      RD: 10.16.1.250:90 mac-ip 0050.7966.680d 192.168.90.10 -                     -       -       0       i     
- * >Ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e     
-   >                             10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.18.250   
- *  ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e   
-                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.17.250    
- * >Ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e 192.168.100.20   
-                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.18.250   
- *  ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680e 192.168.100.20    
-                                 10.16.2.250           -       100     0       i Or-ID: 10.16.2.250 C-LST: 10.16.17.250    
- * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f    
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.18.250    
- *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f    
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.17.250   
- * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f 192.168.90.30
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.18.250    
- *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.680f 192.168.90.30    
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.17.250    
- * >Ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6810    
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.17.250    
- *  ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6810    
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.18.250     
- * >Ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6810 192.168.100.40    
- Or-ID: 10.16.3.250 C-LST: 10.16.17.250    
- *  ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6810 192.168.100.40     
-                                 10.16.3.250           -       100     0       i Or-ID: 10.16.3.250 C-LST: 10.16.18.250
+
+### ping с хоста 192.168.90.10     
+
+84 bytes from 192.168.100.40 icmp_seq=9365 ttl=63 time=25.566 ms   
+84 bytes from 192.168.100.40 icmp_seq=9366 ttl=63 time=13.053 ms    
+84 bytes from 192.168.100.40 icmp_seq=9367 ttl=63 time=14.329 ms    
+84 bytes from 192.168.100.40 icmp_seq=9368 ttl=63 time=21.173 ms     
+84 bytes from 192.168.100.40 icmp_seq=9369 ttl=63 time=20.327 ms    
+84 bytes from 192.168.100.40 icmp_seq=9370 ttl=63 time=25.775 ms    
+84 bytes from 192.168.100.40 icmp_seq=9371 ttl=63 time=22.461 ms    
+84 bytes from 192.168.100.40 icmp_seq=9372 ttl=63 time=27.854 ms    
+84 bytes from 192.168.100.40 icmp_seq=9373 ttl=63 time=22.549 ms   
+84 bytes from 192.168.100.40 icmp_seq=9374 ttl=63 time=25.686 ms     
+84 bytes from 192.168.100.40 icmp_seq=9375 ttl=63 time=21.494 ms    
+
+[Тестовые команды]()
 
 
-### ping
     
 
 
