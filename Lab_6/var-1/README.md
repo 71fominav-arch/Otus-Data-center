@@ -7,8 +7,8 @@ VxLAN. L3VNI
 
 ![Схема коммутации](Схема_L2.jpg)     
 
-В POD1 реализуется  Asymmetric IRB.
-###UNDERLAY строим на OSPF
+В POD1 реализуется  Asymmetric IRB.    
+### UNDERLAY строим на OSPF
 Пример для P1-Leaf-1    
 router ospf 100  
    router-id 10.16.1.250  
@@ -19,7 +19,7 @@ router ospf 100
    network 10.16.1.250/32 area 0.0.0.0  
 Интерфейсы Ethernet5 и Ethernet6 на P1-Spine-1 и P1-Spine-2.       
 
-###OVERLAY строим на iBGP 
+### OVERLAY строим на iBGP 
 Пример для P1-Leaf-1     
 router bgp 65001
    router-id 10.16.1.250  
