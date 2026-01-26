@@ -50,10 +50,41 @@ vlan 90
       rd auto   
       route-target both 90:10090   
       redistribute learned   
-   !
+   !    
    address-family evpn   
       neighbor UNDERLAY activate  
 exit     
+
+Убеждаемся, что все работает.
+Взамодействие между хостами  192.168.90.10 и 192.168.90.30 Vlan90, 192.168.100.20 и 192.168.100.40.
+
+### Настройка L3VNI.     
+vlan 100    (Добавляе Vlan)
+   name Servers-2    
+exit   
+
+ip virtual-router mac-address 02:00:00:00:00:00    
+interface Vlan90   (Поднимаем маршрутизацию)     
+   ip address 192.168.90.1/24   
+   ip virtual-router address 192.168.90.254/24   
+exit   
+
+interface Vlan100   (Поднимаем маршрутизацию)     
+   ip address 192.168.100.1/24   
+   ip virtual-router address 192.168.100.254/24   
+ exit     
+ 
+
+
+
+
+
+
+
+
+
+
+
 
 
 
