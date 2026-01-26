@@ -223,7 +223,7 @@ router bgp 65101
 84 bytes from 192.168.90.50 icmp_seq=2231 ttl=62 time=22.557 ms    
 84 bytes from 192.168.90.50 icmp_seq=2232 ttl=62 time=17.282 ms    
 
-[Тестовые команды с P2-Leaf-1](./test/P2-Leaf-1.txt)     
+[Тестовые команды с P2-Leaf-1](./test/P2-Leaf-2.txt)     
 
 
 Обе реализованные схемы рабочие. Взаимодействие между хостами есть.
