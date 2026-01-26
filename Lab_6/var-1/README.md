@@ -93,7 +93,7 @@ interface Vlan100   (Поднимаем маршрутизацию)
 84 bytes from 192.168.100.40 icmp_seq=9374 ttl=63 time=25.686 ms     
 84 bytes from 192.168.100.40 icmp_seq=9375 ttl=63 time=21.494 ms    
 
-[Тестовые команды с P1-Leaf-1](./test/P1-Leaf1.txt)   
+[Тестовые команды с P1-Leaf-1](./test/P1-Leaf-1.txt)   
 
 
     
