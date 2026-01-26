@@ -34,6 +34,6 @@ router bgp 65001
    neighbor 10.16.18.250 peer group UNDERLAY  
 exit   
 
-
+После построения 
 
    
