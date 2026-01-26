@@ -64,19 +64,19 @@ vlan 100    (Добавляе Vlan)
 exit   
 
 ip virtual-router mac-address 02:00:00:00:00:00    
-interface Vlan90   (Поднимаем маршрутизацию)     
+interface Vlan90   (Поднимаем маршрутизацию)      
    ip address 192.168.90.1/24   
-   ip virtual-router address 192.168.90.254/24   
+   ip virtual-router address 192.168.90.254/24    
 exit   
 
-interface Vlan100   (Поднимаем маршрутизацию)     
-   ip address 192.168.100.1/24   
-   ip virtual-router address 192.168.100.254/24   
+interface Vlan100   (Поднимаем маршрутизацию)      
+   ip address 192.168.100.1/24    
+   ip virtual-router address 192.168.100.254/24      
  exit     
  
+[Конфигурации оборудования]().
 
-
-
+Убеждаемся что есть взаимодействие между хостами. 
 
 
 
