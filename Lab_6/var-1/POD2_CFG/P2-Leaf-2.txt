@@ -1,0 +1,126 @@
+! device: P2-Leaf-2 (vEOS-lab, EOS-4.29.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname P2-Leaf-2
+!
+spanning-tree mode mstp
+!
+vlan 100
+   name Servers-2
+!
+vrf instance VRF-Router
+   rd 65102:22
+!
+interface Ethernet1
+   description to-Server-6-Eth0
+   mtu 9000
+   switchport access vlan 100
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Pod2-Spine-1-Eth2
+   mtu 9000
+   no switchport
+   ip address 10.16.49.13/31
+   isis enable underlay
+   isis bfd
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet6
+   description to-Pod2-Spine-2-Eth2
+   mtu 9000
+   no switchport
+   ip address 10.16.50.13/31
+   isis enable underlay
+   isis bfd
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.34.250/32
+   isis enable underlay
+   isis circuit-type level-1
+!
+interface Management1
+!
+interface Vlan100
+   vrf VRF-Router
+   ip address 192.168.100.5/24
+   ip virtual-router address 192.168.100.254
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 100 vni 100100
+   vxlan vrf VRF-Router vni 111111
+!
+ip virtual-router mac-address 02:02:00:00:00:00
+!
+ip routing
+ip routing vrf VRF-Router
+!
+router bgp 65102
+   router-id 10.16.34.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65601
+   neighbor UNDERLAY next-hop-unchanged
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY update-source Loopback0
+   neighbor UNDERLAY bfd
+   neighbor UNDERLAY ebgp-multihop 2
+   neighbor UNDERLAY send-community extended
+   neighbor 10.16.49.250 peer group UNDERLAY
+   neighbor 10.16.50.250 peer group UNDERLAY
+   !
+   vlan 100
+      rd auto
+      route-target both 100:100100
+      redistribute learned
+   !
+   address-family evpn
+      neighbor UNDERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+   !
+   vrf VRF-Router
+      rd 65102:22
+      route-target import evpn 21:111111
+      route-target export evpn 21:111111
+      redistribute connected
+!
+router isis underlay
+   net 49.0003.0100.1603.4250.00
+   is-type level-1
+   log-adjacency-changes
+   !
+   address-family ipv4 unicast
+!
+end

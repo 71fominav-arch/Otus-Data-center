@@ -1,0 +1,109 @@
+! device: P2-Spine-1 (vEOS-lab, EOS-4.29.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname P2-Spine-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   description to-Pod2-Leaf1-Eth5
+   mtu 9000
+   no switchport
+   ip address 10.16.49.10/31
+   isis enable underlay
+   isis bfd
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet2
+   description to-Pod2-Leaf2-Eth5
+   mtu 9000
+   no switchport
+   ip address 10.16.49.12/31
+   isis enable underlay
+   isis bfd
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet3
+   description to-Pod2-Leaf3-Eth5
+   mtu 9000
+   no switchport
+   ip address 10.16.49.14/31
+   isis enable underlay
+   isis bfd
+   isis circuit-type level-1
+   isis network point-to-point
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-S-Spine1-Eth3
+   mtu 9214
+   no switchport
+   ip address 10.17.1.15/31
+!
+interface Ethernet6
+   description to-S-Spine2-Eth3
+   mtu 9214
+   no switchport
+   ip address 10.17.2.15/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.49.250/32
+   isis enable underlay
+   isis circuit-type level-1
+!
+interface Management1
+!
+ip routing
+!
+peer-filter leaf_asn
+   10 match as-range 65101-65200 result accept
+!
+router bgp 65601
+   router-id 10.16.49.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.16.0.0/16 peer-group UNDERLAY peer-filter leaf_asn
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY next-hop-unchanged
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY update-source Loopback0
+   neighbor UNDERLAY bfd
+   neighbor UNDERLAY ebgp-multihop 2
+   neighbor UNDERLAY send-community extended
+   !
+   address-family evpn
+      neighbor UNDERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+!
+router isis underlay
+   net 49.0003.0100.1604.9250.00
+   is-type level-1
+   log-adjacency-changes
+   !
+   address-family ipv4 unicast
+!
+end
