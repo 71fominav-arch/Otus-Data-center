@@ -37,11 +37,11 @@ exit
 ### После построения L3 связности между Leaf и Spine настраиваем VXLan
 
 vlan 90   / создаем Vlan /
-   name Servers-1  
+   name Servers-1     
 exit  
 
 interface Vxlan1  / создаем Vxlan /  
-   vxlan source-interface Loopback0  
+   vxlan source-interface Loopback0   
    vxlan udp-port 4789   
    vxlan vlan 90 vni 10090 /настраиваем vlan и связываем с vni/   
 exit  
