@@ -36,16 +36,16 @@ exit
 
 ### После построения L3 связности между Leaf и Spine настраиваем VXLan
 
-vlan 90    (создаем Vlan) \      
+vlan 90    (создаем Vlan)       
    name Servers-1     
 exit  
 
-interface Vxlan1  / создаем Vxlan /  
+interface Vxlan1  ( создаем Vxlan )    
    vxlan source-interface Loopback0   
    vxlan udp-port 4789   
-   vxlan vlan 90 vni 10090 /настраиваем vlan и связываем с vni/   
+   vxlan vlan 90 vni 10090 (настраиваем vlan и связываем с vni)     
 exit  
-router bgp 65001 / добавляем информацию о vlan в bgp /      
+router bgp 65001 ( добавляем информацию о vlan в bgp )      
 vlan 90   
       rd auto   
       route-target both 90:10090   
