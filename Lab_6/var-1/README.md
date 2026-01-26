@@ -196,13 +196,36 @@ router bgp 65101
    address-family evpn    
       neighbor UNDERLAY activate  
    exit     
-     
-  [Конфигурации оборудования](./POD2_CFG). 
+        
+  [Конфигурации оборудования](./POD2_CFG).     
+
+### ping с хоста 192.168.90.50     
+
+84 bytes from 192.168.100.60 icmp_seq=2575 ttl=62 time=13.539 ms   
+84 bytes from 192.168.100.60 icmp_seq=2576 ttl=62 time=16.335 ms   
+84 bytes from 192.168.100.60 icmp_seq=2577 ttl=62 time=14.353 ms    
+84 bytes from 192.168.100.60 icmp_seq=2578 ttl=62 time=17.121 ms    
+84 bytes from 192.168.100.60 icmp_seq=2579 ttl=62 time=17.928 ms   
+84 bytes from 192.168.100.60 icmp_seq=2580 ttl=62 time=19.675 ms    
+84 bytes from 192.168.100.60 icmp_seq=2581 ttl=62 time=18.508 ms    
+84 bytes from 192.168.100.60 icmp_seq=2582 ttl=62 time=15.829 ms    
+84 bytes from 192.168.100.60 icmp_seq=2583 ttl=62 time=15.947 ms    
+    
+### ping с хоста 192.168.100.80   
+    
+84 bytes from 192.168.90.50 icmp_seq=2224 ttl=62 time=16.656 ms    
+84 bytes from 192.168.90.50 icmp_seq=2225 ttl=62 time=19.637 ms    
+84 bytes from 192.168.90.50 icmp_seq=2226 ttl=62 time=19.605 ms   
+84 bytes from 192.168.90.50 icmp_seq=2227 ttl=62 time=20.261 ms    
+84 bytes from 192.168.90.50 icmp_seq=2228 ttl=62 time=20.051 ms    
+84 bytes from 192.168.90.50 icmp_seq=2229 ttl=62 time=25.402 ms    
+84 bytes from 192.168.90.50 icmp_seq=2230 ttl=62 time=23.093 ms    
+84 bytes from 192.168.90.50 icmp_seq=2231 ttl=62 time=22.557 ms    
+84 bytes from 192.168.90.50 icmp_seq=2232 ttl=62 time=17.282 ms    
 
 
 
-
-
+      
 
 
 
