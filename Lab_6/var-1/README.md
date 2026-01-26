@@ -196,7 +196,8 @@ router bgp 65101
    address-family evpn    
       neighbor UNDERLAY activate  
    exit     
-  
+     
+  [Конфигурации оборудования](./POD2_CFG). 
 
 
 
