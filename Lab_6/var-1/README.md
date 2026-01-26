@@ -34,6 +34,31 @@ router bgp 65001
    neighbor 10.16.18.250 peer group UNDERLAY  
 exit   
 
-После построения 
+После построения L3 связности между Leaf и Spine настраиваем VXLan
+
+
+vlan 90
+   name Servers-1
+exit
+
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 90 vni 10090
+exit
+router bgp 65001
+vlan 90
+      rd auto
+      route-target both 90:10090
+      redistribute learned
+   !
+   address-family evpn
+      neighbor UNDERLAY activate
+exit    
+
+
+
+
+
 
    
