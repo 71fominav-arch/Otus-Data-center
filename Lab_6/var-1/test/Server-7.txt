@@ -1,0 +1,13 @@
+Checking for duplicate address...
+Server-7 : 192.168.90.70 255.255.255.0 gateway 192.168.90.254
+
+Server-7> ping 192.168.100.60 -t
+
+84 bytes from 192.168.100.60 icmp_seq=1 ttl=62 time=17.937 ms
+84 bytes from 192.168.100.60 icmp_seq=2 ttl=62 time=15.889 ms
+84 bytes from 192.168.100.60 icmp_seq=3 ttl=62 time=17.034 ms
+84 bytes from 192.168.100.60 icmp_seq=4 ttl=62 time=19.310 ms
+84 bytes from 192.168.100.60 icmp_seq=5 ttl=62 time=20.370 ms
+84 bytes from 192.168.100.60 icmp_seq=6 ttl=62 time=17.274 ms
+84 bytes from 192.168.100.60 icmp_seq=7 ttl=62 time=14.291 ms
+84 bytes from 192.168.100.60 icmp_seq=8 ttl=62 time=17.992 ms
