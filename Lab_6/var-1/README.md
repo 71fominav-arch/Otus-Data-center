@@ -96,7 +96,7 @@ interface Vlan100   (Поднимаем маршрутизацию)
 [Тестовые команды с P1-Leaf-1](./test/P1-Leaf-1.txt)   
 
 ### В POD1 реализуется  Symmetric IRB.    
-### UNDERLAY строим на ISIS
+### UNDERLAY строим на ISIS настройки из Lab_5
 Пример для P2-Leaf-1     
 router isis underlay    
    net 49.0003.0100.1603.3250.00    
@@ -127,7 +127,7 @@ interface Ethernet6
    exit   
 Интерфейсы Ethernet5 и Ethernet6 на P1-Spine-1 и P1-Spine-2.       
 
-### OVERLAY строим на eBGP 
+### OVERLAY строим на eBGP настройки из Lab_5     
 Пример для P1-Leaf-1     
 router bgp 65101    
    router-id 10.16.33.250    
@@ -156,6 +156,13 @@ router bgp 65101
       redistribute connected    
    
 ### После построения L3 связности между Leaf и Spine настраиваем vrf и VXLan    
+    
+vlan 90   
+   name Servers-1    
+exit    
+vlan 100    
+   name Servers-2   
+exit   
 vrf instance VRF-Router    
    rd 65101:21   
    exit   
