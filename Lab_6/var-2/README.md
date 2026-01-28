@@ -82,17 +82,42 @@ router bgp 65001
       redistribute connected    
 end        
      
-interface Port-Channel78  /peerlink между Leaf-1 и Leaf-2/   
+interface Port-Channel78  /интерфейс для peerlink между Leaf-1 и Leaf-2/   
    description MLAG-PEERLINK    
    switchport mode trunk    
    switchport trunk group MLAG-PEERLINK    
    spanning-tree link-type point-to-point     
 exit     
 
+vrf instance keeplive / для keepalive линка  /     
+interface Ethernet9   
+   no switchport   
+   vrf keeplive   
+   ip address 192.168.0.1/30   
+exit
+interface Vlan4094 / для peerlink Vlan для передачи данных mlag между Leaf-1 и Leaf-2 /       
+   no autostate    
+   ip address 10.16.1.245/30   
+exit     
+mlag configuration    
+   domain-id Leaves-1-2    
+   local-interface Vlan4094    
+   peer-address 10.16.1.246   / сосед /   
+   peer-address heartbeat 192.168.0.2 vrf keeplive    / сосед /   
+   peer-link Port-Channel78   
+   dual-primary detection delay 1 action errdisable all-interfaces   
+exit     
 
+interface Port-Channel1 /в сторону клиента/    
+   description -Link-to-Server-1-    
+   switchport trunk allowed vlan 90    
+   switchport mode trunk    
+   mlag 1 /ссылка на созданный mlag/    
+exit         
 
-
-
-
+///////////////////////////////////////////////////////////////////////        
+    
+    
+###  Результат настройки 
 
 
