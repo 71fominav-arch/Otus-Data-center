@@ -185,7 +185,11 @@ MTU         : 1500
 84 bytes from 192.168.90.10 icmp_seq=57 ttl=64 time=575.522 ms    
 84 bytes from 192.168.90.10 icmp_seq=58 ttl=64 time=270.958 ms   
 84 bytes from 192.168.90.10 icmp_seq=59 ttl=64 time=229.695 ms       
-    
+
+
+### Диагностические команды.       
+
+[Команды диагностики](./test/).      
 
 
 
