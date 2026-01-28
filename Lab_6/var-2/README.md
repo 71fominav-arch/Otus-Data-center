@@ -1,6 +1,11 @@
 ### Лабораторная работа 6. Вариант 2.
 
 Целью данной работы стало изучение технологии VXLAN, EVPN-VXLAN, L3VNI, MLAG.    
+Оборудование связано между собой через eBGP, EVPN через eBGP. Leaf-1 и Leaf-2 связаны через iBGP.      
+Mlag Настроен на Leaf-1 и Leaf-2.      
+Server-1 в Vlan90   
+Server-3 в Vlan90 /проверить L2vpn /        
+Server-4 в Vlan100 /проверить L3vni схема symmetric ARB/
 
 ![Схема коммутации](Схема_L2.jpg)        
 
