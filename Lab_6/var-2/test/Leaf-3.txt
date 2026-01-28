@@ -1,0 +1,50 @@
+Leaf-3#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.3.250:90 mac-ip 0050.7966.6806
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:90 mac-ip 0050.7966.6806 192.168.90.30
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 mac-ip 0050.7966.6809
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 mac-ip 0050.7966.6809 192.168.100.40
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >Ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >Ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >Ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001 i
+Leaf-3#
+
+Leaf-3# show bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+Neighbor              AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+------------ ----------- ------------- ----------------------- -------------- ---------- ----------
+10.16.17.14        65501 Established   IPv4 Unicast            Negotiated              4          4
+10.16.17.250       65501 Established   L2VPN EVPN              Negotiated              8          8
+10.16.18.14        65501 Established   IPv4 Unicast            Negotiated              4          4
+10.16.18.250       65501 Established   L2VPN EVPN              Negotiated              8          8
+Leaf-3#
+
+
+
+
+

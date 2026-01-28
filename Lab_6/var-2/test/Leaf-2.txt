@@ -1,0 +1,162 @@
+Leaf-2#show mlag
+MLAG Configuration:
+domain-id                          :          Leaves-1-2
+local-interface                    :            Vlan4094
+peer-address                       :         10.16.1.245
+peer-link                          :      Port-Channel78
+hb-peer-address                    :         192.168.0.1
+hb-peer-vrf                        :            keeplive
+peer-config                        :          consistent
+
+MLAG Status:
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:15:f4:e8
+dual-primary detection             :          Configured
+dual-primary interface errdisabled :               False
+
+MLAG Ports:
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   1
+
+
+Leaf-2#show mlag detail
+MLAG Configuration:
+domain-id                          :          Leaves-1-2
+local-interface                    :            Vlan4094
+peer-address                       :         10.16.1.245
+peer-link                          :      Port-Channel78
+hb-peer-address                    :         192.168.0.1
+hb-peer-vrf                        :            keeplive
+peer-config                        :          consistent
+
+MLAG Status:
+state                              :              Active
+negotiation status                 :           Connected
+peer-link status                   :                  Up
+local-int status                   :                  Up
+system-id                          :   52:00:00:15:f4:e8
+dual-primary detection             :          Configured
+dual-primary interface errdisabled :               False
+
+MLAG Ports:
+Disabled                           :                   0
+Configured                         :                   0
+Inactive                           :                   0
+Active-partial                     :                   0
+Active-full                        :                   1
+
+MLAG Detailed Status:
+State                                :              primary
+Peer State                           :            secondary
+State changes                        :                    2
+Last state change time               :          4:30:53 ago
+Hardware ready                       :                 True
+Failover                             :                False
+Failover Cause(s)                    :              Unknown
+Last failover change time            :                never
+Secondary from failover              :                False
+Peer MAC address                     :    50:00:00:cb:38:c2
+Peer MAC routing supported           :                False
+Reload delay                         :          300 seconds
+Non-MLAG reload delay                :          300 seconds
+Peer ports errdisabled               :                False
+Lacp standby                         :                False
+Configured heartbeat interval        :              4000 ms
+Effective heartbeat interval         :              4000 ms
+Heartbeat timeout                    :             60000 ms
+Last heartbeat timeout               :                never
+Heartbeat timeouts since reboot      :                    0
+UDP heartbeat alive                  :                 True
+Heartbeats sent/received             :            8110/8115
+Peer monotonic clock offset          :   178.818002 seconds
+Agent should be running              :                 True
+P2p mount state changes              :                    1
+Fast MAC redirection enabled         :                False
+Interface activation interlock       :          unsupported
+Dual-primary detection delay         :                    1
+Dual-primary action                  :       errdisable-all
+Dual-primary recovery delay          :                    0
+Dual-primary non-mlag recovery delay :                    0
+
+Leaf-2#
+
+Leaf-2#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.16.2.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6806
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6806
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6806 192.168.90.30
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:90 mac-ip 0050.7966.6806 192.168.90.30
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6809
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6809
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6809 192.168.100.40
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:100 mac-ip 0050.7966.6809 192.168.100.40
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >      RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6
+                                 -                     -       -       0       i
+ * >      RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 -                     -       -       0       i
+Leaf-2#show bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.2.250, local AS number 65001
+Neighbor              AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+------------ ----------- ------------- ----------------------- -------------- ---------- ----------
+10.16.1.245        65001 Established   IPv4 Unicast            Negotiated              6          6
+10.16.17.12        65501 Established   IPv4 Unicast            Negotiated              3          3
+10.16.17.250       65501 Established   L2VPN EVPN              Negotiated              8          8
+10.16.18.12        65501 Established   IPv4 Unicast            Negotiated              3          3
+10.16.18.250       65501 Established   L2VPN EVPN              Negotiated              8          8
+Leaf-2#show bgp evpn route-type ?
+  auto-discovery    Filter by Ethernet auto-discovery (A-D) route (type 1)
+  ethernet-segment  Filter by Ethernet segment route (type 4)
+  imet              Filter by inclusive multicast Ethernet tag route (type 3)
+  ip-prefix         Filter by IP prefix route (type 5)
+  join-sync         Filter by multicast join sync route (type 7)
+  leave-sync        Filter by multicast leave sync route (type 8)
+  mac-ip            Filter by MAC/IP advertisement route (type 2)
+  smet              Filter by selective multicast Ethernet tag route (type 6)
+  spmsi             Filter by selective PMSI auto discovery route (type 10)
+
+Leaf-2#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.2.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.2.250:90 imet 10.16.1.251
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:100 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:100 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+Leaf-2#
+
+
+
+
