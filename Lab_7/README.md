@@ -13,7 +13,7 @@
 
 Leaf-1 и Leaf-2 конфигурации взята из предыдущей лабораторной работы. Настроен Mlag. Есть Server-1 (192.168.90.10 Vlan 90), Server-5 (192.168.100.50 Vlan 100).      
 
-Leaf-3 и Leaf-4 настройки из предыдущих лабораторных работ. eBGP номера AS 65003 и 65004. Vxlan1 построен на Lo0. Есть два Vlan 90 и 100. Symmetric ARB (vrf VRF-Router).
+Leaf-3 и Leaf-4 настройки из предыдущих лабораторных работ. eBGP номера AS 65003 и 65004. Vxlan1 построен на Lo0. Есть два Vlan 90 и 100. Symmetric IRB (vrf VRF-Router).
 Настройки Multihoming.   
 
 Leaf-3    
