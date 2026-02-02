@@ -218,5 +218,6 @@ BGP routing table entry for ethernet-segment 0000:0000:0000:0000:3401 10.16.4.25
       Extended Community: TunnelEncap:tunnelTypeVxlan EvpnEsImportRt:00:00:00:00:34:01 DF Election: Preference 90      
 
       
+Интерфейс поднят. 
 
-   
+Устройства между собой доступны. ping проходит без проблем.  
