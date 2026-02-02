@@ -44,10 +44,10 @@ interface Port-Channel1
 
 [Конфигурации стройств](./CFG/)
 
-Portchannel поднялся.
-Leaf-3#show int status
-Port       Name            Status       Vlan     Duplex Speed  Type            Flags Encapsulation   
-Et1        to-Servers-host connected    in Po1   full   1G     EbraTestPhyPort              
+Portchannel поднялся.      
+Leaf-3#show int status        
+Port       Name            Status       Vlan     Duplex Speed  Type            Flags Encapsulation      
+Et1        to-Servers-host connected    in Po1   full   1G     EbraTestPhyPort               
 Et2                        connected    100      full   1G     EbraTestPhyPort              
 Et3                        connected    120      full   1G     EbraTestPhyPort              
 Et4                        connected    1        full   1G     EbraTestPhyPort              
