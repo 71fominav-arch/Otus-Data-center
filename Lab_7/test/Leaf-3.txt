@@ -1,0 +1,230 @@
+Leaf-3#show int status
+Port       Name            Status       Vlan     Duplex Speed  Type            Flags Encapsulation
+Et1        to-Servers-host connected    in Po1   full   1G     EbraTestPhyPort            
+Et2                        connected    100      full   1G     EbraTestPhyPort            
+Et3                        connected    120      full   1G     EbraTestPhyPort            
+Et4                        connected    1        full   1G     EbraTestPhyPort            
+Et5        to-Spine1-Eth3  connected    routed   full   1G     EbraTestPhyPort            
+Et6        to-Spine2-Eth3  connected    routed   full   1G     EbraTestPhyPort            
+Et7                        connected    1        full   1G     EbraTestPhyPort            
+Et8                        connected    1        full   1G     EbraTestPhyPort            
+Et9                        connected    1        full   1G     EbraTestPhyPort            
+Et10                       connected    1        full   1G     EbraTestPhyPort            
+
+Ma1                        connected    routed   a-full a-1G   10/100/1000                
+Po1        to-Servers-host connected    trunk    full   1G     N/A      
+
+Leaf-3#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local N           exthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.3.250:90 auto-discovery 0 0000:0000:0000:0000:3401
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 auto-discovery 0 0000:0000:0000:0000:3401
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.4.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.4.250           -       100     0       65501 65004            i
+ *  ec    RD: 10.16.4.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.4.250           -       100     0       65501 65004            i
+ * >      RD: 10.16.3.250:90 mac-ip 0050.7966.6806
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:90 mac-ip 0050.7966.6806 192.168.90.30
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 mac-ip 0050.7966.6809
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 mac-ip 0050.7966.6809 192.168.100.40
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.1.250:100 mac-ip 0050.7966.680b
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:100 mac-ip 0050.7966.680b
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680b
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680b
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.1.250:100 mac-ip 0050.7966.680b 192.168.100.50
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:100 mac-ip 0050.7966.680b 192.168.100.50
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680b 192.168.100.50
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.2.250:100 mac-ip 0050.7966.680b 192.168.100.50
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.2.250:90 mac-ip 5000.00af.d3f6 192.168.90.10
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.1.250:90 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:90 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.1.250:100 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.1.250:100 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.2.250:90 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ *  ec    RD: 10.16.2.250:90 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001            i
+ * >Ec    RD: 10.16.2.250:100 imet 10.16.1.251
+5501 65001 i
+ *  ec    RD: 10.16.2.250:100 imet 10.16.1.251
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >      RD: 10.16.3.250:90 imet 10.16.3.250
+                                 -                     -       -       0       i
+ * >      RD: 10.16.3.250:100 imet 10.16.3.250
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.3.250:90 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.3.250:90 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ * >Ec    RD: 10.16.3.250:100 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.3.250:100 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ * >      RD: 10.16.3.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.3.250
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.4.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.4.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ * >Ec    RD: 65001:11 ip-prefix 192.168.90.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 65001:11 ip-prefix 192.168.90.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >Ec    RD: 65001:12 ip-prefix 192.168.90.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 65001:12 ip-prefix 192.168.90.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >      RD: 65003:13 ip-prefix 192.168.90.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 65004:14 ip-prefix 192.168.90.0/24
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 65004:14 ip-prefix 192.168.90.0/24
+                                 10.16.4.250           -       100     0       65501 65004 i
+ * >Ec    RD: 65001:11 ip-prefix 192.168.100.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 65001:11 ip-prefix 192.168.100.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >Ec    RD: 65001:12 ip-prefix 192.168.100.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ *  ec    RD: 65001:12 ip-prefix 192.168.100.0/24
+                                 10.16.1.251           -       100     0       65501 65001 i
+ * >      RD: 65003:13 ip-prefix 192.168.100.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 65004:14 ip-prefix 192.168.100.0/24
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 65004:14 ip-prefix 192.168.100.0/24
+                                 10.16.4.250           -       100     0       65501 65004 i
+Leaf-3#
+
+Leaf-3# show bgp summary
+BGP summary information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+Neighbor              AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+------------ ----------- ------------- ----------------------- -------------- ---------- ----------
+10.16.17.14        65501 Established   IPv4 Unicast            Negotiated              6          6
+10.16.17.250       65501 Established   L2VPN EVPN              Negotiated             21         21
+10.16.18.14        65501 Established   IPv4 Unicast            Negotiated              6          6
+10.16.18.250       65501 Established   L2VPN EVPN              Negotiated             21         21
+Leaf-3#
+
+Leaf-3#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.3.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.3.250
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.4.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.4.250:1 ethernet-segment 0000:0000:0000:0000:3401 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+Leaf-3#
+
+Leaf-3#show bgp evpn route-type ethernet-segment detail
+BGP routing table information for VRF default
+Router identifier 10.16.3.250, local AS number 65003
+BGP routing table entry for ethernet-segment 0000:0000:0000:0000:3401 10.16.3.250, Route Distinguisher: 10.16.3.250:1
+ Paths: 1 available
+  Local
+    - from - (0.0.0.0)
+      Origin IGP, metric -, localpref -, weight 0, tag 0, valid, local, best
+      Extended Community: TunnelEncap:tunnelTypeVxlan EvpnEsImportRt:00:00:00:00:34:01 DF Election: Preference 100
+BGP routing table entry for ethernet-segment 0000:0000:0000:0000:3401 10.16.4.250, Route Distinguisher: 10.16.4.250:1
+ Paths: 2 available
+  65501 65004
+    10.16.4.250 from 10.16.17.250 (10.16.17.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: TunnelEncap:tunnelTypeVxlan EvpnEsImportRt:00:00:00:00:34:01 DF Election: Preference 90
+  65501 65004
+    10.16.4.250 from 10.16.18.250 (10.16.18.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: TunnelEncap:tunnelTypeVxlan EvpnEsImportRt:00:00:00:00:34:01 DF Election: Preference 90
+
+Leaf-3#show bgp evpn instance
+EVPN instance: VLAN 100
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:100:100100
+  Route target export: Route-Target-AS:100:100100
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.3.250
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:3401
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:34:01
+      DF election algorithm: preference
+      Designated forwarder: 10.16.3.250
+      Non-Designated forwarder: 10.16.4.250
+EVPN instance: VLAN 90
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:90:10090
+  Route target export: Route-Target-AS:90:10090
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.3.250
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:3401
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:34:01
+      DF election algorithm: preference
+      Designated forwarder: 10.16.3.250
+      Non-Designated forwarder: 10.16.4.250
+
+
+
+
+
+
+
+
+
+
+
+          

@@ -1,0 +1,152 @@
+Leaf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.16.1.250:90 imet 10.16.1.251
+                                 -                     -       -       0       i
+ * >      RD: 10.16.1.250:100 imet 10.16.1.251
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:90 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:100 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:100 imet 10.16.3.250
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:90 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.3.250:90 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ * >Ec    RD: 10.16.3.250:100 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.3.250:100 imet 10.16.4.250
+                                 10.16.4.250           -       100     0       65501 65004 i
+Leaf-1#
+
+Leaf-1#show bgp evpn route-type auto-discovery
+BGP routing table information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending BGP convergence
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.16.3.250:90 auto-discovery 0 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:90 auto-discovery 0 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:100 auto-discovery 0 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:100 auto-discovery 0 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.3.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ *  ec    RD: 10.16.3.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.3.250           -       100     0       65501 65003 i
+ * >Ec    RD: 10.16.4.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.4.250           -       100     0       65501 65004 i
+ *  ec    RD: 10.16.4.250:1 auto-discovery 0000:0000:0000:0000:3401
+                                 10.16.4.250           -       100     0       65501 65004 i
+
+Leaf-1#show bgp evpn route-type auto-discovery detail
+BGP routing table information for VRF default
+Router identifier 10.16.1.250, local AS number 65001
+BGP routing table entry for auto-discovery 0 0000:0000:0000:0000:3401, Route Distinguisher: 10.16.3.250:90
+ Paths: 2 available
+  65501 65003
+    10.16.3.250 from 10.16.18.250 (10.16.18.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 TunnelEncap:tunnelTypeVxlan
+      VNI: 10090
+  65501 65003
+    10.16.3.250 from 10.16.17.250 (10.16.17.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 TunnelEncap:tunnelTypeVxlan
+      VNI: 10090
+BGP routing table entry for auto-discovery 0 0000:0000:0000:0000:3401, Route Distinguisher: 10.16.3.250:100
+ Paths: 2 available
+  65501 65003
+    10.16.3.250 from 10.16.18.250 (10.16.18.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan
+      VNI: 100100
+  65501 65003
+    10.16.3.250 from 10.16.17.250 (10.16.17.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan
+      VNI: 100100
+BGP routing table entry for auto-discovery 0000:0000:0000:0000:3401, Route Distinguisher: 10.16.3.250:1
+ Paths: 2 available
+  65501 65003
+    10.16.3.250 from 10.16.18.250 (10.16.18.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan EvpnEsiLabel:0
+      VNI: 0
+  65501 65003
+    10.16.3.250 from 10.16.17.250 (10.16.17.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan EvpnEsiLabel:0
+      VNI: 0
+BGP routing table entry for auto-discovery 0000:0000:0000:0000:3401, Route Distinguisher: 10.16.4.250:1
+ Paths: 2 available
+  65501 65004
+    10.16.4.250 from 10.16.18.250 (10.16.18.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan EvpnEsiLabel:0
+      VNI: 0
+  65501 65004
+    10.16.4.250 from 10.16.17.250 (10.16.17.250)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:90:10090 Route-Target-AS:100:100100 TunnelEncap:tunnelTypeVxlan EvpnEsiLabel:0
+      VNI: 0
+Leaf-1#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

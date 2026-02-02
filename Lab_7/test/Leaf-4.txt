@@ -1,0 +1,36 @@
+Leaf-4#show bgp evpn instance
+EVPN instance: VLAN 100
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:100:100100
+  Route target export: Route-Target-AS:100:100100
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.4.250
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:3401
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:34:01
+      DF election algorithm: preference
+      Designated forwarder: 10.16.3.250
+      Non-Designated forwarder: 10.16.4.250
+EVPN instance: VLAN 90
+  Route distinguisher: 0:0
+  Route target import: Route-Target-AS:90:10090
+  Route target export: Route-Target-AS:90:10090
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.16.4.250
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:3401
+      Interface: Port-Channel1
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:34:01
+      DF election algorithm: preference
+      Designated forwarder: 10.16.3.250
+      Non-Designated forwarder: 10.16.4.250
+Leaf-4#
