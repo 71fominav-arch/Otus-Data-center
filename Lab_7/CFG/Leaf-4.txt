@@ -1,0 +1,146 @@
+Leaf-4#show run
+! Command: show running-config
+! device: Leaf-4 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-4
+!
+spanning-tree mode mstp
+!
+vlan 90
+   name Servers-1
+!
+vlan 100
+   name Servers-2
+!
+vrf instance VRF-Router
+   rd 65004:14
+!
+interface Port-Channel1
+   description to-Servers-host
+   switchport mode trunk
+   !
+   evpn ethernet-segment
+      identifier 0000:0000:0000:0000:3401
+      designated-forwarder election algorithm preference 90
+      route-target import 00:00:00:00:34:01
+   lacp system-id 0000.0000.3401
+!
+interface Ethernet1
+   description to-Severs-host
+   mtu 9100
+   switchport mode trunk
+   channel-group 1 mode active
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Spine1-Eth4
+   mtu 9214
+   no switchport
+   ip address 10.16.17.17/31
+!
+interface Ethernet6
+   description to-Spine2-Eth4
+   mtu 9214
+   no switchport
+   ip address 10.16.18.17/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.4.250/32
+!
+interface Loopback1
+   ip address 10.16.4.251/32
+!
+interface Management1
+!
+interface Vlan90
+   vrf VRF-Router
+   ip address 192.168.90.4/24
+   ip virtual-router address 192.168.90.254/24
+!
+interface Vlan100
+   vrf VRF-Router
+   ip address 192.168.100.4/24
+   ip virtual-router address 192.168.100.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 90 vni 10090
+   vxlan vlan 100 vni 100100
+   vxlan vrf VRF-Router vni 111111
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 02:00:00:00:00:00
+!
+ip routing
+ip routing vrf VRF-Router
+!
+router bgp 65004
+   router-id 10.16.3.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor OVERLAY peer group
+   neighbor OVERLAY remote-as 65501
+   neighbor OVERLAY out-delay 0
+   neighbor OVERLAY update-source Loopback0
+   neighbor OVERLAY ebgp-multihop 2
+   neighbor OVERLAY send-community extended
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65501
+   neighbor UNDERLAY out-delay 0
+   neighbor 10.16.17.16 peer group UNDERLAY
+   neighbor 10.16.17.250 peer group OVERLAY
+   neighbor 10.16.18.16 peer group UNDERLAY
+   neighbor 10.16.18.250 peer group OVERLAY
+   !
+   vlan 100
+      rd auto
+      route-target both 100:100100
+      redistribute learned
+   !
+   vlan 90
+      rd auto
+      route-target both 90:10090
+      redistribute learned
+   !
+   address-family evpn
+      neighbor OVERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.4.250/32
+      network 10.16.4.251/32
+   !
+   vrf VRF-Router
+      rd 65004:14
+      route-target import evpn 11:111111
+      route-target export evpn 11:111111
+      redistribute connected
+!
+end
+Leaf-4#
