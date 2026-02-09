@@ -1,0 +1,209 @@
+! device: Leaf-4 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-4
+!
+spanning-tree mode mstp
+!
+vlan 70
+   name Cl2_Server
+!
+vlan 71
+   name Cl2_Admin
+!
+vlan 78
+   name tranzit-Client-2
+!
+vlan 88
+   name tranzit-Client-1
+!
+vlan 90
+   name Servers-1
+!
+vlan 100
+   name Servers-2
+!
+vrf instance Client-1
+   rd 65004:14
+!
+vrf instance Client-2
+   rd 65004:24
+!
+interface Ethernet1
+   description to-Severs-host
+   mtu 9100
+   no switchport
+!
+interface Ethernet1.1
+   encapsulation dot1q vlan 88
+   vrf Client-1
+   ip address 172.16.4.1/30
+!
+interface Ethernet1.2
+   encapsulation dot1q vlan 78
+   vrf Client-2
+   ip address 172.16.4.5/30
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Spine1-Eth4
+   mtu 9214
+   no switchport
+   ip address 10.16.17.17/31
+!
+interface Ethernet6
+   description to-Spine2-Eth4
+   mtu 9214
+   no switchport
+   ip address 10.16.18.17/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Ethernet9
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   ip address 10.16.4.250/32
+!
+interface Loopback1
+   ip address 10.16.4.251/32
+!
+interface Management1
+!
+interface Vlan70
+   vrf Client-2
+   ip address 192.168.70.4/24
+   ip virtual-router address 192.168.70.254/24
+!
+interface Vlan71
+   vrf Client-2
+   ip address 192.168.71.4/24
+   ip virtual-router address 192.168.71.254/24
+!
+interface Vlan90
+   vrf Client-1
+   ip address 192.168.90.4/24
+   ip virtual-router address 192.168.90.254/24
+!
+interface Vlan100
+   vrf Client-1
+   ip address 192.168.100.4/24
+   ip virtual-router address 192.168.100.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback0
+   vxlan udp-port 4789
+   vxlan vlan 70 vni 10070
+   vxlan vlan 71 vni 10071
+   vxlan vlan 78 vni 10078
+   vxlan vlan 88 vni 10088
+   vxlan vlan 90 vni 10090
+   vxlan vlan 100 vni 100100
+   vxlan vrf Client-1 vni 111111
+   vxlan vrf Client-2 vni 222222
+   vxlan learn-restrict any
+!
+ip virtual-router mac-address 02:00:00:00:00:00
+!
+ip routing
+ip routing vrf Client-1
+ip routing vrf Client-2
+!
+router bgp 65004
+   router-id 10.16.3.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor OVERLAY peer group
+   neighbor OVERLAY remote-as 65501
+   neighbor OVERLAY out-delay 0
+   neighbor OVERLAY update-source Loopback0
+   neighbor OVERLAY ebgp-multihop 2
+   neighbor OVERLAY send-community extended
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65501
+   neighbor UNDERLAY out-delay 0
+   neighbor 10.16.17.16 peer group UNDERLAY
+   neighbor 10.16.17.250 peer group OVERLAY
+   neighbor 10.16.18.16 peer group UNDERLAY
+   neighbor 10.16.18.250 peer group OVERLAY
+   !
+   vlan 100
+      rd auto
+      route-target both 100:100100
+      redistribute learned
+   !
+   vlan 70
+      rd auto
+      route-target both 70:10070
+      redistribute learned
+   !
+   vlan 71
+      rd auto
+      route-target both 71:10071
+      redistribute learned
+   !
+   vlan 78
+      rd auto
+      route-target both 78:10078
+      redistribute learned
+   !
+   vlan 88
+      rd auto
+      route-target both 88:10088
+      redistribute learned
+   !
+   vlan 90
+      rd auto
+      route-target both 90:10090
+      redistribute learned
+   !
+   address-family evpn
+      neighbor OVERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.4.250/32
+      network 10.16.4.251/32
+   !
+   vrf Client-1
+      rd 65004:14
+      route-target import evpn 11:111111
+      route-target export evpn 11:111111
+      neighbor 172.16.4.2 remote-as 65601
+      redistribute connected
+      !
+      address-family ipv4
+         neighbor 172.16.4.2 activate
+         redistribute connected
+   !
+   vrf Client-2
+      rd 65004:24
+      route-target import evpn 11:222222
+      route-target export evpn 11:222222
+      neighbor 172.16.4.6 remote-as 65601
+      redistribute connected
+      !
+      address-family ipv4
+         neighbor 172.16.4.6 activate
+         redistribute connected
+!
+end

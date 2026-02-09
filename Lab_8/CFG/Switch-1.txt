@@ -1,0 +1,63 @@
+! device: Server-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model ribd
+!
+hostname Server-1
+!
+spanning-tree mode mstp
+!
+vlan 70
+   name Server
+!
+vlan 71
+   name Admin
+!
+vlan 90
+   name Servers-1
+!
+vlan 100
+   name Servers-2
+!
+interface Port-Channel1
+   switchport trunk allowed vlan 70-71,90,100
+   switchport mode trunk
+!
+interface Ethernet1
+   switchport mode trunk
+   channel-group 1 mode active
+!
+interface Ethernet2
+   switchport mode trunk
+   channel-group 1 mode active
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   switchport access vlan 100
+!
+interface Ethernet6
+   switchport access vlan 70
+!
+interface Ethernet7
+   switchport access vlan 71
+!
+interface Ethernet8
+!
+interface Management1
+!
+interface Vlan90
+   ip address 192.168.90.10/24
+!
+ip routing
+!
+ip route 0.0.0.0/0 192.168.90.254
+!
+end

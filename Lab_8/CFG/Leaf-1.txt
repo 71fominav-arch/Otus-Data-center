@@ -1,0 +1,227 @@
+! device: Leaf-1 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+no logging console
+!
+hostname Leaf-1
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4094
+!
+vlan 70
+   name Server
+!
+vlan 71
+   name Admin
+!
+vlan 90
+   name Servers-1
+!
+vlan 100
+   name Servers-2
+!
+vlan 4094
+   name MLAG-PEERLINK
+   trunk group MLAG-PEERLINK
+!
+vrf instance Client-1
+   rd 65001:11
+!
+vrf instance Client-2
+   rd 65001:21
+!
+vrf instance keeplive
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Port-Channel1
+   description -Link-to-Server-1-
+   switchport trunk allowed vlan 70-71,90,100
+   switchport mode trunk
+   mlag 1
+!
+interface Port-Channel78
+   description MLAG-PEERLINK
+   switchport mode trunk
+   switchport trunk group MLAG-PEERLINK
+   spanning-tree link-type point-to-point
+!
+interface Ethernet1
+   description -Link-to-Sever-1-
+   switchport mode trunk
+   channel-group 1 mode active
+!
+interface Ethernet2
+   switchport access vlan 100
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   description to-Spine1-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.16.17.11/31
+   no isis bfd
+!
+interface Ethernet6
+   description to-Spine2-Eth1
+   mtu 9214
+   no switchport
+   ip address 10.16.18.11/31
+   no isis bfd
+!
+interface Ethernet7
+   description MLAG-PEERLINK
+   channel-group 78 mode active
+!
+interface Ethernet8
+   description MLAG-PEERLINK
+   channel-group 78 mode active
+!
+interface Ethernet9
+   no switchport
+   vrf keeplive
+   ip address 192.168.0.1/30
+!
+interface Ethernet10
+!
+interface Ethernet11
+!
+interface Loopback0
+   description OVERLAY
+   ip address 10.16.1.250/32
+!
+interface Loopback1
+   description VXLAN-VTEP
+   ip address 10.16.1.251/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.1/24
+!
+interface Vlan70
+   vrf Client-2
+   ip address 192.168.70.1/24
+   ip virtual-router address 192.168.70.254/24
+!
+interface Vlan71
+   vrf Client-2
+   ip address 192.168.71.1/24
+   ip virtual-router address 192.168.71.254/24
+!
+interface Vlan90
+   vrf Client-1
+   ip address 192.168.90.1/24
+   ip virtual-router address 192.168.90.254/24
+!
+interface Vlan100
+   vrf Client-1
+   ip address 192.168.100.1/24
+   ip virtual-router address 192.168.100.254/24
+!
+interface Vlan4094
+   no autostate
+   ip address 10.16.1.245/30
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 70 vni 10070
+   vxlan vlan 71 vni 10071
+   vxlan vlan 90 vni 10090
+   vxlan vlan 100 vni 100100
+   vxlan vrf Client-1 vni 111111
+   vxlan vrf Client-2 vni 222222
+!
+ip virtual-router mac-address 02:00:00:00:00:00
+!
+ip routing
+ip routing vrf Client-1
+ip routing vrf Client-2
+ip routing vrf keeplive
+ip routing vrf mng_net
+!
+mlag configuration
+   domain-id Leaves-1-2
+   local-interface Vlan4094
+   peer-address 10.16.1.246
+   peer-address heartbeat 192.168.0.2 vrf keeplive
+   peer-link Port-Channel78
+   dual-primary detection delay 1 action errdisable all-interfaces
+!
+router bgp 65001
+   router-id 10.16.1.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   neighbor OVERLAY peer group
+   neighbor OVERLAY remote-as 65501
+   neighbor OVERLAY out-delay 0
+   neighbor OVERLAY update-source Loopback0
+   neighbor OVERLAY ebgp-multihop 2
+   neighbor OVERLAY send-community extended
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65501
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY-MLAG peer group
+   neighbor UNDERLAY-MLAG remote-as 65001
+   neighbor UNDERLAY-MLAG next-hop-self
+   neighbor 10.16.1.246 peer group UNDERLAY-MLAG
+   neighbor 10.16.17.10 peer group UNDERLAY
+   neighbor 10.16.17.250 peer group OVERLAY
+   neighbor 10.16.18.10 peer group UNDERLAY
+   neighbor 10.16.18.250 peer group OVERLAY
+   !
+   vlan 100
+      rd auto
+      route-target both 100:100100
+      redistribute learned
+   !
+   vlan 70
+      rd auto
+      route-target both 70:10070
+      redistribute learned
+   !
+   vlan 71
+      rd auto
+      route-target both 71:10071
+      redistribute learned
+   !
+   vlan 90
+      rd auto
+      route-target both 90:10090
+      redistribute learned
+   !
+   address-family evpn
+      neighbor OVERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      neighbor UNDERLAY-MLAG activate
+      network 10.16.1.250/32
+      network 10.16.1.251/32
+   !
+   vrf Client-1
+      rd 65001:11
+      route-target import evpn 11:111111
+      route-target export evpn 11:111111
+      redistribute connected
+   !
+   vrf Client-2
+      rd 65001:21
+      route-target import evpn 11:222222
+      route-target export evpn 11:222222
+      redistribute connected
+!
+end
