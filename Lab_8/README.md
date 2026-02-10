@@ -65,6 +65,8 @@ interface Ethernet2.2
    ip address 172.16.4.6/30   
   exit     
 
+### Схема маршрутизации.      
+![схема маршрутизации](./Схема_VXLan.jpg)
 
 
 
