@@ -108,52 +108,63 @@ interface Ethernet20
    description to-Spine0-Eth0     
    mtu 9214     
    no switchport     
-   ip address 10.16.16.2/30     
+   ip address 10.16.16.2/30 
+   bfd interval 300 min-rx 300 multiplier 3     
 exit     
 interface Ethernet21     
    description to-Spine1-Eth0     
    mtu 9214     
    no switchport      
-   ip address 10.16.17.2/30     
+   ip address 10.16.17.2/30 
+   bfd interval 300 min-rx 300 multiplier 3       
 exit      
 interface Ethernet22     
    description to-Spine2-Eth0     
    mtu 9214      
    no switchport     
    ip address 10.16.18.2/30      
+   bfd interval 300 min-rx 300 multiplier 3     
 exit        
 interface Ethernet23      
    description to-Spine3-Eth0     
    mtu 9214      
    no switchport      
    ip address 10.16.19.2/30     
+   bfd interval 300 min-rx 300 multiplier 3     
 exit     
 interface Ethernet24     
    description to-Spine4-Eth0      
    mtu 9214      
    no switchport      
    ip address 10.16.20.2/30     
+   bfd interval 300 min-rx 300 multiplier 3      
 exit     
 interface Ethernet25      
    description to-Spine5-Eth0      
    mtu 9214     
    no switchport     
    ip address 10.16.21.2/30     
+   bfd interval 300 min-rx 300 multiplier 3     
 exit        
 interface Loopback0
    description Overlay_EBGP 
    ip address 10.16.0.250/32
 exit
 
-router bgp 650100     
+router bgp 65100     
    router-id 10.16.0.250    
    no bgp default ipv4-unicast     
    timers bgp 3 9     
    distance bgp 20 200 200     
    maximum-paths 6 ecmp 2     
-       
-
-
+   neighbor UNDERLAY peer group       
+   neighbor UNDERLAY remote-as 65000      
+   neighbor UNDERLAY out-delay 0     
+   neighbor UNDERLAY bfd      
+ address-family ipv4     
+      neighbor UNDERLAY activate     
+      network 10.16.0.250/32     
+exit     
        
     
 
