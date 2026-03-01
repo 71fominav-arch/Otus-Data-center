@@ -103,7 +103,7 @@ As Leaf-0 65100, Leaf-1 65101, ... Leaf-9 65009
       hardware port-group 1 select eth0-6 profile dot1q-25g-4x     
 Настройка интерфейсов:    
 conf t 
-ip routing /* Включаем маршрутизацию
+ip routing /* Включаем маршрутизацию      
 interface Ethernet20     
    description to-Spine0-Eth0     
    mtu 9214     
@@ -146,10 +146,10 @@ interface Ethernet25
    ip address 10.16.21.2/30     
    bfd interval 300 min-rx 300 multiplier 3     
 exit        
-interface Loopback0
-   description Overlay_EBGP 
-   ip address 10.16.0.250/32
-exit
+interface Loopback0       
+   description Overlay_EBGP     
+   ip address 10.16.0.250/32      
+exit        
 
 router bgp 65100     
    router-id 10.16.0.250    
