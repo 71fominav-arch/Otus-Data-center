@@ -161,6 +161,12 @@ router bgp 65100
    neighbor UNDERLAY remote-as 65000      
    neighbor UNDERLAY out-delay 0     
    neighbor UNDERLAY bfd      
+   neighbor 10.16.16.1 peer group UNDERLAY      
+   neighbor 10.16.17.1 peer group UNDERLAY      
+   neighbor 10.16.18.1 peer group UNDERLAY     
+   neighbor 10.16.19.1 peer group UNDERLAY      
+   neighbor 10.16.20.1 peer group UNDERLAY      
+   neighbor 10.16.21.1 peer group UNDERLAY     
  address-family ipv4     
       neighbor UNDERLAY activate     
       network 10.16.0.250/32     
@@ -176,7 +182,7 @@ Leaf-Downlink: 32 порта х 25 Гбит/с = 800 Гбит/с.
 Leaf-Uplink: 8 портов х 100 Гбит/с = 800 Гбит/с.     
 Переподписка: 1:1 (физическая). Однако, с учетом того, что модель Arista 7060CX-32S имеет 32 порта 100G, у вас остается еще 16 свободных портов на каждом Leaf для будущего роста (доведения до 64 портов 25G), что и обеспечит целевую переподписку 1:2.      
 7. Логическая структура (VXLAN/EVPN)      
-Underlay (iBGP):    
+Underlay (eBGP):    
 Все устройства в одной AS 65001.    
 Spine работают как Route Reflectors (RR).     
 MTU: 9214 (Jumbo Frames) для инкапсуляции VXLAN.     
