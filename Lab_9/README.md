@@ -94,48 +94,63 @@ IP сети на интерфейсах:
 | 14 |	B-Leaf-3 |	10.16.16.54/10.16.16.53 |	10.16.17.54/10.16.17.53 |	10.16.18.54/10.16.18.53 |	10.16.19.54/10.16.19.53 |	10.16.20.54/10.16.20.53 |	10.16.21.54/10.16.21.53 |     
 
 
-### 3. Настройки Underlay     
-     Пример Leaf-0     
-      hardware port-group 1 select eth0-6 profile dot1q-25g-4x
-Настройка интерфейсов:
-conf t
-interface Ethernet20
-   description to-Spine0-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.16.2/30
-exit
-interface Ethernet21
-   description to-Spine1-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.17.2/30
-exit 
-interface Ethernet22
-   description to-Spine2-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.18.2/30
-exit      
-interface Ethernet23
-   description to-Spine3-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.19.2/30
-exit
-interface Ethernet24
-   description to-Spine4-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.20.2/30
-exit 
-interface Ethernet25
-   description to-Spine5-Eth0
-   mtu 9214
-   no switchport
-   ip address 10.16.21.2/30
-exit      
+### 3. Настройки Underlay 
+Underlay строим на основе eBGP    
+As Spine 65000  
+As Leaf-0 65100, Leaf-1 65101, ... Leaf-9 65009      
 
+     Пример Leaf-0     
+      hardware port-group 1 select eth0-6 profile dot1q-25g-4x     
+Настройка интерфейсов:    
+conf t 
+ip routing /* Включаем маршрутизацию
+interface Ethernet20     
+   description to-Spine0-Eth0     
+   mtu 9214     
+   no switchport     
+   ip address 10.16.16.2/30     
+exit     
+interface Ethernet21     
+   description to-Spine1-Eth0     
+   mtu 9214     
+   no switchport      
+   ip address 10.16.17.2/30     
+exit      
+interface Ethernet22     
+   description to-Spine2-Eth0     
+   mtu 9214      
+   no switchport     
+   ip address 10.16.18.2/30      
+exit        
+interface Ethernet23      
+   description to-Spine3-Eth0     
+   mtu 9214      
+   no switchport      
+   ip address 10.16.19.2/30     
+exit     
+interface Ethernet24     
+   description to-Spine4-Eth0      
+   mtu 9214      
+   no switchport      
+   ip address 10.16.20.2/30     
+exit     
+interface Ethernet25      
+   description to-Spine5-Eth0      
+   mtu 9214     
+   no switchport     
+   ip address 10.16.21.2/30     
+exit        
+interface Loopback0
+   description Overlay_EBGP 
+   ip address 10.16.0.250/32
+exit
+
+router bgp 650100     
+   router-id 10.16.0.250    
+   no bgp default ipv4-unicast     
+   timers bgp 3 9     
+   distance bgp 20 200 200     
+   maximum-paths 6 ecmp 2     
        
 
 
