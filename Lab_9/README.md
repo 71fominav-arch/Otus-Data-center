@@ -99,12 +99,12 @@ Underlay строим на основе eBGP
 As Spine 65000  
 As Leaf-0 65100, Leaf-1 65101, ... Leaf-9 65009      
 
-     Пример Leaf-0     
-      hardware port-group 1 select eth0-6 profile dot1q-25g-4x     
+   ###  Пример Leaf-0     
+      hardware port-group 1 select eth0-6 profile dot1q-25g-4x     /* Интерфейсы в режим 4*25Gbs итого 24 интерфейса по 25Gbs
 Настройка интерфейсов:    
 conf t 
 ip routing /* Включаем маршрутизацию      
-interface Ethernet20     
+interface Ethernet20  /* Задаем адреса на интерфейсах в сторону Spine        
    description to-Spine0-Eth0     
    mtu 9214     
    no switchport     
@@ -146,7 +146,7 @@ interface Ethernet25
    ip address 10.16.21.2/30     
    bfd interval 300 min-rx 300 multiplier 3     
 exit        
-interface Loopback0       
+interface Loopback0             
    description Overlay_EBGP     
    ip address 10.16.0.250/32      
 exit        
