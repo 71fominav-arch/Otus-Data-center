@@ -50,7 +50,11 @@ Overlay: VXLAN с использованием EVPN.
 | 13 | B-Leaf-2 | Eth20/Eth22 | Eth21/Eth22 | Eth22/Eth22 | Eth23/Eth22 | Eth24/Eth22 | Eth25/Eth22 |
 | 14 | B-Leaf-3 | Eth20/Eth23 | Eth21/Eth23 | Eth22/Eth23 | Eth23/Eth22 | Eth24/Eth23 | Eth25/Eth23 |     
 
+IP адресация на интерфейсах:     
 
+| N | Switch | Lo0 | mngmnt | Spine-0 | Spine-1 | Spine-2 | Spine-3 | Spine-4 | Spine-5 |
+|---|--------|-----|--------|---------|---------|---------|---------|---------|---------|
+| 1 | Spine-0 |  |  |  |  |  |  |  |  |    
 
 
 
