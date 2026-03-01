@@ -95,10 +95,46 @@ IP сети на интерфейсах:
 
 
 ### 3. Настройки Underlay     
-     
-
-      
-
+     Пример Leaf-0     
+      hardware port-group 1 select eth0-6 profile dot1q-25g-4x
+Настройка интерфейсов:
+conf t
+interface Ethernet20
+   description to-Spine0-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.16.2/30
+exit
+interface Ethernet21
+   description to-Spine1-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.17.2/30
+exit 
+interface Ethernet22
+   description to-Spine2-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.18.2/30
+exit      
+interface Ethernet23
+   description to-Spine3-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.19.2/30
+exit
+interface Ethernet24
+   description to-Spine4-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.20.2/30
+exit 
+interface Ethernet25
+   description to-Spine5-Eth0
+   mtu 9214
+   no switchport
+   ip address 10.16.21.2/30
+exit      
 
        
 
