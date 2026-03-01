@@ -35,20 +35,20 @@ Overlay: VXLAN с использованием EVPN.
 
 | N | Leaf/Spine | Spine-0 | Spine-1 | Spine-2 | Spine-3 | Spine-4 | Spine-5 |
 |---|------------|---------|----------|---------|---------|---------|----------|
-| 1 | Leaf-0  |  |  |   |    |    |    |  
-| 2 | Leaf-1  |  |  |   |    |    |    |
-| 3 | Leaf-2  |  |  |   |    |    |    |
-| 4 | Leaf-3  |  |  |   |    |    |    |
-| 5 | Leaf-4  |  |  |   |    |    |    |
-| 6 | Leaf-5  |  |  |   |    |    |    |
-| 7 | Leaf-6  |  |  |   |    |    |    |
-| 8 | Leaf-7  |  |  |   |    |    |    |
-| 9 | Leaf-8  |  |  |   |    |    |    |
-| 10 | Leaf-9 |  |  |   |    |    |    |
-| 11 | B-Leaf-0 |  |   |   |    |    |     |
-| 12 | B-Leaf-1 |  |   |   |    |    |     |
-| 13 | B-Leaf-2 |  |   |   |    |    |     |
-| 14 | B-Leaf-3 |  |   |   |    |    |     |     
+| 1 | Leaf-0  | Eth20/Eth0 | Eth21/Eth0 |   |    |    |    |  
+| 2 | Leaf-1  | Eth20/Eth1 | Eth21/Eth1 |   |    |    |    |
+| 3 | Leaf-2  | Eth20/Eth2 | Eth21/Eth2 |   |    |    |    |
+| 4 | Leaf-3  | Eth20/Eth3 | Eth21/Eth3 |   |    |    |    |
+| 5 | Leaf-4  | Eth20/Eth4 | Eth21/Eth4 |   |    |    |    |
+| 6 | Leaf-5  | Eth20/Eth5 | Eth21/Eth5 |   |    |    |    |
+| 7 | Leaf-6  | Eth20/Eth6 | Eth21/Eth6 |   |    |    |    |
+| 8 | Leaf-7  | Eth20/Eth7 | Eth21/Eth7 |   |    |    |    |
+| 9 | Leaf-8  | Eth20/Eth8 | Eth21/Eth8 |   |    |    |    |
+| 10 | Leaf-9 | Eth20/Eth9 | Eth21/Eth9 |   |    |    |    |
+| 11 | B-Leaf-0 | Eth20/Eth20 | Eth21/Eth20 |   |    |    |     |
+| 12 | B-Leaf-1 | Eth20/Eth21 | Eth21/Eth21 |   |    |    |     |
+| 13 | B-Leaf-2 | Eth20/Eth22 | Eth21/Eth22 |   |    |    |     |
+| 14 | B-Leaf-3 | Eth20/Eth23 | Eth21/Eth23 |   |    |    |     |     
 
 
 
