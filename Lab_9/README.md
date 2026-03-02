@@ -176,7 +176,7 @@ exit
 
 conf t 
 ip routing /* Включаем маршрутизацию      
-/* Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3.    
+** Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3.**    
 interface Ethernet0    
    description to-Leaf0-Eth20     
    mtu 9214    
