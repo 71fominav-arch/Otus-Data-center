@@ -108,28 +108,28 @@ interface Ethernet20  /* Задаем адреса на интерфейсах �
    description to-Spine0-Eth0     
    mtu 9214     
    no switchport     
-   ip address 10.16.16.2/30 
+   ip address 10.16.16.2/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
 interface Ethernet21     
    description to-Spine1-Eth0     
    mtu 9214     
    no switchport      
-   ip address 10.16.17.2/30 
+   ip address 10.16.17.2/30      
    bfd interval 300 min-rx 300 multiplier 3       
 exit      
 interface Ethernet22     
    description to-Spine2-Eth0     
    mtu 9214      
    no switchport     
-   ip address 10.16.18.2/30      
+   ip address 10.16.18.2/30        
    bfd interval 300 min-rx 300 multiplier 3     
 exit        
 interface Ethernet23      
    description to-Spine3-Eth0     
    mtu 9214      
    no switchport      
-   ip address 10.16.19.2/30     
+   ip address 10.16.19.2/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
 interface Ethernet24     
@@ -177,27 +177,129 @@ exit
 conf t 
 ip routing /* Включаем маршрутизацию      
 /* Настраиваем порты      
-interface Ethernet0
-   description to-Leaf1-Eth5
-   mtu 9214
-   no switchport
-   ip address 10.16.17.10/31
-   no isis bfd
-exit
-interface Ethernet1
-   description to-Leaf2-Eth5
-   mtu 9214
-   no switchport
-   ip address 10.16.17.12/31
-   no isis bfd
-exit
-interface Ethernet2
-   description to-Leaf3-Eth5
-   mtu 9214
-   no switchport
-   ip address 10.16.17.14/31
-   no isis bfd
-exit
+interface Ethernet0    
+   description to-Leaf0-Eth20     
+   mtu 9214    
+   no switchport     
+   ip address 10.16.16.1/30     
+   bfd interval 300 min-rx 300 multiplier 3     
+exit     
+interface Ethernet1     
+   description to-Leaf1-Eth20     
+   mtu 9214     
+   no switchport    
+   ip address 10.16.16.5/30     
+   bfd interval 300 min-rx 300 multiplier 3      
+exit      
+interface Ethernet2      
+   description to-Leaf2-Eth20      
+   mtu 9214     
+   no switchport     
+   ip address 10.16.16.9/30     
+   bfd interval 300 min-rx 300 multiplier 3     
+exit     
+interface Ethernet3     
+   description to-Leaf3-Eth20       
+   mtu 9214     
+   no switchport     
+   ip address 10.16.16.13/30      
+   bfd interval 300 min-rx 300 multiplier 3     
+exit       
+interface Ethernet4     
+   description to-Leaf4-Eth20      
+   mtu 9214       
+   no switchport     
+   ip address 10.16.16.17/30      
+   bfd interval 300 min-rx 300 multiplier 3     
+exit      
+interface Ethernet5     
+   description to-Leaf5-Eth20     
+   mtu 9214      
+   no switchport     
+   ip address 10.16.16.21/30      
+   bfd interval 300 min-rx 300 multiplier 3      
+exit      
+interface Ethernet6      
+   description to-Leaf6-Eth20      
+   mtu 9214     
+   no switchport     
+   ip address 10.16.16.25/30     
+   bfd interval 300 min-rx 300 multiplier 3     
+exit      
+interface Ethernet7     
+   description to-Leaf7-Eth20     
+   mtu 9214      
+   no switchport      
+   ip address 10.16.16.29/30      
+   bfd interval 300 min-rx 300 multiplier 3     
+exit      
+interface Ethernet8      
+   description to-Leaf8-Eth20     
+   mtu 9214      
+   no switchport      
+   ip address 10.16.16.33/30      
+   bfd interval 300 min-rx 300 multiplier 3      
+exit     
+interface Ethernet9     
+   description to-Leaf9-Eth20       
+   mtu 9214       
+   no switchport       
+   ip address 10.16.16.37/30       
+   bfd interval 300 min-rx 300 multiplier 3      
+exit       
+interface Ethernet20        
+   description to-B-Leaf0-Eth20      
+   mtu 9214        
+   no switchport       
+   ip address 10.16.16.41/30        
+   bfd interval 300 min-rx 300 multiplier 3         
+exit       
+interface Ethernet21      
+   description to-B-Leaf1-Eth20       
+   mtu 9214       
+   no switchport        
+   ip address 10.16.16.45/30      
+   bfd interval 300 min-rx 300 multiplier 3      
+exit       
+interface Ethernet22      
+   description to-B-Leaf2-Eth20        
+   mtu 9214       
+   no switchport     
+   ip address 10.16.16.49/30       
+   bfd interval 300 min-rx 300 multiplier 3      
+exit      
+interface Ethernet23        
+   description to-B-Leaf3-Eth20      
+   mtu 9214       
+   no switchport       
+   ip address 10.16.16.53/30      
+   bfd interval 300 min-rx 300 multiplier 3       
+exit       
+
+interface Loopback0             
+   description Overlay_EBGP     
+   ip address 10.16.16.250/32      
+exit       
+         
+peer-filter leaf_asn         
+   10 match as-range 65000-65100 result accept      
+exit      
+router bgp 65000      
+   router-id 10.16.16.250     
+   no bgp default ipv4-unicast      
+   timers bgp 3 9     
+   distance bgp 20 200 200      
+   maximum-paths 6 ecmp 2      
+   bgp listen range 10.16.16.0/25 peer-group UNDERLAY peer-filter leaf_asn     
+   neighbor UNDERLAY peer group       
+   neighbor UNDERLAY remote-as 65000      
+   neighbor UNDERLAY out-delay 0     
+   neighbor UNDERLAY bfd       
+ address-family ipv4       
+      neighbor UNDERLAY activate     
+      network 10.16.16.250/32     
+exit     
+
 
        
 6. Конфигурация портов и переподписка    
