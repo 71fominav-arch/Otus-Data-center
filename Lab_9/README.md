@@ -176,7 +176,28 @@ exit
 
 conf t 
 ip routing /* Включаем маршрутизацию      
-      
+/* Настраиваем порты      
+interface Ethernet0
+   description to-Leaf1-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.10/31
+   no isis bfd
+exit
+interface Ethernet1
+   description to-Leaf2-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.12/31
+   no isis bfd
+exit
+interface Ethernet2
+   description to-Leaf3-Eth5
+   mtu 9214
+   no switchport
+   ip address 10.16.17.14/31
+   no isis bfd
+exit
 
        
 6. Конфигурация портов и переподписка    
