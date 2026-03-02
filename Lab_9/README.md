@@ -97,14 +97,14 @@ IP сети на интерфейсах:
 ### 3. Настройки Underlay 
 Underlay строим на основе eBGP    
 As Spine 65000  
-As Leaf-0 65100, Leaf-1 65101, ... Leaf-9 65009      
+As Leaf-0 65100, Leaf-1 65001, ... Leaf-9 65009      
 
    ###  Пример Leaf-0     
       hardware port-group 1 select eth0-6 profile dot1q-25g-4x     /* Интерфейсы в режим 4*25Gbs итого 24 интерфейса по 25Gbs
 Настройка интерфейсов:    
 conf t 
 ip routing /* Включаем маршрутизацию      
-interface Ethernet20  /* Задаем адреса на интерфейсах в сторону Spine        
+interface Ethernet20  /* Задаем адреса на интерфейсах в сторону Spine Eth0-Eth9              
    description to-Spine0-Eth0     
    mtu 9214     
    no switchport     
@@ -176,7 +176,7 @@ exit
 
 conf t 
 ip routing /* Включаем маршрутизацию      
-/* Настраиваем порты      
+/* Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3.    
 interface Ethernet0    
    description to-Leaf0-Eth20     
    mtu 9214    
@@ -282,17 +282,16 @@ interface Loopback0
 exit       
          
 peer-filter leaf_asn         
-   10 match as-range 65000-65100 result accept      
+   10 match as-range 65000-65099 result accept      
 exit      
-router bgp 65000      
+router bgp 65100      
    router-id 10.16.16.250     
    no bgp default ipv4-unicast      
    timers bgp 3 9     
    distance bgp 20 200 200      
    maximum-paths 6 ecmp 2      
    bgp listen range 10.16.16.0/25 peer-group UNDERLAY peer-filter leaf_asn     
-   neighbor UNDERLAY peer group       
-   neighbor UNDERLAY remote-as 65000      
+   neighbor UNDERLAY peer group            
    neighbor UNDERLAY out-delay 0     
    neighbor UNDERLAY bfd       
  address-family ipv4       
