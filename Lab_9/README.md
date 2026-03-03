@@ -102,7 +102,7 @@ As Leaf-0 65100, Leaf-1 65001, ... Leaf-9 65009
    ###  Пример Leaf-0     
 _hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфейсы в режим 4*25Gbs итого 24 интерфейса по 25Gbs
 Настройка интерфейсов:    
-conf t 
+conf t    
 ip routing /* Включаем маршрутизацию      
 interface Ethernet20  /* Задаем адреса на интерфейсах в сторону Spine Eth0-Eth9              
    description to-Spine0-Eth0     
@@ -174,7 +174,7 @@ exit
        
 #### Пример Spine-0
 
-conf t 
+conf t    
 ip routing /* Включаем маршрутизацию      
 ## Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3.       
 interface Ethernet0    
@@ -320,10 +320,10 @@ exit
 ## Настройка Vxlan.   
 ## Коммутатор Leaf-0.    
     
-vrf instance UOS      
+vrf instance UOS /* _VRF Для UOS_     
    rd 65000:200      
 exit    
-vrf instance IAS    
+vrf instance IAS /* _VRF Для IAS_   
    rd 65000:300    
 exit     
     
@@ -380,7 +380,7 @@ interface Vxlan1
    vxlan vrf UOS vni 222222     
    vxlan vrf IAS vni 333333     
 exit     
-		    
+### _Настройки eBGP evpn vxlan_		    
 
        
 6. Конфигурация портов и переподписка    
