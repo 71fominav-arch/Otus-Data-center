@@ -319,9 +319,68 @@ exit
 
 ## Настройка Vxlan.   
 ## Коммутатор Leaf-0.    
-
-
-		  
+    
+vrf instance UOS      
+   rd 65000:200      
+exit    
+vrf instance IAS    
+   rd 65000:300    
+exit     
+    
+ip routing vrf UOS     
+ip routing vrf IAS    
+     
+Vlan 200     
+ name UOS-server-system    
+exit    
+    
+Vlan 201    
+ name UOS-server-antivirus    
+exit    
+      
+Vlan 202    
+ name UOS-server-backup    
+exit     
+       
+Vlan 203     
+ name UOS-server-main     
+exit      
+      
+Vlan 300     
+ name IAS-server-system     
+exit     
+     
+Vlan 301     
+ name IAS-server-antivirus
+exit     
+        
+Vlan 302     
+ name IAS-server-backup     
+exit      
+       
+Vlan 303      
+ name IAS-server-main      
+exit       
+     
+interface Loopback1     
+   description VXLAN-VTEP      
+   ip address 10.16.0.251/32     
+exit     
+interface Vxlan1     
+   vxlan source-interface Loopback1      
+   vxlan udp-port 4789      
+   vxlan vlan 200 vni 100200     
+   vxlan vlan 201 vni 100201      
+   vxlan vlan 202 vni 100202     
+   vxlan vlan 203 vni 100203     
+   vxlan vlan 300 vni 100300      
+   vxlan vlan 301 vni 100301      
+   vxlan vlan 302 vni 100302      
+   vxlan vlan 303 vni 100303      
+   vxlan vrf UOS vni 222222     
+   vxlan vrf IAS vni 333333     
+exit     
+		    
 
        
 6. Конфигурация портов и переподписка    
