@@ -379,9 +379,123 @@ interface Vxlan1
    vxlan vlan 303 vni 100303      
    vxlan vrf UOS vni 222222     
    vxlan vrf IAS vni 333333     
+exit
+### _Настройки Symmetric IRB_
+ip virtual-router mac-address 02:00:00:00:00:99    
+!     
+interface Vlan200      
+   description UOS-server-system      
+   vrf UOS     
+   ip address virtual 10.144.0.1/24     
 exit     
-### _Настройки eBGP evpn vxlan_		    
+interface Vlan201     
+   description UOS-server-antivirus      
+   vrf UOS     
+   ip address virtual 10.144.1.1/24     
+exit      
+interface Vlan202      
+   description UOS-server-backup      
+   vrf UOS     
+   ip address virtual 10.144.2.1/24      
+exit      
+interface Vlan203     
+   description UOS-server-main     
+   vrf UOS     
+   ip address virtual 10.144.3.1/24      
+exit      
+        
+interface Vlan300       
+   description IAS-server-system      
+   vrf IAS      
+   ip address virtual 10.80.0.1/24      
+exit       
+interface Vlan301      
+   description IAS-server-antivirus       
+   vrf IAS       
+   ip address virtual 10.80.1.1/24      
+exit       
+interface Vlan302       
+   description IAS-server-backup     
+   vrf IAS       
+   ip address virtual 10.80.2.1/24      
+exit        
+interface Vlan303      
+   description IAS-server-main     
+   vrf IAS      
+   ip address virtual 10.80.3.1/24      
+exit       
+### _Настройки eBGP evpn vxlan на Leaf-0_		      
+router bgp 65100     
+   neighbor OVERLAY peer group      
+   neighbor OVERLAY remote-as 65000      
+   neighbor OVERLAY out-delay 0      
+   neighbor OVERLAY update-source Loopback0      
+   neighbor OVERLAY ebgp-multihop 2      
+   neighbor OVERLAY send-community extended      
+   neighbor 10.16.16.250 peer group OVERLAY      
+   neighbor 10.16.17.250 peer group OVERLAY     
+   neighbor 10.16.18.250 peer group OVERLAY      
+   neighbor 10.16.19.250 peer group OVERLAY     
+   neighbor 10.16.20.250 peer group OVERLAY       
+   neighbor 10.16.21.250 peer group OVERLAY        
+   !     
+   vlan 200     
+      rd auto      
+      route-target both 200:100200      
+      redistribute learned       
+   !     
+   vlan 201      
+      rd auto     
+      route-target both 201:100201      
+      redistribute learned       
+   !         
+   vlan 202       
+      rd auto      
+      route-target both 202:100202       
+      redistribute learned         
+   !         
+   vlan 203        
+      route-target both 203:100203        
+      redistribute learned      
+   !         
+   vlan 300       
+      rd auto       
+      route-target both 300:100300       
+      redistribute learned       
+   !         
+   vlan 301      
+      rd auto        
+      route-target both 301:100301      
+      redistribute learned        
+   !       
+   vlan 302       
+      rd auto         
+      route-target both 302:100302       
+      redistribute learned       
+   !       
+   vlan 303      
+      rd auto       
+      route-target both 303:100303     
+      redistribute learned        
+   !       
+   address-family evpn      
+      neighbor OVERLAY activate       
+   !      
+   vrf UOS        
+      rd 65000:200       
+      route-target import evpn 11:222222       
+      route-target export evpn 11:222222         
+      redistribute connected        
+   !         
+   vrf IAS        
+      rd 65000:300        
+      route-target import evpn 11:333333        
+      route-target export evpn 11:333333          
+      redistribute connected         
+!       
+end        
 
+### _Настройки Spine-0_      
        
 6. Конфигурация портов и переподписка    
 Leaf-Downlink: 24 порта х 25 Гбит/с = 600 Гбит/с.    
