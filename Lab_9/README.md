@@ -500,23 +500,28 @@ router bgp 65100
 end        
 
 ### _Настройки Spine-0_      
+
+### _Настройки eBGP evpn vxlan на Spine-0_        
+          
+peer-filter leaf_asn       
+   10 match as-range 65001-65100 result accept      
+exit     
+        
+router bgp 65000     
+   bgp listen range 10.16.0.0/20 peer-group OVERLAY peer-filter leaf_asn        
+   neighbor OVERLAY peer group       
+   neighbor OVERLAY next-hop-unchanged       
+   neighbor OVERLAY update-source Loopback0        
+   neighbor OVERLAY ebgp-multihop 2        
+   neighbor OVERLAY send-community extended        
+   !         
+   address-family evpn       
+      neighbor OVERLAY activate       
+   !      
+end        
+
+### _Настройки eBGP evpn vxlan на Spine-0 конец_      
+
+
        
-6. Конфигурация портов и переподписка    
-Leaf-Downlink: 24 порта х 25 Гбит/с = 600 Гбит/с.    
-Leaf-Uplink: 6 портов х 100 Гбит/с = 600 Гбит/с.     
-Переподписка: 1:1 (физическая). Однако, с учетом того, что модель Arista 7060CX-32S имеет 32 порта 100G, у вас остается еще 16 свободных портов на каждом Leaf для будущего роста (доведения до 64 портов 25G), что и обеспечит целевую переподписку 1:2.      
-7. Логическая структура (VXLAN/EVPN)      
-Underlay (eBGP):    
-Все устройства в одной AS 65001.    
-Spine работают как Route Reflectors (RR).     
-MTU: 9214 (Jumbo Frames) для инкапсуляции VXLAN.     
-Overlay (Symmetric IRB):     
-L3 VNI: Отдельный VNI для каждого VRF (UOS, IAS) для передачи трафика между подсетями.     
-Anycast Gateway: Одинаковый IP/MAC на всех Leaf для каждого VLAN, что позволяет серверам мигрировать между стойками без смены шлюза.     
-MLAG:     
-Используется пара портов (например, 31-32) для MLAG Peer-link между соседними Leaf.     
-8. Возможность роста      
-Масштабирование Leaf: Текущая конфигурация Spine (8 шт по 32 порта) позволяет подключить до 32 Leaf-коммутаторов.     
-Масштабирование Downlink: На текущих Leaf задействовано только 16 портов из 32. Можно удвоить количество серверных подключений на каждой стойке.    
-Пропускная способность: Добавление дополнительных Spine-коммутаторов (максимум до 16-32 в зависимости от лицензий и дизайна) для увеличения аплинков.    
 
