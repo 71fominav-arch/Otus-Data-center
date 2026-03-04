@@ -285,7 +285,7 @@ interface Loopback0
 exit       
          
 peer-filter leaf_asn         
-   10 match as-range 65000-65099 result accept      
+   10 match as-range 65100-65128 result accept      
 exit      
 router bgp 65100      
    router-id 10.16.16.250     
@@ -301,6 +301,7 @@ router bgp 65100
       neighbor UNDERLAY activate     
       network 10.16.16.250/32     
 exit     
+#### _Пример Spine-0 конец_     
 
 ### Пользовательские сети     
 В данной финансовой структуре созданы две непересекающиеся между собой сети:     
@@ -385,7 +386,7 @@ interface Vxlan1
    vxlan vrf UOS vni 10144    
    vxlan vrf IAS vni 10800     
 exit
-### _Настройки Symmetric IRB_
+### _Настройки Symmetric IRB_     
 ip virtual-router mac-address 02:00:00:00:00:99    
 !     
 interface Vlan200      
@@ -429,6 +430,7 @@ interface Vlan303
    vrf IAS      
    ip address virtual 10.80.3.1/24      
 exit       
+### _Настройки Symmetric IRB конец_    
 ### _Настройки eBGP evpn vxlan на Leaf-0_		      
 router bgp 65100     
    neighbor OVERLAY peer group      
@@ -500,13 +502,14 @@ router bgp 65100
       redistribute connected         
 !       
 end        
+### _Настройки eBGP evpn vxlan на Leaf-0 конец_		      
 
 ### _Настройки Spine-0_      
 
 ### _Настройки eBGP evpn vxlan на Spine-0_        
           
 peer-filter leaf_asn       
-   10 match as-range 65001-65100 result accept      
+   10 match as-range 65100-65128 result accept      
 exit     
         
 router bgp 65000     
