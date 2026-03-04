@@ -97,10 +97,10 @@ IP сети на интерфейсах:
 ### 3. Настройки Underlay 
 Underlay строим на основе eBGP    
 As Spine 65000  
-As Leaf-0 65100, Leaf-1 65001, ... Leaf-9 65009      
+As Leaf-0 65100, Leaf-1 65101, ... Leaf-9 65109      
 
    ###  Пример Leaf-0     
-_hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфейсы в режим 4*25Gbs итого 24 интерфейса по 25Gbs
+_hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфейсы в режим 4 * 25Gbs итого 24 интерфейса по 25Gbs
 Настройка интерфейсов:    
 conf t    
 ip routing /* Включаем маршрутизацию      
@@ -176,7 +176,7 @@ exit
 
 conf t    
 ip routing /* Включаем маршрутизацию      
-## Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3.       
+## _Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3_       
 interface Ethernet0    
    description to-Leaf0-Eth20     
    mtu 9214    
@@ -369,16 +369,16 @@ exit
 interface Vxlan1     
    vxlan source-interface Loopback1      
    vxlan udp-port 4789      
-   vxlan vlan 200 vni 100200     
-   vxlan vlan 201 vni 100201      
-   vxlan vlan 202 vni 100202     
-   vxlan vlan 203 vni 100203     
-   vxlan vlan 300 vni 100300      
-   vxlan vlan 301 vni 100301      
-   vxlan vlan 302 vni 100302      
-   vxlan vlan 303 vni 100303      
-   vxlan vrf UOS vni 222222     
-   vxlan vrf IAS vni 333333     
+   vxlan vlan 200 vni 1014400     
+   vxlan vlan 201 vni 1014401     
+   vxlan vlan 202 vni 1014402    
+   vxlan vlan 203 vni 1014403    
+   vxlan vlan 300 vni 108000      
+   vxlan vlan 301 vni 108001      
+   vxlan vlan 302 vni 108002      
+   vxlan vlan 303 vni 108003      
+   vxlan vrf UOS vni 10144    
+   vxlan vrf IAS vni 10800     
 exit
 ### _Настройки Symmetric IRB_
 ip virtual-router mac-address 02:00:00:00:00:99    
@@ -441,41 +441,42 @@ router bgp 65100
    !     
    vlan 200     
       rd auto      
-      route-target both 200:100200      
+      route-target both 200:1014400      
       redistribute learned       
    !     
    vlan 201      
       rd auto     
-      route-target both 201:100201      
+      route-target both 201:1014401     
       redistribute learned       
    !         
    vlan 202       
       rd auto      
-      route-target both 202:100202       
+      route-target both 202:1014402       
       redistribute learned         
    !         
    vlan 203        
-      route-target both 203:100203        
+      rd auto      
+      route-target both 203:1014403        
       redistribute learned      
    !         
    vlan 300       
       rd auto       
-      route-target both 300:100300       
+      route-target both 300:108000       
       redistribute learned       
    !         
    vlan 301      
       rd auto        
-      route-target both 301:100301      
+      route-target both 301:108001      
       redistribute learned        
    !       
    vlan 302       
       rd auto         
-      route-target both 302:100302       
+      route-target both 302:108002       
       redistribute learned       
    !       
    vlan 303      
       rd auto       
-      route-target both 303:100303     
+      route-target both 303:108003     
       redistribute learned        
    !       
    address-family evpn      
@@ -483,14 +484,14 @@ router bgp 65100
    !      
    vrf UOS        
       rd 65000:200       
-      route-target import evpn 11:222222       
-      route-target export evpn 11:222222         
+      route-target import evpn 11:10144       
+      route-target export evpn 11:10144         
       redistribute connected        
    !         
    vrf IAS        
       rd 65000:300        
-      route-target import evpn 11:333333        
-      route-target export evpn 11:333333          
+      route-target import evpn 11:10800        
+      route-target export evpn 11:10800          
       redistribute connected         
 !       
 end        
