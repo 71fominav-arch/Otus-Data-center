@@ -114,43 +114,43 @@ _hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфе
 Настройка интерфейсов:    
 conf t    
 ip routing /* Включаем маршрутизацию      
-interface Ethernet20  /* Задаем адреса на интерфейсах в сторону Spine Eth0-Eth9              
-   description to-Spine0-Eth0     
+interface Ethernet21  /* Задаем адреса на интерфейсах в сторону Spine Eth0-Eth9              
+   description to-Spine0-Eth1     
    mtu 9214     
    no switchport     
    ip address 10.16.16.2/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
-interface Ethernet21     
-   description to-Spine1-Eth0     
+interface Ethernet22     
+   description to-Spine1-Eth1     
    mtu 9214     
    no switchport      
    ip address 10.16.17.2/30      
    bfd interval 300 min-rx 300 multiplier 3       
 exit      
-interface Ethernet22     
-   description to-Spine2-Eth0     
+interface Ethernet23     
+   description to-Spine2-Eth1     
    mtu 9214      
    no switchport     
    ip address 10.16.18.2/30        
    bfd interval 300 min-rx 300 multiplier 3     
 exit        
-interface Ethernet23      
-   description to-Spine3-Eth0     
+interface Ethernet24      
+   description to-Spine3-Eth1     
    mtu 9214      
    no switchport      
    ip address 10.16.19.2/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
-interface Ethernet24     
-   description to-Spine4-Eth0      
+interface Ethernet25     
+   description to-Spine4-Eth1      
    mtu 9214      
    no switchport      
    ip address 10.16.20.2/30     
    bfd interval 300 min-rx 300 multiplier 3      
 exit     
-interface Ethernet25      
-   description to-Spine5-Eth0      
+interface Ethernet26      
+   description to-Spine5-Eth1      
    mtu 9214     
    no switchport     
    ip address 10.16.21.2/30     
@@ -187,71 +187,71 @@ exit
 conf t    
 ip routing /* Включаем маршрутизацию      
 ## _Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3_       
-interface Ethernet0    
-   description to-Leaf0-Eth20     
+interface Ethernet1    
+   description to-Leaf0-Eth21     
    mtu 9214    
    no switchport     
    ip address 10.16.16.1/30     
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
-interface Ethernet1     
-   description to-Leaf1-Eth20     
+interface Ethernet2     
+   description to-Leaf1-Eth21     
    mtu 9214     
    no switchport    
    ip address 10.16.16.5/30     
    bfd interval 300 min-rx 300 multiplier 3      
 exit      
-interface Ethernet2      
-   description to-Leaf2-Eth20      
+interface Ethernet3      
+   description to-Leaf2-Eth21      
    mtu 9214     
    no switchport     
    ip address 10.16.16.9/30     
    bfd interval 300 min-rx 300 multiplier 3     
 exit     
-interface Ethernet3     
-   description to-Leaf3-Eth20       
+interface Ethernet4     
+   description to-Leaf3-Eth21       
    mtu 9214     
    no switchport     
    ip address 10.16.16.13/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit       
-interface Ethernet4     
-   description to-Leaf4-Eth20      
+interface Ethernet5     
+   description to-Leaf4-Eth21      
    mtu 9214       
    no switchport     
    ip address 10.16.16.17/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit      
-interface Ethernet5     
-   description to-Leaf5-Eth20     
+interface Ethernet6     
+   description to-Leaf5-Eth21     
    mtu 9214      
    no switchport     
    ip address 10.16.16.21/30      
    bfd interval 300 min-rx 300 multiplier 3      
 exit      
-interface Ethernet6      
-   description to-Leaf6-Eth20      
+interface Ethernet7      
+   description to-Leaf6-Eth21      
    mtu 9214     
    no switchport     
    ip address 10.16.16.25/30     
    bfd interval 300 min-rx 300 multiplier 3     
 exit      
-interface Ethernet7     
-   description to-Leaf7-Eth20     
+interface Ethernet8     
+   description to-Leaf7-Eth21     
    mtu 9214      
    no switchport      
    ip address 10.16.16.29/30      
    bfd interval 300 min-rx 300 multiplier 3     
 exit      
-interface Ethernet8      
-   description to-Leaf8-Eth20     
+interface Ethernet9      
+   description to-Leaf8-Eth21     
    mtu 9214      
    no switchport      
    ip address 10.16.16.33/30      
    bfd interval 300 min-rx 300 multiplier 3      
 exit     
-interface Ethernet9     
-   description to-Leaf9-Eth20       
+interface Ethernet10     
+   description to-Leaf9-Eth21       
    mtu 9214       
    no switchport       
    ip address 10.16.16.37/30       
@@ -534,6 +534,12 @@ end
 
 ### _Настройки eBGP evpn vxlan на Spine-0 конец_      
 
+		### _Настройки Mlag на Leaf-0 начало_        
+
+![Схема портов Mlag на коммутаторах](./Lab_9_Mlag.jpg).       
+
+
+        ### _Настройки Mlag на Leaf-0 конец_      		
 
        
 
