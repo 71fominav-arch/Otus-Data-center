@@ -538,6 +538,72 @@ end
 
 ![Схема портов Mlag на коммутаторах](./Lab_9_Mlag.jpg).       
 
+no spanning-tree vlan-id 4094       
+       
+vlan 4094       
+   name MLAG-PEERLINK      
+   trunk group MLAG-PEERLINK      
+exit       
+       
+!      
+vrf instance mng_net      
+   description Managment_net and keepalive mlag      
+!        
+        
+         
+interface Port-Channel1920      
+   description MLAG-PEERLINK     
+   switchport mode trunk      
+   switchport trunk group MLAG-PEERLINK      
+   spanning-tree link-type point-to-point      
+exit        
+         
+interface Port-Channel1.1         
+   description -Link-to-Server-1-         
+   switchport trunk allowed vlan 200-399        
+   switchport mode trunk        
+   mlag 1        
+exit       
+
+interface Ethernet1/1      
+   description -Link-to-Sever-1-      
+   switchport mode trunk      
+   channel-group 1 mode active       
+exit        
+
+interface Ethernet19         
+   description MLAG-PEERLINK         
+   channel-group 1920 mode active       
+exit        
+interface Ethernet20       
+   description MLAG-PEERLINK        
+   channel-group 1920 mode active      
+exit         
+
+interface Management1       
+   vrf mng_net       
+   no switchport       
+   ip address 192.168.100.100/24       
+exit         
+
+interface Vlan4094        
+   no autostate        
+   ip address 10.16.0.245/30       
+exit          
+          
+ip routing vrf mng_net        
+!        
+mlag configuration        
+   domain-id Leafes-0-1       
+   local-interface Vlan4094       
+   peer-address 10.16.0.246      
+   peer-address heartbeat 192.168.100.101 vrf mng_net        
+   peer-link Port-Channel1920         
+   dual-primary detection delay 1 action errdisable all-interfaces         
+exit         
+         
+
+
 
         ### _Настройки Mlag на Leaf-0 конец_      		
 
