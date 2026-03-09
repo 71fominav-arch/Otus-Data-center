@@ -35,7 +35,10 @@ Overlay: VXLAN с использованием EVPN.
 
 Рапределение портов на Spine-0:         
       ![Spine-0](Lab_9_Spine-0.jpg).        
-		    
+             
+Рапределение портов на B-Leaf-0:         
+      ![B-Leaf-0](Lab_9_B-Leaf-0.jpg).        
+		     
 
 Взаимодействие сетевых интерфейсов:    
 
@@ -51,10 +54,10 @@ Overlay: VXLAN с использованием EVPN.
 | 8 | Leaf-7  | Eth21/Eth8 | Eth22/Eth8 | Eth23/Eth8 | Eth24/Eth8 | Eth25/Eth8 | Eth26/Eth8 |
 | 9 | Leaf-8  | Eth21/Eth9 | Eth22/Eth9 | Eth23/Eth9 | Eth24/Eth9 | Eth25/Eth9 | Eth26/Eth9 |
 | 10 | Leaf-9 | Eth21/Eth10 | Eth22/Eth10 | Eth23/Eth10 | Eth24/Eth10 | Eth25/Eth10 | Eth26/Eth10 |
-| 11 | B-Leaf-0 | Eth20/Eth20 | Eth21/Eth20 | Eth22/Eth20 | Eth23/Eth20 | Eth24/Eth20 | Eth25/Eth20 |
-| 12 | B-Leaf-1 | Eth20/Eth21 | Eth21/Eth21 | Eth22/Eth21 | Eth23/Eth21 | Eth24/Eth21 | Eth25/Eth21 |
-| 13 | B-Leaf-2 | Eth20/Eth22 | Eth21/Eth22 | Eth22/Eth22 | Eth23/Eth22 | Eth24/Eth22 | Eth25/Eth22 |
-| 14 | B-Leaf-3 | Eth20/Eth23 | Eth21/Eth23 | Eth22/Eth23 | Eth23/Eth22 | Eth24/Eth23 | Eth25/Eth23 |     
+| 11 | B-Leaf-0 | Eth21/Eth21 | Eth22/Eth21 | Eth23/Eth21 | Eth24/Eth21 | Eth25/Eth21 | Eth26/Eth21 |
+| 12 | B-Leaf-1 | Eth21/Eth22 | Eth22/Eth22 | Eth23/Eth22 | Eth24/Eth22 | Eth25/Eth22 | Eth26/Eth22 |
+| 13 | B-Leaf-2 | Eth21/Eth23 | Eth22/Eth23 | Eth23/Eth23 | Eth24/Eth23 | Eth25/Eth23 | Eth26/Eth23 |
+| 14 | B-Leaf-3 | Eth21/Eth24 | Eth22/Eth24 | Eth23/Eth24 | Eth24/Eth24 | Eth25/Eth24 | Eth26/Eth24 |     
 
 IP сети на интерфейсах:     
 
