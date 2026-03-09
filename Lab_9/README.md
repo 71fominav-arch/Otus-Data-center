@@ -260,29 +260,29 @@ interface Ethernet10
    ip address 10.16.16.37/30       
    bfd interval 300 min-rx 300 multiplier 3      
 exit       
-interface Ethernet20        
-   description to-B-Leaf0-Eth20      
+interface Ethernet21        
+   description to-B-Leaf0-Eth21      
    mtu 9214        
    no switchport       
    ip address 10.16.16.41/30        
    bfd interval 300 min-rx 300 multiplier 3         
 exit       
-interface Ethernet21      
-   description to-B-Leaf1-Eth20       
+interface Ethernet22      
+   description to-B-Leaf1-Eth21       
    mtu 9214       
    no switchport        
    ip address 10.16.16.45/30      
    bfd interval 300 min-rx 300 multiplier 3      
 exit       
-interface Ethernet22      
-   description to-B-Leaf2-Eth20        
+interface Ethernet23      
+   description to-B-Leaf2-Eth21        
    mtu 9214       
    no switchport     
    ip address 10.16.16.49/30       
    bfd interval 300 min-rx 300 multiplier 3      
 exit      
-interface Ethernet23        
-   description to-B-Leaf3-Eth20      
+interface Ethernet24        
+   description to-B-Leaf3-Eth21      
    mtu 9214       
    no switchport       
    ip address 10.16.16.53/30      
