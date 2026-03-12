@@ -1,0 +1,201 @@
+! Command: show running-config
+! device: B-Leaf-0 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+service routing protocols model multi-agent
+!
+no logging console
+!
+hostname Spine-0
+!
+spanning-tree mode mstp
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Ethernet1
+   description -Link-to-Leaf-0-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.1/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet2
+   description -Link-to-Leaf-1-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.5/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet3
+   description -Link-to-Leaf-2-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.9/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet4
+   description -Link-to-Leaf-3-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.13/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet5
+   description -Link-to-Leaf-4-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.17/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet6
+   description -Link-to-Leaf-5-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.21/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet7
+   description -Link-to-Leaf-6-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.25/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet8
+   description -Link-to-Leaf-7-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.29/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet9
+   description -Link-to-Leaf-8-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.33/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet10
+   description -Link-to-Leaf-9-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.37/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet11
+   description to-Rezerv
+!
+interface Ethernet12
+   description to-Rezerv
+!
+interface Ethernet13
+   description to-Rezerv
+!
+interface Ethernet14
+   description to-Rezerv
+!
+interface Ethernet15
+   description to-Rezerv
+!
+interface Ethernet16
+   description to-Rezerv
+!
+interface Ethernet17
+   description to-Rezerv
+!
+interface Ethernet18
+   description to-Rezerv
+!
+interface Ethernet19
+    description to-Rezerv
+!
+interface Ethernet20
+    description to-Rezerv
+!
+interface Ethernet21
+   description -Link-to-B-Leaf-0-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.41/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet22
+   description -Link-to-B-Leaf-1-Eth21
+    mtu 9214
+    no switchport
+    ip address 10.16.16.45/30
+	bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet23
+   description to-Rezerv
+!
+interface Ethernet24
+   description to-Rezerv
+!
+interface Ethernet25
+   description to-Rezerv
+!
+interface Ethernet26
+   description to-Rezerv
+!
+interface Ethernet27
+   description to-Rezerv
+!
+interface Ethernet28
+   description to-Rezerv
+!
+interface Ethernet29
+   description to-Rezerv
+!
+interface Ethernet30
+   description to-Rezerv
+!
+interface Ethernet31
+   description to-Rezerv
+!
+interface Ethernet32
+   description to-Rezerv
+!
+interface Loopback0
+   description OVERLAY
+   ip address 10.16.16.250/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.116/24
+!
+ip routing
+ip routing vrf mng_net
+!
+peer-filter leaf_asn
+   10 match as-range 65100-65120 result accept
+!
+router bgp 65000
+   router-id 10.16.16.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 2 ecmp 2
+   bgp listen range 10.16.0.0/20 peer-group OVERLAY peer-filter leaf_asn
+   bgp listen range 10.16.16.0/25 peer-group UNDERLAY peer-filter leaf_asn
+   neighbor OVERLAY peer group
+   neighbor OVERLAY next-hop-unchanged
+   neighbor OVERLAY update-source Loopback0
+   neighbor OVERLAY ebgp-multihop 2
+   neighbor OVERLAY send-community extended
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY out-delay 0
+   !
+   address-family evpn
+      neighbor OVERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.16.16.250/32
+   !
+end
+Spine-0#
