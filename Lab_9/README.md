@@ -109,220 +109,17 @@ IP сети на интерфейсах:
 
 
 
-### 3. Настройки Underlay      
+### 3. Настройки коммутаторов             
 
 ![Underlay](./Lab_9_Underlay.jpg)      
                    
 Underlay строим на основе eBGP    
 As Spine 65000  
-As Leaf-0 65100, Leaf-1 65100, Leaf-2 65102, Leaf-3 65102, Leaf-4 65104, Leaf-5 65104 ... Leaf-9 65109      
-
-   ###  Пример Leaf-0     
-_hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфейсы в режим 4 * 25Gbs итого 24 интерфейса по 25Gbs
-Настройка интерфейсов:    
-conf t    
-ip routing /* Включаем маршрутизацию      
-interface Ethernet21  /* Задаем адреса на интерфейсах в сторону Spine Eth0-Eth9              
-   description to-Spine0-Eth1     
-   mtu 9214     
-   no switchport     
-   ip address 10.16.16.2/30      
-   bfd interval 300 min-rx 300 multiplier 3     
-exit     
-interface Ethernet22     
-   description to-Spine1-Eth1     
-   mtu 9214     
-   no switchport      
-   ip address 10.16.17.2/30      
-   bfd interval 300 min-rx 300 multiplier 3       
-exit      
-interface Ethernet23     
-   description to-Spine2-Eth1     
-   mtu 9214      
-   no switchport     
-   ip address 10.16.18.2/30        
-   bfd interval 300 min-rx 300 multiplier 3     
-exit        
-interface Ethernet24      
-   description to-Spine3-Eth1     
-   mtu 9214      
-   no switchport      
-   ip address 10.16.19.2/30      
-   bfd interval 300 min-rx 300 multiplier 3     
-exit     
-interface Ethernet25     
-   description to-Spine4-Eth1      
-   mtu 9214      
-   no switchport      
-   ip address 10.16.20.2/30     
-   bfd interval 300 min-rx 300 multiplier 3      
-exit     
-interface Ethernet26      
-   description to-Spine5-Eth1      
-   mtu 9214     
-   no switchport     
-   ip address 10.16.21.2/30     
-   bfd interval 300 min-rx 300 multiplier 3     
-exit        
-interface Loopback0             
-   description Overlay_EBGP     
-   ip address 10.16.0.250/32      
-exit        
-
-router bgp 65100     
-   router-id 10.16.0.250    
-   no bgp default ipv4-unicast     
-   timers bgp 3 9     
-   distance bgp 20 200 200     
-   maximum-paths 6 ecmp 2     
-   neighbor UNDERLAY peer group       
-   neighbor UNDERLAY remote-as 65000      
-   neighbor UNDERLAY out-delay 0     
-   neighbor UNDERLAY bfd      
-   neighbor 10.16.16.1 peer group UNDERLAY      
-   neighbor 10.16.17.1 peer group UNDERLAY      
-   neighbor 10.16.18.1 peer group UNDERLAY     
-   neighbor 10.16.19.1 peer group UNDERLAY      
-   neighbor 10.16.20.1 peer group UNDERLAY      
-   neighbor 10.16.21.1 peer group UNDERLAY     
- address-family ipv4     
-      neighbor UNDERLAY activate     
-      network 10.16.0.250/32     
-exit     
-       
-#### Пример Spine-0
-
-conf t    
-ip routing /* Включаем маршрутизацию      
-## _Настраиваем порты  для связи с Leaf-0 .... Leaf-5, B-Leaf-0 .... B-Leaf-3_       
-interface Ethernet1    
-   description to-Leaf0-Eth21     
-   mtu 9214    
-   no switchport     
-   ip address 10.16.16.1/30     
-   bfd interval 300 min-rx 300 multiplier 3     
-exit     
-interface Ethernet2     
-   description to-Leaf1-Eth21     
-   mtu 9214     
-   no switchport    
-   ip address 10.16.16.5/30     
-   bfd interval 300 min-rx 300 multiplier 3      
-exit      
-interface Ethernet3      
-   description to-Leaf2-Eth21      
-   mtu 9214     
-   no switchport     
-   ip address 10.16.16.9/30     
-   bfd interval 300 min-rx 300 multiplier 3     
-exit     
-interface Ethernet4     
-   description to-Leaf3-Eth21       
-   mtu 9214     
-   no switchport     
-   ip address 10.16.16.13/30      
-   bfd interval 300 min-rx 300 multiplier 3     
-exit       
-interface Ethernet5     
-   description to-Leaf4-Eth21      
-   mtu 9214       
-   no switchport     
-   ip address 10.16.16.17/30      
-   bfd interval 300 min-rx 300 multiplier 3     
-exit      
-interface Ethernet6     
-   description to-Leaf5-Eth21     
-   mtu 9214      
-   no switchport     
-   ip address 10.16.16.21/30      
-   bfd interval 300 min-rx 300 multiplier 3      
-exit      
-interface Ethernet7      
-   description to-Leaf6-Eth21      
-   mtu 9214     
-   no switchport     
-   ip address 10.16.16.25/30     
-   bfd interval 300 min-rx 300 multiplier 3     
-exit      
-interface Ethernet8     
-   description to-Leaf7-Eth21     
-   mtu 9214      
-   no switchport      
-   ip address 10.16.16.29/30      
-   bfd interval 300 min-rx 300 multiplier 3     
-exit      
-interface Ethernet9      
-   description to-Leaf8-Eth21     
-   mtu 9214      
-   no switchport      
-   ip address 10.16.16.33/30      
-   bfd interval 300 min-rx 300 multiplier 3      
-exit     
-interface Ethernet10     
-   description to-Leaf9-Eth21       
-   mtu 9214       
-   no switchport       
-   ip address 10.16.16.37/30       
-   bfd interval 300 min-rx 300 multiplier 3      
-exit       
-interface Ethernet21        
-   description to-B-Leaf0-Eth21      
-   mtu 9214        
-   no switchport       
-   ip address 10.16.16.41/30        
-   bfd interval 300 min-rx 300 multiplier 3         
-exit       
-interface Ethernet22      
-   description to-B-Leaf1-Eth21       
-   mtu 9214       
-   no switchport        
-   ip address 10.16.16.45/30      
-   bfd interval 300 min-rx 300 multiplier 3      
-exit       
-interface Ethernet23      
-   description to-B-Leaf2-Eth21        
-   mtu 9214       
-   no switchport     
-   ip address 10.16.16.49/30       
-   bfd interval 300 min-rx 300 multiplier 3      
-exit      
-interface Ethernet24        
-   description to-B-Leaf3-Eth21      
-   mtu 9214       
-   no switchport       
-   ip address 10.16.16.53/30      
-   bfd interval 300 min-rx 300 multiplier 3       
-exit       
-
-interface Loopback0             
-   description Overlay_EBGP     
-   ip address 10.16.16.250/32      
-exit       
-         
-peer-filter leaf_asn         
-   10 match as-range 65100-65128 result accept      
-exit      
-router bgp 65100      
-   router-id 10.16.16.250     
-   no bgp default ipv4-unicast      
-   timers bgp 3 9     
-   distance bgp 20 200 200      
-   maximum-paths 6 ecmp 2      
-   bgp listen range 10.16.16.0/25 peer-group UNDERLAY peer-filter leaf_asn     
-   neighbor UNDERLAY peer group            
-   neighbor UNDERLAY out-delay 0     
-   neighbor UNDERLAY bfd       
- address-family ipv4       
-      neighbor UNDERLAY activate     
-      network 10.16.16.250/32     
-exit     
-#### _Пример Spine-0 конец_     
+As Leaf-0 65100, Leaf-1 65100, Leaf-2 65102, Leaf-3 65102, Leaf-4 65104, Leaf-5 65104, Leaf-6 65106, Leaf-7 65106, Leaf-8 65108, Leaf-9 65108, B-Leaf-0 65110, B-Leaf-1 65110        
+#### Настройки Mlag     
+![Настройки Mlag](./Lab_9_Mlag.jpg).      
 
 ### Пользовательские сети     
-В данной финансовой структуре созданы две непересекающиеся между собой сети:     
-1. Учетно-операционная система, выделен диапазон сетей 10.144.0.0/18;
-2. Информационно-аналитическая система, выделен диапазон сетей 10.80.0.0/18.
-               
            
 ![Схема пользовательских сетей](./Lab_9_Clients.jpg)        
 
@@ -338,282 +135,878 @@ exit
 | B-Leaf-1 |  |  |  |  |  | 10.16.10.251 |  |    
 | B-Leaf-3 |  |  |  |  |  |  | 10.16.12.251 |
 
-## Настройка Vxlan.   
-## Коммутатор Leaf-0.    
-    
-vrf instance UOS /* _VRF Для UOS_     
-   rd 65000:200      
-exit    
-vrf instance IAS /* _VRF Для IAS_   
-   rd 65000:300    
-exit     
-    
-ip routing vrf UOS     
-ip routing vrf IAS    
-     
-Vlan 200     
- name UOS-server-system    
-exit    
-    
-Vlan 201    
- name UOS-server-antivirus    
-exit    
-      
-Vlan 202    
- name UOS-server-backup    
-exit     
-       
-Vlan 203     
- name UOS-server-main     
+             
+   ###  Пример Leaf-0     
+_hardware port-group 1 select eth0-6 profile dot1q-25g-4x_     /* Интерфейсы в режим 4 * 25Gbs итого 24 интерфейса по 25Gbs
+conf t       
+! device: Leaf-0 (vEOS-lab, EOS-4.29.2F)       
+!           
+! boot system flash:/vEOS-lab.swi        
+!         
+no aaa root        
+!        
+service routing protocols model multi-agent         
+hardware port-group 1 select eth1-6 profile dot1q-25g-4x           
+!           
+no logging console         
+!         
+hostname Leaf-0          
+!       
+spanning-tree mode mstp      
+no spanning-tree vlan-id 4094       
+!      
+vrf instance UOS /* VRF Для UOS       
+rd 65100:200         
 exit      
-      
-Vlan 300     
- name IAS-server-system     
-exit     
-     
-Vlan 301     
- name IAS-server-antivirus
-exit     
-        
-Vlan 302     
- name IAS-server-backup     
-exit      
-       
-Vlan 303      
- name IAS-server-main      
-exit       
-     
-interface Loopback1     
-   description VXLAN-VTEP      
-   ip address 10.16.0.251/32     
-exit     
-interface Vxlan1     
-   vxlan source-interface Loopback1      
-   vxlan udp-port 4789      
-   vxlan vlan 200 vni 1014400     
-   vxlan vlan 201 vni 1014401     
-   vxlan vlan 202 vni 1014402    
-   vxlan vlan 203 vni 1014403    
-   vxlan vlan 300 vni 108000      
-   vxlan vlan 301 vni 108001      
-   vxlan vlan 302 vni 108002      
-   vxlan vlan 303 vni 108003      
-   vxlan vrf UOS vni 10144    
-   vxlan vrf IAS vni 10800     
-exit
-### _Настройки Symmetric IRB_     
-ip virtual-router mac-address 02:00:00:00:00:99    
-!     
-interface Vlan200      
-   description UOS-server-system      
-   vrf UOS     
-   ip address virtual 10.144.0.1/24     
-exit     
-interface Vlan201     
-   description UOS-server-antivirus      
-   vrf UOS     
-   ip address virtual 10.144.1.1/24     
-exit      
-interface Vlan202      
-   description UOS-server-backup      
-   vrf UOS     
-   ip address virtual 10.144.2.1/24      
-exit      
-interface Vlan203     
-   description UOS-server-main     
-   vrf UOS     
-   ip address virtual 10.144.3.1/24      
-exit      
-        
-interface Vlan300       
-   description IAS-server-system      
-   vrf IAS      
-   ip address virtual 10.80.0.1/24      
-exit       
-interface Vlan301      
-   description IAS-server-antivirus       
-   vrf IAS       
-   ip address virtual 10.80.1.1/24      
-exit       
-interface Vlan302       
-   description IAS-server-backup     
-   vrf IAS       
-   ip address virtual 10.80.2.1/24      
+vrf instance IAS /* VRF Для IAS         
+rd 65100:300         
+exit          
+vrf instance DMZ /* VRF Для DMZ        
+rd 65100:400           
 exit        
-interface Vlan303      
-   description IAS-server-main     
-   vrf IAS      
-   ip address virtual 10.80.3.1/24      
+vrf instance mng_net       
+   description Managment_net          
+exit      
+!       
+interface Port-Channel011       
+   description -Link-to-Server-1-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403          
+   switchport mode trunk       
+   mlag 1       
+!        
+interface Port-Channel012        
+   description -Link-to-Server-2-        
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403         
+   switchport mode trunk       
+   mlag 2        
+!       
+interface Port-Channel013          
+   description -Link-to-Server-3-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk        
+   mlag 3       
+!      
+interface Port-Channel014        
+   description -Link-to-Server-4-        
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403        
+   switchport mode trunk       
+   mlag 4        
+!       
+interface Port-Channel021      
+   description -Link-to-Server-5-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk      
+   mlag 5        
+!        
+interface Port-Channel022     
+   description -Link-to-Server-6-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403         
+   switchport mode trunk       
+   mlag 6      
+!          
+interface Port-Channel023        
+   description -Link-to-Server-7-        
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk      
+   mlag 7      
+!        
+interface Port-Channel024       
+   description -Link-to-Server-8-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk          
+   mlag 8        
+!         
+interface Port-Channel031         
+   description -Link-to-Server-9-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403          
+   switchport mode trunk         
+   mlag 9       
+!         
+interface Port-Channel032        
+   description -Link-to-Server-10-          
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk       
+   mlag 10         
+!        
+interface Port-Channel033      
+   description -Link-to-Server-11-     
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403      
+   switchport mode trunk        
+   mlag 11      
+!      
+interface Port-Channel034       
+   description -Link-to-Server-12-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403      
+   switchport mode trunk       
+   mlag 12        
+!           
+interface Port-Channel041         
+   description -Link-to-Server-13-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403        
+   switchport mode trunk         
+   mlag 13        
+!        
+interface Port-Channel042       
+   description -Link-to-Server-14-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403      
+   switchport mode trunk       
+   mlag 14      
+!        
+interface Port-Channel043       
+   description -Link-to-Server-15-        
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403          
+   switchport mode trunk         
+   mlag 15       
+!         
+interface Port-Channel044        
+   description -Link-to-Server-16-       
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403         
+   switchport mode trunk        
+   mlag 16        
+!          
+interface Port-Channel051          
+   description -Link-to-Server-17-           
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403       
+   switchport mode trunk            
+   mlag 17       
+!          
+interface Port-Channel052        
+   description -Link-to-Server-18-        
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403           
+   switchport mode trunk         
+   mlag 18       
+!           
+interface Port-Channel053         
+   description -Link-to-Server-19-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403        
+   switchport mode trunk        
+   mlag 19        
+!       
+interface Port-Channel054       
+   description -Link-to-Server-20-          
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403           
+   switchport mode trunk         
+   mlag 20           
+!       
+interface Port-Channel061         
+   description -Link-to-Server-21-           
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403           
+   switchport mode trunk          
+   mlag 21            
+!          
+interface Port-Channel062          
+   description -Link-to-Server-22-         
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403             
+   switchport mode trunk         
+   mlag 22       
+!         
+interface Port-Channel063        
+   description -Link-to-Server-23-           
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403      
+   switchport mode trunk         
+   mlag 23            
+!          
+interface Port-Channel064            
+   description -Link-to-Server-24-          
+   switchport trunk allowed vlan 200, 201, 202, 203, 300, 301, 302, 303, 400, 401, 402, 403      
+   switchport mode trunk           
+   mlag 24         
+!           
+interface Port-Channel1920           
+   description MLAG-PEERLINK              
+   switchport mode trunk        
+   switchport trunk group MLAG-PEERLINK           
+   spanning-tree link-type point-to-point           
+!          
+      
+!     
+interface Ethernet1/1          
+   description -Link-to-Server-1-         
+   switchport mode trunk        
+   channel-group 011 mode active      
+!       
+interface Ethernet1/2        
+  description -Link-to-Server-2-         
+  switchport mode trunk          
+  channel-group 012 mode active       
+!          
+interface Ethernet1/3          
+  description -Link-to-Server-3-          
+  switchport mode trunk          
+  channel-group 013 mode active           
+!          
+interface Ethernet1/4          
+  description -Link-to-Server-4-      
+  switchport mode trunk         
+  channel-group 014 mode active         
+!          
+interface Ethernet2/1           
+   description -Link-to-Server-5-          
+   switchport mode trunk          
+   channel-group 021 mode active          
+!         
+interface Ethernet2/2      
+  description -Link-to-Server-6-          
+  switchport mode trunk          
+  channel-group 022 mode active           
+!          
+interface Ethernet2/3          
+  description -Link-to-Server-7-        
+  switchport mode trunk        
+  channel-group 023 mode active       
+!           
+interface Ethernet2/4         
+  description -Link-to-Server-8-         
+  switchport mode trunk           
+  channel-group 024 mode active         
+!             
+interface Ethernet3/1          
+   description -Link-to-Server-9-           
+   switchport mode trunk          
+   channel-group 031 mode active       
+!         
+interface Ethernet3/2         
+  description -Link-to-Server-10-       
+  switchport mode trunk            
+  channel-group 032 mode active       
+!          
+interface Ethernet3/3      
+  description -Link-to-Server-11-      
+  switchport mode trunk        
+  channel-group 033 mode active       
+!          
+interface Ethernet3/4         
+  description -Link-to-Server-12-      
+  switchport mode trunk          
+  channel-group 034 mode active          
+!           
+interface Ethernet4/1       
+   description -Link-to-Server-13-       
+   switchport mode trunk      
+   channel-group 041 mode active          
+!       
+interface Ethernet4/2        
+  description -Link-to-Server-14-      
+  switchport mode trunk      
+  channel-group 042 mode active     
+!             
+interface Ethernet4/3        
+  description -Link-to-Server-15-         
+  switchport mode trunk           
+  channel-group 043 mode active          
+!            
+interface Ethernet4/4        
+  description -Link-to-Server-16-        
+  switchport mode trunk          
+  channel-group 044 mode active     
+!        
+interface Ethernet5/1        
+   description -Link-to-Server-17-           
+   switchport mode trunk          
+   channel-group 051 mode active       
+!          
+interface Ethernet5/2        
+  description -Link-to-Server-18-         
+  switchport mode trunk           
+  channel-group 052 mode active         
+!           
+interface Ethernet5/3         
+  description -Link-to-Server-19-           
+  switchport mode trunk            
+  channel-group 053 mode active       
+!          
+interface Ethernet5/4           
+  description -Link-to-Server-20-           
+  switchport mode trunk          
+  channel-group 054 mode active         
+!          
+interface Ethernet6/1            
+   description -Link-to-Server-21-            
+   switchport mode trunk             
+   channel-group 061 mode active           
+!             
+interface Ethernet6/2           
+  description -Link-to-Server-22-         
+  switchport mode trunk            
+  channel-group 062 mode active           
+!            
+interface Ethernet6/3            
+  description -Link-to-Server-23-           
+  switchport mode trunk           
+  channel-group 063 mode active         
+!         
+interface Ethernet6/4           
+  description -Link-to-Server-24-        
+  switchport mode trunk        
+  channel-group 064 mode active     
+!             
+interface Ethernet7          
+   description to-Rezerv      
+!           
+interface Ethernet8       
+   description to-Rezerv           
+!             
+interface Ethernet9           
+   description to-Rezerv          
+!           
+interface Ethernet10            
+   description to-Rezerv            
+!               
+interface Ethernet11            
+   description to-Rezerv           
+!             
+interface Ethernet12         
+   description to-Rezerv           
+!              
+interface Ethernet13         
+   description to-Rezerv           
+!            
+interface Ethernet14           
+   description to-Rezerv         
+!              
+interface Ethernet15           
+   description to-Rezerv          
+!            
+interface Ethernet16         
+   description to-Rezerv      
+!             
+interface Ethernet17             
+   description to-Rezerv           
+!            
+interface Ethernet18          
+   description to-Rezerv           
+!            
+interface Ethernet19           
+   description MLAG-PEERLINK           
+   channel-group 1920 mode active           
+!             
+interface Ethernet20            
+   description MLAG-PEERLINK            
+   channel-group 1920 mode active            
+!           
+interface Ethernet21 /* Задаем адреса на интерфейсах в сторону Spine Eth1-Eth6          
+description to-Spine0-Eth1              
+mtu 9214           
+no switchport             
+ip address 10.16.16.2/30           
+bfd interval 300 min-rx 300 multiplier 3           
+exit        
+!         
+interface Ethernet22          
+description to-Spine1-Eth1           
+mtu 9214          
+no switchport            
+ip address 10.16.17.2/30              
+bfd interval 300 min-rx 300 multiplier 3           
 exit       
-### _Настройки Symmetric IRB конец_    
-### _Настройки eBGP evpn vxlan на Leaf-0_		      
-router bgp 65100     
-   neighbor OVERLAY peer group      
-   neighbor OVERLAY remote-as 65000      
-   neighbor OVERLAY out-delay 0      
-   neighbor OVERLAY update-source Loopback0      
-   neighbor OVERLAY ebgp-multihop 2      
-   neighbor OVERLAY send-community extended      
+!         
+interface Ethernet23            
+description to-Spine2-Eth1            
+mtu 9214           
+no switchport            
+ip address 10.16.18.2/30          
+bfd interval 300 min-rx 300 multiplier 3         
+exit          
+!        
+interface Ethernet24          
+description to-Spine3-Eth1            
+mtu 9214          
+no switchport           
+ip address 10.16.19.2/30               
+bfd interval 300 min-rx 300 multiplier 3           
+exit         
+!          
+interface Ethernet25         
+description to-Spine4-Eth1          
+mtu 9214       
+no switchport      
+ip address 10.16.20.2/30        
+bfd interval 300 min-rx 300 multiplier 3         
+exit       
+!               
+interface Ethernet26          
+description to-Spine5-Eth1        
+mtu 9214         
+no switchport        
+ip address 10.16.21.2/30        
+bfd interval 300 min-rx 300 multiplier 3        
+exit      
+         
+!          
+interface Ethernet27        
+   description to-Rezerv            
+!             
+interface Ethernet28          
+   description to-Rezerv           
+!         
+interface Ethernet29        
+   description to-Rezerv         
+!         
+interface Ethernet30           
+   description to-Rezerv           
+!           
+interface Ethernet31           
+   description to-Rezerv        
+!       
+interface Ethernet32   
+   description to-Rezerv   
+!      
+       
+interface Loopback0       
+description Overlay_EBGP        
+ip address 10.16.0.250/32          
+exit         
+!        
+interface Loopback1           
+description VXLAN-VTEP        
+ip address 10.16.0.251/32       
+exit        
+!        
+interface Management1         
+   vrf mng_net       
+   ip address 192.168.100.100/24      
+   exit     
+!           
+interface Vlan200          
+description UOS-server-system        
+vrf UOS           
+ip virtual-router address 10.144.0.1/24            
+exit          
+interface Vlan201          
+description UOS-server-antivirus          
+vrf UOS          
+ip virtual-router address 10.144.1.1/24       
+exit         
+interface Vlan202              
+description UOS-server-backup         
+vrf UOS        
+ip virtual-router address 10.144.2.1/24          
+exit          
+interface Vlan203          
+description UOS-server-main        
+vrf UOS         
+ip virtual-router address 10.144.3.1/24      
+exit           
+          
+interface Vlan300          
+description IAS-server-system        
+vrf IAS         
+ip virtual-router address 10.80.0.1/24          
+exit        
+interface Vlan301         
+description IAS-server-antivirus        
+vrf IAS         
+ip virtual-router address 10.80.1.1/24       
+exit       
+interface Vlan302        
+description IAS-server-backup            
+vrf IAS             
+ip virtual-router address 10.80.2.1/24            
+exit            
+interface Vlan303              
+description IAS-server-main           
+vrf IAS             
+ip virtual-router address 10.80.3.1/24            
+exit              
+!               
+interface Vlan400              
+description DMZ-0               
+vrf DMZ                 
+ip virtual-router address 10.112.0.1/24         
+exit          
+interface Vlan401        
+description DMZ-1          
+vrf DMZ              
+ip virtual-router address 10.112.1.1/24             
+exit           
+interface Vlan402        
+description DMZ-2          
+vrf DMZ        
+ip virtual-router address 10.112.2.1/24           
+exit       
+interface Vlan403     
+description DMZ-3       
+vrf DMZ        
+ip virtual-router address 10.112.3.1/24        
+exit       
+!         
+interface Vlan4094            
+   no autostate           
+   ip address 10.16.0.245/30         
+exit         
+!             
+interface Vxlan1           
+   vxlan source-interface Loopback1         
+   vxlan udp-port 4789            
+   vxlan vlan 200 vni 1014400            
+   vxlan vlan 201 vni 1014401             
+   vxlan vlan 202 vni 1014402          
+   vxlan vlan 203 vni 1014403            
+   vxlan vlan 300 vni 108000           
+   vxlan vlan 301 vni 108001         
+   vxlan vlan 302 vni 108002           
+   vxlan vlan 303 vni 108003         
+   vxlan vlan 400 vni 1011200       
+   vxlan vlan 401 vni 1011201     
+   vxlan vlan 402 vni 1011202      
+   vxlan vlan 403 vni 1011203          
+   vxlan vrf UOS vni 10144        
+   vxlan vrf IAS vni 10800       
+   vxlan vrf DMZ vni 10112        
+!               
+ip virtual-router mac-address 02:00:00:00:00:00               
+!       
+ip routing       
+ip routing vrf UOS            
+ip routing vrf IAS            
+ip routing vrf DMZ           
+ip routing vrf mng_net           
+!          
+mlag configuration            
+   domain-id Leafes-0-1         
+   local-interface Vlan4094           
+   peer-address 10.16.0.246          
+   peer-address heartbeat 192.168.100.101 vrf mng_net          
+   peer-link Port-Channel1920           
+   dual-primary detection delay 1 action errdisable all-interfaces           
+!         
+             
+ router bgp 65100             
+   router-id 10.16.0.250                 
+   no bgp default ipv4-unicast            
+   timers bgp 3 9              
+   distance bgp 20 200 200       
+   maximum-paths 6 ecmp 2             
+   neighbor UNDERLAY peer group         
+   neighbor UNDERLAY remote-as 65000            
+   neighbor UNDERLAY out-delay 0           
+   neighbor UNDERLAY bfd            
+   neighbor 10.16.16.1 peer group UNDERLAY            
+   neighbor 10.16.17.1 peer group UNDERLAY           
+   neighbor 10.16.18.1 peer group UNDERLAY          
+   neighbor 10.16.19.1 peer group UNDERLAY           
+   neighbor 10.16.20.1 peer group UNDERLAY          
+   neighbor 10.16.21.1 peer group UNDERLAY              
+   neighbor OVERLAY peer group            
+   neighbor OVERLAY remote-as 65000          
+   neighbor OVERLAY out-delay 0         
+   neighbor OVERLAY update-source Loopback0         
+   neighbor OVERLAY ebgp-multihop 2            
+   neighbor OVERLAY send-community extended           
+   neighbor UNDERLAY-MLAG peer group       
+   neighbor UNDERLAY-MLAG remote-as 65100      
+   neighbor UNDERLAY-MLAG next-hop-self      
+   neighbor UNDERLAY-MLAG bfd       
+   neighbor 10.16.0.246 peer group UNDERLAY-MLAG         
    neighbor 10.16.16.250 peer group OVERLAY      
-   neighbor 10.16.17.250 peer group OVERLAY     
+   neighbor 10.16.17.250 peer group OVERLAY      
    neighbor 10.16.18.250 peer group OVERLAY      
-   neighbor 10.16.19.250 peer group OVERLAY     
-   neighbor 10.16.20.250 peer group OVERLAY       
-   neighbor 10.16.21.250 peer group OVERLAY        
-   !     
-   vlan 200     
-      rd auto      
-      route-target both 200:1014400      
-      redistribute learned       
-   !     
+   neighbor 10.16.19.250 peer group OVERLAY         
+   neighbor 10.16.20.250 peer group OVERLAY        
+   neighbor 10.16.21.250 peer group OVERLAY          
+  !        
+   vlan 200           
+      rd auto       
+      route-target both 200:1014400          
+      redistribute learned           
+   !        
    vlan 201      
-      rd auto     
-      route-target both 201:1014401     
-      redistribute learned       
-   !         
-   vlan 202       
+      rd auto         
+      route-target both 201:1014401      
+      redistribute learned      
+   !        
+   vlan 202        
       rd auto      
       route-target both 202:1014402       
-      redistribute learned         
-   !         
+      redistribute learned             
+   !        
    vlan 203        
-      rd auto      
-      route-target both 203:1014403        
-      redistribute learned      
+      rd auto          
+      route-target both 203:1014403         
+      redistribute learned          
    !         
-   vlan 300       
-      rd auto       
-      route-target both 300:108000       
-      redistribute learned       
-   !         
-   vlan 301      
+   vlan 300        
       rd auto        
-      route-target both 301:108001      
-      redistribute learned        
-   !       
-   vlan 302       
-      rd auto         
-      route-target both 302:108002       
+      route-target both 300:108000          
+      redistribute learned              
+   !        
+   vlan 301         
+      rd auto        
+      route-target both 301:108001       
       redistribute learned       
-   !       
-   vlan 303      
-      rd auto       
-      route-target both 303:108003     
+   !         
+   vlan 302        
+      rd auto        
+      route-target both 302:108002         
+      redistribute learned         
+   !          
+   vlan 303        
+      rd auto         
+      route-target both 303:108003       
       redistribute learned        
+   !         
+   vlan 400         
+      rd auto        
+      route-target both 400:1011200        
+      redistribute learned        
+   !        
+   vlan 401        
+      rd auto        
+      route-target both 401:1011201        
+      redistribute learned       
+   !      
+   vlan 402      
+      rd auto        
+      route-target both 402:1011202       
+      redistribute learned       
+   !         
+   vlan 403        
+      rd auto       
+      route-target both 403:1011203      
+      redistribute learned      
    !       
+          
    address-family evpn      
-      neighbor OVERLAY activate       
+      neighbor OVERLAY activate      
    !      
-   vrf UOS        
-      rd 65000:200       
+   address-family ipv4      
+      neighbor UNDERLAY activate      
+      neighbor UNDERLAY-MLAG activate      
+      network 10.16.0.250/32      
+      network 10.16.0.251/32      
+   !       
+   vrf UOS       
+      rd 65100:200      
       route-target import evpn 11:10144       
-      route-target export evpn 11:10144         
+      route-target export evpn 11:10144       
       redistribute connected        
-   !         
-   vrf IAS        
-      rd 65000:300        
-      route-target import evpn 11:10800        
-      route-target export evpn 11:10800          
-      redistribute connected         
-!       
-end        
-### _Настройки eBGP evpn vxlan на Leaf-0 конец_		      
-
-### _Настройки Spine-0_      
-
-### _Настройки eBGP evpn vxlan на Spine-0_        
-          
-peer-filter leaf_asn       
-   10 match as-range 65100-65128 result accept      
-exit     
-        
-router bgp 65000     
-   bgp listen range 10.16.0.0/20 peer-group OVERLAY peer-filter leaf_asn        
-   neighbor OVERLAY peer group       
-   neighbor OVERLAY next-hop-unchanged       
-   neighbor OVERLAY update-source Loopback0        
-   neighbor OVERLAY ebgp-multihop 2        
-   neighbor OVERLAY send-community extended        
-   !         
-   address-family evpn       
-      neighbor OVERLAY activate       
+	  !       
+   !        
+   vrf IAS      
+      rd 65100:300     
+      route-target import evpn 11:10800       
+      route-target export evpn 11:10800      
+      redistribute connected     
+	  !     
    !      
-end        
+   vrf DMZ      
+      rd 65100:400      
+      route-target import evpn 11:10112      
+      route-target export evpn 11:10112     
+	  redistribute connected      
+	    !      
+    exit      
+exit     
+#### Пример Leaf-0        
 
-### _Настройки eBGP evpn vxlan на Spine-0 конец_      
-
-		### _Настройки Mlag на Leaf-0 начало_        
-
-![Схема портов Mlag на коммутаторах](./Lab_9_Mlag.jpg).       
-
-no spanning-tree vlan-id 4094       
-       
-vlan 4094       
-   name MLAG-PEERLINK      
-   trunk group MLAG-PEERLINK      
-exit       
-       
-!      
-vrf instance mng_net      
-   description Managment_net and keepalive mlag      
-!        
         
-         
-interface Port-Channel1920      
-   description MLAG-PEERLINK     
-   switchport mode trunk      
-   switchport trunk group MLAG-PEERLINK      
-   spanning-tree link-type point-to-point      
-exit        
-         
-interface Port-Channel1.1         
-   description -Link-to-Server-1-         
-   switchport trunk allowed vlan 200-399        
-   switchport mode trunk        
-   mlag 1        
-exit       
-
-interface Ethernet1/1      
-   description -Link-to-Sever-1-      
-   switchport mode trunk      
-   channel-group 1 mode active       
-exit        
-
-interface Ethernet19         
-   description MLAG-PEERLINK         
-   channel-group 1920 mode active       
-exit        
-interface Ethernet20       
-   description MLAG-PEERLINK        
-   channel-group 1920 mode active      
-exit         
-
-interface Management1       
-   vrf mng_net       
-   no switchport       
-   ip address 192.168.100.100/24       
-exit         
-
-interface Vlan4094        
-   no autostate        
-   ip address 10.16.0.245/30       
-exit          
-          
-ip routing vrf mng_net        
+#### Пример Spine-0          
+! Command: show running-config             
+! device: B-Leaf-0 (vEOS-lab, EOS-4.29.2F)           
+!             
+! boot system flash:/vEOS-lab.swi          
+!          
+no aaa root           
+!            
+service routing protocols model multi-agent        
+!            
+no logging console            
+!             
+hostname Spine-0            
+!                
+spanning-tree mode mstp             
+!           
+vrf instance mng_net            
+   description Managment_net         
+!            
+interface Ethernet1               
+   description -Link-to-Leaf-0-Eth21             
+    mtu 9214           
+    no switchport           
+    ip address 10.16.16.1/30        
+	bfd interval 300 min-rx 300 multiplier 3            
+!          
+interface Ethernet2             
+   description -Link-to-Leaf-1-Eth21          
+    mtu 9214            
+    no switchport            
+    ip address 10.16.16.5/30      
+	bfd interval 300 min-rx 300 multiplier 3         
+!           
+interface Ethernet3           
+   description -Link-to-Leaf-2-Eth21           
+    mtu 9214            
+    no switchport             
+    ip address 10.16.16.9/30             
+	bfd interval 300 min-rx 300 multiplier 3            
+!              
+interface Ethernet4             
+   description -Link-to-Leaf-3-Eth21            
+    mtu 9214         
+    no switchport            
+    ip address 10.16.16.13/30            
+	bfd interval 300 min-rx 300 multiplier 3          
+!           
+interface Ethernet5           
+   description -Link-to-Leaf-4-Eth21          
+    mtu 9214            
+    no switchport            
+    ip address 10.16.16.17/30            
+	bfd interval 300 min-rx 300 multiplier 3          
+!           
+interface Ethernet6              
+   description -Link-to-Leaf-5-Eth21      
+    mtu 9214        
+    no switchport          
+    ip address 10.16.16.21/30            
+	bfd interval 300 min-rx 300 multiplier 3         
+!          
+interface Ethernet7        
+   description -Link-to-Leaf-6-Eth21          
+    mtu 9214      
+    no switchport      
+    ip address 10.16.16.25/30         
+	bfd interval 300 min-rx 300 multiplier 3           
+!           
+interface Ethernet8         
+   description -Link-to-Leaf-7-Eth21         
+    mtu 9214           
+    no switchport            
+    ip address 10.16.16.29/30           
+	bfd interval 300 min-rx 300 multiplier 3        
+!         
+interface Ethernet9           
+   description -Link-to-Leaf-8-Eth21       
+    mtu 9214          
+    no switchport         
+    ip address 10.16.16.33/30           
+	bfd interval 300 min-rx 300 multiplier 3         
+!             
+interface Ethernet10          
+   description -Link-to-Leaf-9-Eth21           
+    mtu 9214            
+    no switchport           
+    ip address 10.16.16.37/30            
+	bfd interval 300 min-rx 300 multiplier 3           
+!          
+interface Ethernet11         
+   description to-Rezerv          
 !        
-mlag configuration        
-   domain-id Leafes-0-1       
-   local-interface Vlan4094       
-   peer-address 10.16.0.246      
-   peer-address heartbeat 192.168.100.101 vrf mng_net        
-   peer-link Port-Channel1920         
-   dual-primary detection delay 1 action errdisable all-interfaces         
-exit         
-         
+interface Ethernet12         
+   description to-Rezerv         
+!        
+interface Ethernet13       
+   description to-Rezerv       
+!        
+interface Ethernet14         
+   description to-Rezerv       
+!      
+interface Ethernet15          
+   description to-Rezerv         
+!        
+interface Ethernet16        
+   description to-Rezerv       
+!        
+interface Ethernet17       
+   description to-Rezerv       
+!        
+interface Ethernet18        
+   description to-Rezerv      
+!         
+interface Ethernet19        
+    description to-Rezerv         
+!           
+interface Ethernet20           
+    description to-Rezerv       
+!           
+interface Ethernet21         
+   description -Link-to-B-Leaf-0-Eth21         
+    mtu 9214        
+    no switchport       
+    ip address 10.16.16.41/30         
+	bfd interval 300 min-rx 300 multiplier 3            
+!
+interface Ethernet22          
+   description -Link-to-B-Leaf-1-Eth21      
+    mtu 9214          
+    no switchport       
+    ip address 10.16.16.45/30       
+	bfd interval 300 min-rx 300 multiplier 3        
+!       
+interface Ethernet23          
+   description to-Rezerv         
+!            
+interface Ethernet24          
+   description to-Rezerv          
+!        
+interface Ethernet25         
+   description to-Rezerv        
+!       
+interface Ethernet26        
+   description to-Rezerv           
+!        
+interface Ethernet27       
+   description to-Rezerv        
+!       
+interface Ethernet28       
+   description to-Rezerv
+!         
+interface Ethernet29      
+   description to-Rezerv
+!       
+interface Ethernet30          
+   description to-Rezerv         
+!        
+interface Ethernet31         
+   description to-Rezerv          
+!           
+interface Ethernet32          
+   description to-Rezerv         
+!          
+interface Loopback0         
+   description OVERLAY           
+   ip address 10.16.16.250/32        
+!         
+interface Management1         
+   vrf mng_net       
+   ip address 192.168.100.116/24         
+!       
+ip routing       
+ip routing vrf mng_net         
+!           
+peer-filter leaf_asn         
+   10 match as-range 65100-65120 result accept          
+!            
+router bgp 65000         
+   router-id 10.16.16.250         
+   no bgp default ipv4-unicast         
+   timers bgp 3 9              
+   distance bgp 20 200 200             
+   maximum-paths 2 ecmp 2            
+   bgp listen range 10.16.0.0/20 peer-group OVERLAY peer-filter leaf_asn           
+   bgp listen range 10.16.16.0/25 peer-group UNDERLAY peer-filter leaf_asn         
+   neighbor OVERLAY peer group       
+   neighbor OVERLAY next-hop-unchanged         
+   neighbor OVERLAY update-source Loopback0      
+   neighbor OVERLAY ebgp-multihop 2         
+   neighbor OVERLAY send-community extended         
+   neighbor UNDERLAY peer group        
+   neighbor UNDERLAY out-delay 0       
+   !          
+   address-family evpn         
+      neighbor OVERLAY activate         
+   !           
+   address-family ipv4         
+      neighbor UNDERLAY activate          
+      network 10.16.16.250/32          
+   !           
+end       
+Spine-0#          
+
+#### _Пример Spine-0 конец_      
 
 
 
-        ### _Настройки Mlag на Leaf-0 конец_      		
 
        
 
