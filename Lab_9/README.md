@@ -1004,8 +1004,549 @@ end
 Spine-0#          
 
 #### _Пример Spine-0 конец_      
+            
+#### _Пример B-Leaf-0 начало_       
+! Command: show running-config
+! device: B-Leaf-0 (vEOS-lab, EOS-4.29.2F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+service routing protocols model multi-agent
+!
+no logging console
+!
+hostname B-Leaf-0
+!
+spanning-tree mode mstp
+no spanning-tree vlan-id 4094
+!
+vrf instance UOS /* VRF Для UOS
+rd 65110:200
+exit
+vrf instance IAS /* VRF Для IAS
+rd 65110:300
+exit
+vrf instance DMZ /* VRF Для DMZ
+rd 65110:400
+exit
+vrf instance mng_net
+   description Managment_net
+exit
 
+Vlan 200
+name UOS-server-system
+exit
 
+Vlan 201
+name UOS-server-antivirus
+exit
+
+Vlan 202
+name UOS-server-backup
+exit
+
+Vlan 203
+name UOS-server-main
+exit
+
+Vlan 299
+name UOS-tranzit
+exit
+
+Vlan 300
+name IAS-server-system
+exit
+
+Vlan 301
+name IAS-server-antivirus exit
+
+Vlan 302
+name IAS-server-backup
+exit
+
+Vlan 303
+name IAS-server-main
+exit
+
+Vlan 399
+name IAS-tranzit
+exit
+
+Vlan 401
+name IAS-server-antivirus exit
+
+Vlan 402
+name IAS-server-backup
+exit
+
+Vlan 403
+name IAS-server-main
+exit
+
+Vlan 498
+name DMZ-tranzit-UOS
+exit
+
+Vlan 499
+name DMZ-tranzit-IAS
+exit
+!
+vlan 4094
+   name MLAG-PEERLINK
+   trunk group MLAG-PEERLINK
+!
+vrf instance mng_net
+   description Managment_net
+!
+interface Port-Channel1
+   description -Link-to-FW-UOS-1-
+   switchport trunk allowed vlan 299, 498
+   switchport mode trunk
+   mlag 1
+!
+interface Port-Channel2
+   description -Link-to-FW-UOS-2-
+   switchport trunk allowed vlan 299, 498
+   switchport mode trunk
+   mlag 2
+!
+interface Port-Channel3
+   description -Link-to-FW-IAS-1-
+   switchport trunk allowed vlan 399, 499
+   switchport mode trunk
+   mlag 3
+!
+interface Port-Channel4
+   description -Link-to-FW-IAS-2-
+   switchport trunk allowed vlan 399, 499
+   switchport mode trunk
+   mlag 4
+!
+interface Port-Channel1920
+   description MLAG-PEERLINK
+   switchport mode trunk
+   switchport trunk group MLAG-PEERLINK
+   spanning-tree link-type point-to-point
+!
+interface Ethernet1
+   description -Link-to-FW-UOS-1-
+   switchport mode trunk
+   channel-group 1 mode active
+!
+interface Ethernet2
+   description -Link-to-FW-UOS-2-
+   switchport mode trunk
+   channel-group 2 mode active
+!
+interface Ethernet3
+   description -Link-to-FW-IAS-1-
+   switchport mode trunk
+   channel-group 3 mode active
+!
+interface Ethernet4
+   description -Link-to-FW-IAS-2-
+   switchport mode trunk
+   channel-group 4 mode active
+!
+interface Ethernet5
+   description to-Rezerv
+!
+interface Ethernet6
+   description to-Rezerv
+!
+interface Ethernet7
+   description to-Rezerv
+!
+interface Ethernet8
+   description to-Rezerv
+!
+interface Ethernet9
+   description to-Rezerv
+!
+interface Ethernet10
+   description to-Rezerv
+!
+interface Ethernet11
+   description to-Rezerv
+!
+interface Ethernet12
+   description to-Rezerv
+!
+interface Ethernet13
+   description to-Rezerv
+!
+interface Ethernet14
+   description to-Rezerv
+!
+interface Ethernet15
+   description to-Rezerv
+!
+interface Ethernet16
+   description to-Rezerv
+!
+interface Ethernet17
+   description to-Rezerv
+!
+interface Ethernet18
+   description to-Rezerv
+!
+interface Ethernet19
+   description MLAG-PEERLINK
+   channel-group 1920 mode active
+!
+interface Ethernet20
+   description MLAG-PEERLINK
+   channel-group 1920 mode active
+!
+interface Ethernet21
+   description to-Spine0-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.16.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet22
+   description to-Spine1-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.17.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet23
+   description to-Spine2-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.18.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet24
+   description to-Spine3-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.19.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet25
+   description to-Spine4-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.20.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet26
+   description to-Spine5-Eth21
+   mtu 9214
+   no switchport
+   ip address 10.16.21.42/30
+   bfd interval 300 min-rx 300 multiplier 3
+!
+interface Ethernet27
+!
+interface Ethernet28
+!
+interface Ethernet29
+!
+interface Ethernet30
+!
+interface Ethernet31
+!
+interface Ethernet32
+!
+interface Loopback0
+   description OVERLAY
+   ip address 10.16.10.250/32
+!
+interface Loopback1
+   description VXLAN-VTEP
+   ip address 10.16.10.251/32
+!
+interface Management1
+   vrf mng_net
+   ip address 192.168.100.110/24
+!
+interface Vlan200
+description UOS-server-system
+vrf UOS
+ip virtual-router address 10.144.0.1/24
+exit
+interface Vlan201
+description UOS-server-antivirus
+vrf UOS
+ip virtual-router address 10.144.1.1/24
+exit
+interface Vlan202
+description UOS-server-backup
+vrf UOS
+ip virtual-router address 10.144.2.1/24
+exit
+interface Vlan203
+description UOS-server-main
+vrf UOS
+ip virtual-router address 10.144.3.1/24
+exit
+interface Vlan299
+description UOS-tranzit
+vrf UOS
+ip address 10.144.63.12/28
+exit
+
+interface Vlan300
+description IAS-server-system
+vrf IAS
+ip virtual-router address 10.80.0.1/24
+exit
+interface Vlan301
+description IAS-server-antivirus
+vrf IAS
+ip virtual-router address 10.80.1.1/24
+exit
+interface Vlan302
+description IAS-server-backup
+vrf IAS
+ip virtual-router address 10.80.2.1/24
+exit
+interface Vlan303
+description IAS-server-main
+vrf IAS
+ip virtual-router address 10.80.3.1/24
+exit
+
+interface Vlan399
+description IAS-tranzit
+vrf IAS
+ip address 10.80.63.12/28
+exit
+
+interface Vlan400
+description DMZ-0
+vrf DMZ
+ip virtual-router address 10.112.0.1/24
+exit
+interface Vlan401
+description DMZ-1
+vrf DMZ
+ip virtual-router address 10.112.1.1/24
+exit
+interface Vlan402
+description DMZ-2
+vrf DMZ
+ip virtual-router address 10.112.2.1/24
+exit
+interface Vlan403
+description DMZ-3
+vrf DMZ
+ip virtual-router address 10.112.3.1/24
+exit
+
+interface Vlan498
+description DMZ-tranzit-UOS
+vrf DMZ
+ip address 10.112.63.12/28
+exit
+
+interface Vlan499
+description DMZ-tranzit-IAS
+vrf DMZ
+ip address 10.112.63.28/28
+exit
+
+interface Vlan4094
+   no autostate
+   ip address 10.16.10.245/30
+exit
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 200 vni 1014400
+   vxlan vlan 201 vni 1014401
+   vxlan vlan 202 vni 1014402
+   vxlan vlan 203 vni 1014403
+   vxlan vlan 300 vni 108000
+   vxlan vlan 301 vni 108001
+   vxlan vlan 302 vni 108002
+   vxlan vlan 303 vni 108003
+   vxlan vlan 400 vni 1011200
+   vxlan vlan 401 vni 1011201
+   vxlan vlan 402 vni 1011202
+   vxlan vlan 403 vni 1011203
+   vxlan vrf UOS vni 10144
+   vxlan vrf IAS vni 10800
+   vxlan vrf DMZ vni 10112
+!
+ip virtual-router mac-address 02:00:00:00:00:00
+!
+ip routing
+ip routing vrf UOS
+ip routing vrf IAS
+ip routing vrf DMZ
+ip routing vrf mng_net
+!
+mlag configuration
+   domain-id B-Leafes-0-1
+   local-interface Vlan4094
+   peer-address 10.16.10.246
+   peer-address heartbeat 192.168.100.111 vrf mng_net
+   peer-link Port-Channel1920
+   dual-primary detection delay 1 action errdisable all-interfaces
+!
+router bgp 65110
+   router-id 10.16.10.250
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   distance bgp 20 200 200
+   maximum-paths 6 ecmp 2
+   neighbor UNDERLAY peer group
+   neighbor UNDERLAY remote-as 65000
+   neighbor UNDERLAY out-delay 0
+   neighbor UNDERLAY bfd
+   neighbor 10.16.16.41 peer group UNDERLAY
+   neighbor 10.16.17.41 peer group UNDERLAY
+   neighbor 10.16.18.41 peer group UNDERLAY
+   neighbor 10.16.19.41 peer group UNDERLAY
+   neighbor 10.16.20.41 peer group UNDERLAY
+   neighbor 10.16.21.41 peer group UNDERLAY
+   neighbor OVERLAY peer group
+   neighbor OVERLAY remote-as 65000
+   neighbor OVERLAY out-delay 0
+   neighbor OVERLAY update-source Loopback0
+   neighbor OVERLAY ebgp-multihop 2
+   neighbor OVERLAY send-community extended
+   neighbor UNDERLAY-MLAG peer group
+   neighbor UNDERLAY-MLAG remote-as 65110
+   neighbor UNDERLAY-MLAG next-hop-self
+   neighbor UNDERLAY-MLAG bfd
+   neighbor 10.16.10.246 peer group UNDERLAY-MLAG
+   neighbor 10.16.16.250 peer group OVERLAY
+   neighbor 10.16.17.250 peer group OVERLAY
+   neighbor 10.16.18.250 peer group OVERLAY
+   neighbor 10.16.19.250 peer group OVERLAY
+   neighbor 10.16.20.250 peer group OVERLAY
+   neighbor 10.16.21.250 peer group OVERLAY
+   !
+   vlan 200
+      rd auto
+      route-target both 200:1014400
+      redistribute learned
+   !
+   vlan 201
+      rd auto
+      route-target both 201:1014401
+      redistribute learned
+   !
+   vlan 202
+      rd auto
+      route-target both 202:1014402
+      redistribute learned
+   !
+   vlan 203
+      rd auto
+      route-target both 203:1014403
+      redistribute learned
+   !
+   vlan 300
+      rd auto
+      route-target both 300:108000
+      redistribute learned
+   !
+   vlan 301
+      rd auto
+      route-target both 301:108001
+      redistribute learned
+   !
+   vlan 302
+      rd auto
+      route-target both 302:108002
+      redistribute learned
+   !
+   vlan 303
+      rd auto
+      route-target both 303:108003
+      redistribute learned
+   !
+   vlan 400
+      rd auto
+      route-target both 400:1011200
+      redistribute learned
+   !
+   vlan 401
+      rd auto
+      route-target both 401:1011201
+      redistribute learned
+   !
+   vlan 402
+      rd auto
+      route-target both 402:1011202
+      redistribute learned
+   !
+   vlan 403
+      rd auto
+      route-target both 403:1011203
+      redistribute learned
+   !
+   
+   address-family evpn
+      neighbor OVERLAY activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      neighbor UNDERLAY-MLAG activate
+      network 10.16.10.250/32
+      network 10.16.10.251/32
+   !
+   vrf UOS
+      rd 65110:200
+      route-target import evpn 11:10144
+      route-target export evpn 11:10144
+	  neighbor FW-UOS peer group
+      neighbor FW-UOS remote-as 65201 
+      neighbor FW-UOS out-delay 0
+      neighbor FW-UOS bfd
+      neighbor 10.144.63.1 peer group FW-UOS
+      redistribute connected
+	  !
+	  address-family ipv4
+	   neighbor FW-UOS activate
+   !
+   vrf IAS
+      rd 65110:300
+      route-target import evpn 11:10800
+      route-target export evpn 11:10800
+	  neighbor FW-IAS peer group
+      neighbor FW-IAS remote-as 65202 
+      neighbor FW-IAS out-delay 0
+      neighbor FW-IAS bfd
+      neighbor 10.80.63.1 peer group FW-IAS
+      redistribute connected
+	  !
+	  address-family ipv4
+	   neighbor FW-IAS activate
+   !
+   vrf DMZ
+      rd 65110:400
+      route-target import evpn 11:10112
+      route-target export evpn 11:10112
+      neighbor FW-UOS-DMZ peer group
+      neighbor FW-UOS-DMZ remote-as 65201 
+      neighbor FW-UOS-DMZ out-delay 0
+      neighbor FW-UOS-DMZ bfd
+      neighbor 10.112.63.1 peer group FW-UOS-DMZ
+	  neighbor FW-IAS-DMZ peer group
+      neighbor FW-IAS-DMZ remote-as 65201 
+      neighbor FW-IAS-DMZ out-delay 0
+      neighbor FW-IAS-DMZ bfd
+      neighbor 10.112.63.17 peer group FW-IAS-DMZ
+	  redistribute connected 
+	  !
+	  address-family ipv4
+	   neighbor FW-UOS-DMZ activate
+	   neighbor FW-IAS-DMZ activate
+!
+end
+Leaf-1#
+
+### _ _Пример B-Leaf-0 конец_                 
 
 
        
